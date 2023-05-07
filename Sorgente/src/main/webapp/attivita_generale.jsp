@@ -28,7 +28,6 @@
       </p>
     </div>
     <br>
-
-    FOOTER CESARE
+    <jsp:include page="footer.jsp"></jsp:include>
   </body>
 </html>
