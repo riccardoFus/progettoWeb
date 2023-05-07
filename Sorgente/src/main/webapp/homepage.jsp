@@ -31,7 +31,6 @@
                 <button type="button" disabled>Scarica volantino</button>
             </a>
         </div>
-
-        FOOTER CESARE
+        <jsp:include page="footer.jsp"></jsp:include>
     </body>
 </html>
