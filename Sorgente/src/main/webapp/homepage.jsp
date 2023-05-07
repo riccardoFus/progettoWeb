@@ -5,7 +5,7 @@
   Time: 09:18
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <html>
     <head>
         <title></title>
@@ -22,15 +22,16 @@
         </div>
         <div>
             <figure>
-                <img src="media/immagineHomePage.jpg" alt="Immagine Home Page raffigurante due mani come simbolo di aiuto" height="560" width="448" style="transform: rotate(90deg);">
-                <figcaption>Immagine rappresentativa della nostra associazione</figcaption>
+                <img src="images/associazione-regole.jpg" alt="Immagine Home Page">
+                <figcaption>Immagine rappresentativa della nostra associazione (DA MODIFICARE EVENTUALMENTE)</figcaption>
             </figure>
         </div>
         <div>
-            <a href="media/immagineHomePage.jpg" download="VolantinoYum4World">
+            <a href="" download="VolantinoTum4World">
                 <button type="button" disabled>Scarica volantino</button>
             </a>
         </div>
+
         FOOTER CESARE
     </body>
 </html>
