@@ -45,7 +45,6 @@
       <span class="navigation-dot" onclick="currentSlide(3)"></span>
     </div>
     <script src="javascript/scriptSlider.js"></script>
-
-    FOOTER CESARE
+    <jsp:include page="footer.jsp"></jsp:include>
   </body>
 </html>
