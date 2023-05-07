@@ -5,7 +5,7 @@
   Time: 09:18
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
 <html>
   <head>
     <title></title>
@@ -45,6 +45,7 @@
       <span class="navigation-dot" onclick="currentSlide(3)"></span>
     </div>
     <script src="javascript/scriptSlider.js"></script>
+
     FOOTER CESARE
   </body>
 </html>
