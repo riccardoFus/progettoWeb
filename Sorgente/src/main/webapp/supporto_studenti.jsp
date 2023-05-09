@@ -1,10 +1,4 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
-<html>
-    <head>
-        <title>Mind Checkup</title>
-    </head>
-    <body>
-    HEADER SILVANUS
+<jsp:include page="header.jsp"></jsp:include>
     <div>
         <h2>Mind Checkup: trova l'aiuto di cui hai bisogno</h2>
         <p>
@@ -33,6 +27,4 @@
         </p>
     </div>
     <br>
-    <jsp:include page="footer.jsp"></jsp:include>
-    </body>
-</html>
+<jsp:include page="footer.jsp"></jsp:include>
