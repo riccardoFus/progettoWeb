@@ -1,11 +1,5 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" session="true" %>
-<html>
-<head>
-    <title>Water Week</title>
-</head>
-<body>
-    HEADER SILVANUS
-        <div>
+<jsp:include page="header.jsp"></jsp:include>
+<div>
             <h1>Water Week: idroterapia</h1>
 
             <p>
@@ -66,6 +60,4 @@
             </ul>
         </div>
     <br>
-    <jsp:include page="footer.jsp"></jsp:include>
-</body>
-</html>
+<jsp:include page="footer.jsp"></jsp:include>
