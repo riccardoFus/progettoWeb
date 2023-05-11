@@ -13,10 +13,10 @@
         </figure>
     </div>
     <div>
-        <a href="" download="VolantinoTum4World">
-            <form>
+        <form id="buttonForm">
+            <a href="" download="VolantinoTum4World">
                 <input type="submit" value="Volantino" id="button">
-            </form>
-        </a>
+            </a>
+        </form>
     </div>
 <jsp:include page="footer.jsp"></jsp:include>
