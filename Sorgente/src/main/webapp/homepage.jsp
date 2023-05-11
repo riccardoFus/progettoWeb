@@ -13,10 +13,8 @@
         </figure>
     </div>
     <div>
-        <form id="buttonForm">
             <a href="" download="VolantinoTum4World">
                 <input type="submit" value="Volantino" id="button">
             </a>
-        </form>
     </div>
 <jsp:include page="footer.jsp"></jsp:include>
