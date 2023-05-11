@@ -37,10 +37,10 @@ p{
 }
 
 #divBottoni{
-    margin: auto;
+    position:absolute;
     width: 50%;
     padding: 10px;
-
+    margin:auto;
 }
 
 #header{
