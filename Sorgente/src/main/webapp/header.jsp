@@ -12,7 +12,7 @@
 <header id="header">
     <div>
         <h1>Tum4World</h1>
-        <div id="divBottoni">
+        <div id="divBottoni" align="center">
             <form>
                 <input type="submit" value="Homepage" id="button" formaction="homepage.jsp">
                 <input type="submit" value="Chi siamo" id="button" formaction="chisiamo.jsp">
