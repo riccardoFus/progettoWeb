@@ -37,10 +37,10 @@ p{
 }
 
 #divBottoni{
-    position:absolute;
+    margin: auto;
     width: 50%;
     padding: 10px;
-    margin:auto;
+
 }
 
 #header{
@@ -61,4 +61,4 @@ p{
 #imageStandard{
     max-width: 60%;
     height: auto;
-}
+} 
