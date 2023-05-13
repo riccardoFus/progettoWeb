@@ -37,10 +37,9 @@ p{
 }
 
 #divBottoni{
-    position:absolute;
+    margin: auto;
     width: 50%;
     padding: 10px;
-    margin:auto;
 }
 
 #header{
@@ -54,11 +53,21 @@ p{
     background-color: #717171;
     margin: 0;
     padding: 20px;
-    box-shadow: 1;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    position:absolute;
+    bottom:0;
+    width:97.85%;
 }
 
 #imageStandard{
     max-width: 60%;
     height: auto;
+}
+
+#textbox{
+    max-lines: 1;
+    text-align: center;
+    height: 40px;
+    font-size: 1vw;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
