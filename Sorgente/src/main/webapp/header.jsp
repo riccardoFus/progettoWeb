@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
 </head>
 <body>
-<header id="header">
+<header id="header" >
     <div>
         <h1>Tum4World</h1>
         <div id="divBottoni">
