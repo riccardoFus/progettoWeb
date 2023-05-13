@@ -7,25 +7,44 @@
   <div>
     <p>Numero di telefono della nostra associazione: +39 326 151242 1512154 1154</p>
   </div>
-  <div id="form">
-    <form action="SendFakeEmail" method="post">
-      <label for="name">Inserisci nome: </label>
-      <input type="text" name="name" id="name" style="position: absolute"><br>
-      <label for="name">Inserisci cognome: </label>
-      <input type="text" name="surname" id="surname"><br>
-      <label for="name">Inserisci email: </label>
-      <input type="text" name="email" id="email"><br>
-      <label for="reasons">Inserisci motivazione: </label>
-      <select name="reasons" id="reasons">
-        <option value="info">Informazioni aggiuntive sui nostri servizi</option>
-        <option value="richiesta">Richiesta di uno specifico servizio</option>
-        <option value="inserimento">Vuoi entrare a far parte del nostro team</option>
-        <option value="altro">Altro</option>
-      </select><br>
-      <textarea name="altro" id="altro" cols="100" rows="15"></textarea><br>
-      <input type="button" value="Invia dati" name="fakeSubmit" id="fakeSubmit" onclick="if(validatePageContatti(this.form)) document.getElementById('submit').click()">
-      <input type="submit" id="submit" hidden>
-      <input type="reset" value="Resetta i campi di compilazione" name="reset" id="reset">
+  <div id="form" align="center">
+    <form action="invio_confermato.jsp" method="post">
+      <div>
+        <label for="name">Nome: </label>
+        <input type="text" name="name" id="name" class="textbox"><br>
+      </div>
+      <br>
+      <div>
+        <label for="name">Cognome: </label>
+        <input type="text" name="surname" id="surname" class="textbox"><br>
+      </div>
+      <br>
+      <div>
+        <label for="name">Email: </label>
+        <input type="text" name="email" id="email" class="textbox"><br>
+      </div>
+      <br>
+      <div>
+        <label for="reasons">Motivazione: </label>
+        <select name="reasons" id="reasons" class="textbox">
+          <option value="info">Informazioni aggiuntive sui nostri servizi</option>
+          <option value="richiesta">Richiesta di uno specifico servizio</option>
+          <option value="inserimento">Vuoi entrare a far parte del nostro team</option>
+          <option value="altro">Altro</option>
+        </select><br>
+      </div>
+      <br>
+      <div>
+        <label for="altro">Aggiungi dettagli alla richiesta:</label><br><br>
+        <textarea name="altro" id="altro" cols="100" rows="15"></textarea><br>
+      </div>
+      <br>
+      <div>
+        <input type="button" value="Submit" name="fakeSubmit" id="button" onclick="if(validatePageContatti(this.form)) document.getElementById('submit').click()">
+        <input type="submit" id="submit" hidden>
+        <input type="reset" value="Reset" name="reset" id="button">
+      </div>
+      <br>
     </form>
   </div>
 <jsp:include page="footer.jsp"></jsp:include>
