@@ -9,7 +9,7 @@
   </div>
 
   <div>
-    <p>Numero di telefono della nostra associazione: <b>+39 326 151242 1512154 1154</p></div></b>
+    <p>Numero di telefono della nostra associazione: <b>+39 326 151242 1512154 1154</b></p></div>
   </div>
 
   <div id="form" align="center">
@@ -54,7 +54,7 @@
         <input type="submit" id="submit" hidden>
         <input type="reset" value="Reset" name="reset" id="button">
       </div>
-      
+
       <br>
     </form>
   </div>
