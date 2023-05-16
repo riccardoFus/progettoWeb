@@ -5,13 +5,13 @@
             <form>
                 <div id="divBottoni">
                 <b><label>Username</label></b>
-                <input type="text" id="textbox" required="true" height="50px">
+                <input type="text" id="textbox" required="true">
                 </div>
                 <br>
 
                 <div id="divBottoni">
                     <b><label>Password</label></b>
-                <input type="password" id="textbox" required="true">
+                <input type="password" id="textbox">
                 </div>
 
                 <br>
