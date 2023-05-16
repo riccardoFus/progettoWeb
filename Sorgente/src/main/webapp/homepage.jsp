@@ -7,11 +7,13 @@
             <%-- AGGIUNGI IMMAGINE LOGO CON FIGURE--%>
         </p>
     </div>
+
     <div>
         <figure>
             <img src="images/associazione-regole.jpg" alt="Immagine Home Page" id="imageStandard">
         </figure>
     </div>
+
     <div align="center">
             <a href="" download="VolantinoTum4World">
                 <input type="submit" value="Volantino" id="button">
