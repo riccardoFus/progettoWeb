@@ -18,10 +18,9 @@ function setAlert(trigger) {
     switch (trigger) {
         case 'usernameMissing':
             return alert("Username mancante! Si prega di compilarlo");
+            break;
         case 'passwordMissing':
             return alert("Password mancante! Si prega di inserirla");
-        default:
-            return alert("Dati mancanti! Si prega di inserirli");
     }
 }
     function checkLogin(form){
