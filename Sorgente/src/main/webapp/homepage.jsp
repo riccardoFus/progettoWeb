@@ -1,8 +1,8 @@
 <jsp:include page="header.jsp"></jsp:include>
     <div>
         <p>
-            Tum4World è un'associazione di volontariato che si dedica a sostenere e migliorare la vita degli anziani, dei disabili e degli
-            studenti universitari, fornendo supporto e risorse per aiutare queste persone a raggiungere i propri obiettivi e migliorare
+            <b>Tum4World</b> è un'associazione di volontariato che si dedica a <b>sostenere e migliorare la vita degli anziani, dei disabili e degli
+            studenti universitari</b>, fornendo supporto e risorse per aiutarli a raggiungere i propri obiettivi e a migliorare
             la loro qualità di vita.
             <%-- AGGIUNGI IMMAGINE LOGO CON FIGURE--%>
         </p>
