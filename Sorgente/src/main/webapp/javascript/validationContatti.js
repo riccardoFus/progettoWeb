@@ -8,7 +8,11 @@ function isValidEmail(s){
 }
 
 function warnNoValidForm(field, s){
-    let message = "Non hai inserito il valore nel campo " + s;
+    let message;
+    if(s=='Email')
+        message = "Non hai inserito il valore nel campo " + s +", o hai inserito un format non valido";
+    else
+        message="Non hai inserito il valore nel campo " + s;
     field.focus();
     alert(message)
     return false;
