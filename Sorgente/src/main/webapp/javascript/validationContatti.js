@@ -8,7 +8,7 @@ function isValidEmail(s){
 }
 
 function warnNoValidForm(field, s){
-    var message = "Non hai inserito il valore nel campo " + s;
+    let message = "Non hai inserito il valore nel campo " + s;
     field.focus();
     alert(message)
     return false;
@@ -25,7 +25,7 @@ function checkEmail(field, s){
 }
 function validatePageContatti(form) {
     return check(form.elements["name"], "Nome")
-        && check(form.elements["surname"], "Cogname")
+        && check(form.elements["surname"], "Cognome")
         && check(form.elements["email"], "Email")
         && checkEmail(form.elements["email"], "Email");
 }
