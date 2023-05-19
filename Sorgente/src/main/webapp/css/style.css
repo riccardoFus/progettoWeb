@@ -28,7 +28,7 @@ p{
     text-align: justify;
 }
 
-#button {
+.button {
     border:2px solid #bbbbbb;
     border-radius: 2px;
     text-decoration: none;
@@ -41,16 +41,16 @@ p{
     text-align: center;
 }
 
-#divBottoni{
+.divBottoni{
     margin: auto;
     width: 50%;
     padding: 10px;
+    align: center;
 }
 
 #header{
     background-color: #717171;
     padding: 20px;
-    box-shadow: 1;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
@@ -58,12 +58,11 @@ p{
     background-color: #717171;
     margin: 0;
     padding: 20px;
-    box-shadow: 1;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     margin-top: auto;
 }
 
-#imageStandard{
+.imageStandard{
     max-width: 60%;
     height: auto;
 }

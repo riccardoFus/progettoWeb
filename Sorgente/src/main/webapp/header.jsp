@@ -1,5 +1,8 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
+
+<!-- gestione sessione
+HttpSession session = request.getSession() -->
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -12,14 +15,21 @@
 <header id="header" >
     <div>
         <h1>Tum4World</h1>
-        <div id="divBottoni" align="center">
+        <div class="divBottoni" align="center">
             <form>
-                <input type="submit" value="Homepage" id="button" formaction="homepage.jsp">
-                <input type="submit" value="Chi siamo" id="button" formaction="chisiamo.jsp">
-                <input type="submit" value="Attività" id="button" formaction="attivita_generale.jsp">
-                <input type="submit" value="Contatti" id="button" formaction="contatti.jsp">
-                <input type="submit" value="Sign-In" id="button" formaction="sign_in.jsp">
-                <input type="submit" value="Login" id="button" formaction="login.jsp">
+                <input type="submit" value="Homepage" class="button" formaction="homepage.jsp">
+                <input type="submit" value="Chi siamo" class="button" formaction="chisiamo.jsp">
+                <input type="submit" value="Attività" class="button" formaction="attivita_generale.jsp">
+                <input type="submit" value="Contatti" class="button" formaction="contatti.jsp">
+                <!-- if(session.getAttribute("nome") == null)
+                -->
+                <input type="submit" value="Sign-In" class="button" formaction="sign_in.jsp">
+                <!-- if(session.getAttribute("nome") == null) -->
+                <input type="submit" value="Login" class="button" formaction="login.jsp">
+                <!-- else
+                add-logout mechanism
+                <input type="button" value="Logout" class="button" formaction="< % response.encodeurl(homepage.jsp) % >" >
+                -->
             </form>
         </div>
     </div>
@@ -29,4 +39,5 @@
         <p>Frase ispirante: <span><!%= phraseBean.toString() %></span></p>
     </div>
     -->
+
 </header>
