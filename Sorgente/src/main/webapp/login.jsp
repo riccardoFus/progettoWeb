@@ -5,13 +5,13 @@
             <form>
                 <div class="divBottoni">
                 <b><label>Username</label></b>
-                <input type="text" class="textbox" id="username" required="true" height="50px">
+                <input type="text" class="textbox" id="username" height="50px">
                 </div>
                 <br>
 
                 <div clas="divBottoni">
                     <b><label>Password</label></b>
-                <input type="password" class="textbox" id="password" required="true">
+                <input type="password" class="textbox" id="password">
                 </div>
 
                 <br>
@@ -20,35 +20,4 @@
             </form>
         </div>
     </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 <jsp:include page="footer.jsp"></jsp:include>
