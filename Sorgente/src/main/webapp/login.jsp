@@ -1,15 +1,15 @@
 <jsp:include page="header.jsp"></jsp:include>
     <div>
         <h1>Login</h1>
-        <div id="divBottoni" align="center">
+        <div class="divBottoni" align="center">
             <form>
-                <div id="divBottoni">
+                <div class="divBottoni">
                 <b><label>Username</label></b>
                 <input type="text" class="textbox" id="username" height="50px">
                 </div>
                 <br>
 
-                <div id="divBottoni">
+                <div class="divBottoni">
                     <b><label>Password</label></b>
                 <input type="password" class="textbox" id="password">
                 </div>
