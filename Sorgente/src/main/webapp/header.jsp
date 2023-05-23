@@ -1,36 +1,40 @@
 <!DOCTYPE html>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
 
-<!-- gestione sessione
-HttpSession session = request.getSession() -->
 <html lang="en">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tum4World</title>
-    <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
     <link rel="stylesheet" href="css/style.css" type="text/css">
+
+    <!-- gestione dei diversi file css da includere-->
+    <%
+        String[] URI = (request.getRequestURI()).split("/");
+        String pagina = URI[URI.length-1];
+        if(pagina.equals("sign_in.jsp")){
+    %>
+    <link rel="stylesheet" href="css/signIn_style.css" type="text/css">
+    <% }else if(pagina.equals("chisiamo.jsp")){%>
+    <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
+    <%}%>
+
 </head>
 <body>
 <header id="header" >
     <div>
         <h1>Tum4World</h1>
-        <div class="divBottoni" align="center">
-            <form>
-                <input type="submit" value="Homepage" class="button" formaction="homepage.jsp">
-                <input type="submit" value="Chi siamo" class="button" formaction="chisiamo.jsp">
-                <input type="submit" value="Attività" class="button" formaction="attivita_generale.jsp">
-                <input type="submit" value="Contatti" class="button" formaction="contatti.jsp">
-                <!-- if(session.getAttribute("nome") == null)
-                -->
-                <input type="submit" value="Sign-In" class="button" formaction="sign_in.jsp">
-                <!-- if(session.getAttribute("nome") == null) -->
-                <input type="submit" value="Login" class="button" formaction="login.jsp">
-                <!-- else
+        <div class="divBottoni">
+            <a class="button" href="<%= response.encodeURL("homepage.jsp")%>">Homepage</a>
+            <a class="button" href="<%=response.encodeURL("chisiamo.jsp")%>">Chi siamo</a>
+            <a class="button" href="<%=response.encodeURL("attivita_generale.jsp")%>">Attività</a>
+            <a class="button" href="<%=response.encodeURL("contatti.jsp")%>">Contatti</a>
+            <a class="button" href="<%=response.encodeURL("sign_in.jsp")%>">Sign-In</a>
+            <a class="button" href="<%=response.encodeURL("login.jsp")%>">Login</a>
+            <!--
                 add-logout mechanism
-                <input type="button" value="Logout" class="button" formaction="< % response.encodeurl(homepage.jsp) % >" >
+                <a class="button" href="< % response.encodeurl(homepage.jsp) % >" >Logout</a>
                 -->
-            </form>
         </div>
     </div>
     <!--

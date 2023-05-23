@@ -15,7 +15,7 @@ function validateEmail(form){
     let elem = form.elements.namedItem("email");
     if(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(elem.value)) {
         //reset warning se attivi
-        document.getElementById("warnEmail").style.visibility = "collapse";
+        document.getElementById("warnEmail").style.visibility = "hidden";
         return true;
     }else{
         let msg;
@@ -43,7 +43,7 @@ function validateDate(form){
         let sogliaData = new Date(parseInt(nascita[0]) + 18,  parseInt(nascita[2]) - 1, parseInt(nascita[1]) );
 
         if(oggi - sogliaData.getTime()>= 0) {
-            document.getElementById("warnData").style.visibility = "collapse";
+            document.getElementById("warnData").style.visibility = "hidden";
             return true;
         }else {
             showWarning("Iscrizione consentita solo ai maggiorenni", "warnData")
@@ -68,21 +68,21 @@ function validateNSU(form){
         esito = false;
         showWarning("Campo obbligatorio", "warnNome");
     }else{
-        document.getElementById("warnNome").style.visibility = "collapse";
+        document.getElementById("warnNome").style.visibility = "hidden";
     }
 
     if(elemC.value === ""){
         esito = false;
         showWarning("Campo obbligatorio", "warnCogn")
     }else{
-        document.getElementById("warnCogn").style.visibility = "collapse";
+        document.getElementById("warnCogn").style.visibility = "hidden";
     }
 
     if(elemU.value === ""){
         esito = false;
         showWarning("Campo obbligatorio", "warnUser")
     }else{
-        document.getElementById("warnUser").style.visibility = "collapse";
+        document.getElementById("warnUser").style.visibility = "hidden";
     }
 
     return esito;
@@ -96,9 +96,9 @@ function validatePsw(form){
 
     //controlla che sia stata inserita
     if(/^(?=.*[Rr])(?=.*[sS])(?=.*[dD])(?=.*[rR])(?=.*[A-Z])(?=.*\d)(?=.*[$!?])[\w\W]{8}$/.test(elemP.value)){
-        document.getElementById("warnPsw").style.visibility = "collapse";
+        document.getElementById("warnPsw").style.visibility = "hidden";
         if (elemP.value === elemPC.value) {
-            document.getElementById("warnPswConf").style.visibility = "collapse";
+            document.getElementById("warnPswConf").style.visibility = "hidden";
             return true;
         }else{
             //no matching
@@ -123,7 +123,7 @@ function validateTel(form){
     //standard E.164 internazionale:
     // numeri di telefono accettati sono in formato [+][codice nazione 1-4 cifre][codice area][numero cell locale]
     if(/^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,5}[-\s\.]?[0-9]{1,6}$/.test(elem.value)) {
-        document.getElementById("warnTel").style.visibility = "collapse";
+        document.getElementById("warnTel").style.visibility = "hidden";
         return true;
     }else{
         let msg;
@@ -153,7 +153,7 @@ function reset(){
     //reset tutti i warning
     let warnings = document.getElementsByClassName("warn");
     for (let el of warnings){
-        el.style.visibility = "collapse";
+        el.style.visibility = "hidden";
     }
 }
 
