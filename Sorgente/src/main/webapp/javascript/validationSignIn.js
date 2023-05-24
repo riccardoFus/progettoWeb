@@ -1,14 +1,9 @@
 function validate(){
     let form = document.getElementById("form");
     // esito scritto invece di return a&& b && c ... per forzare la chiamata di tutte le funzioni in modo che diano tutti warning
-    let esito = true;
-    esito &=  validateDate(form);
-    esito &= validateNSU(form);
-    esito &= validatePsw(form);
-    esito &= validateTel(form);
-    esito &= validateEmail(form);
-    // attenzione!! esito è considerato number per ora
-    return Boolean(esito);
+    let esitoDate = validateDate(form), esitoNSU =  validateNSU(form), esitoPsw= validatePsw(form),
+        esitoTel=validateTel(form), esitoEmail = validateEmail(form);
+    return esitoDate && esitoTel && esitoPsw && esitoNSU && esitoEmail;
 }
 
 function validateEmail(form){
@@ -95,7 +90,7 @@ function validatePsw(form){
     let elemPC = form.elements.namedItem("psw confermata");
 
     //controlla che sia stata inserita
-    if(/^(?=.*[Rr])(?=.*[sS])(?=.*[dD])(?=.*[rR])(?=.*[A-Z])(?=.*\d)(?=.*[$!?])[\w\W]{8}$/.test(elemP.value)){
+    if(/^(?=.*[Cc])(?=.*[sS])(?=.*[dD])(?=.*[rR])(?=.*[A-Z])(?=.*\d)(?=.*[$!?])[\w\W]{8}$/.test(elemP.value)){
         document.getElementById("warnPsw").style.visibility = "hidden";
         if (elemP.value === elemPC.value) {
             document.getElementById("warnPswConf").style.visibility = "hidden";
@@ -153,7 +148,7 @@ function reset(){
     //reset tutti i warning
     let warnings = document.getElementsByClassName("warn");
     for (let el of warnings){
-        el.style.visibility = "hidden";
+        el.setAttribute("visibility", "hidden");
     }
 }
 

@@ -1,8 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp"/>
 
-<div id="container-main" class="row" >
-    <div class="flex-container">
+<div class="flex-container" id="container-main">
         <form method="post" action="<%= response.encodeURL("./registrazione_confermata.jsp")%>" onsubmit="return validate()" id="form">
             <div class="row">
                 <label>Nome</label>
@@ -40,9 +39,9 @@
 
             <div class="row">
                 <label>Sottoscrizione</label>
-                <input type="radio" name="simp" value="simpatizzante" checked>
+                <input type="radio" name="sottoscriz" value="simpatizzante">
                 <label>Simpatizzante</label>
-                <input type="radio" name="ad" value="aderente">
+                <input type="radio" name="sottoscriz" value="aderente">
                 <label>Aderente</label>
 
             </div>
@@ -68,13 +67,12 @@
 
             </div>
 
-            <div class="row">
+            <div class="flex-container">
                 <input type="submit" value="Sign in" class="button">
-                <input type="button" onclick="return reset()" value="Reset" class="button">
+                <input type="button" onclick="reset()" value="Reset" class="button">
             </div>
 
         </form>
-    </div>
 </div>
 
 <script type="text/javascript" src="./javascript/validationSignIn.js"></script>
