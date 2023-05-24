@@ -13,7 +13,7 @@
   </div>
 
   <div id="form" align="center">
-    <form action="invio_confermato.jsp" method="post">
+    <form action="<%= response.encodeURL("./invio_confermato.jsp")%>" method="post">
       <div>
         <label for="name">Nome: </label>
         <input type="text" name="name" id="name" class="textbox"><br>
@@ -50,9 +50,9 @@
 
       <br>
       <div>
-        <input type="button" value="Submit" name="fakeSubmit" id="button" onclick="if(validatePageContatti(this.form)) document.getElementById('submit').click()">
+        <input type="button" value="Submit" name="fakeSubmit" class="button" onclick="if(validatePageContatti(this.form)) document.getElementById('submit').click()">
         <input type="submit" id="submit" hidden>
-        <input type="reset" value="Reset" name="reset" id="button">
+        <input type="reset" value="Reset" name="reset" class="button">
       </div>
 
       <br>

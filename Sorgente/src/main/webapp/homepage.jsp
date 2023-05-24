@@ -10,13 +10,13 @@
 
     <div>
         <figure>
-            <img src="images/associazione-regole.jpg" alt="Immagine Home Page" id="imageStandard">
+            <img src="images/associazione-regole.jpg" alt="Immagine Home Page" class="imageStandard">
         </figure>
     </div>
 
     <div align="center">
-            <a href="documents/volantino.pdf">
-                <input type="submit" value="Volantino" id="button">
+            <a href="documents/Associazione%20Tum4World.pdf" download="VolantinoTum4World">
+                <input type="submit" value="Volantino" class="button">
             </a>
     </div>
 <jsp:include page="footer.jsp"></jsp:include>

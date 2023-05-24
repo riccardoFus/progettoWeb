@@ -1,6 +1,4 @@
-<jsp:include page="header.jsp"></jsp:include>
-<div><h1 align="center">CHI SIAMO</h1>
-</div>
+<jsp:include page="header.jsp"/>
 <div>
       <p>Tum4World è un'organizzazione no-profit fondata nel 2023 da Riccardo Fusiello, Denise Comincioli, Silvanus Bordignon e Cesare Lever, quattro studenti dell'Università di Trento che hanno avuto un'idea “originalissima” durante il corso di Programmazione Web.
         L'organizzazione si dedica a sostenere anziani, disabili e studenti universitari fornendo supporto e risorse per aiutare queste persone a raggiungere i propri obiettivi e migliorare la loro qualità di vita.
@@ -29,4 +27,4 @@
       <span class="navigation-dot" onclick="currentSlide(3)"></span>
     </div>
 
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
