@@ -17,7 +17,7 @@
 .row{
     display: flex;
     flex-flow: row wrap-reverse;
-    gap: 2vh;
+    gap: 0.1vh;
 }
 
 .warn{
@@ -25,7 +25,9 @@
     width: 15vw;
 }
 
-
 input.textbox{
     width: 15vw;
+}
+.label{
+    font-weight: bold;
 }
