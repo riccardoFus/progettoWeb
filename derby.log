@@ -1,3 +1,14 @@
+Sat May 27 16:03:47 CEST 2023 : Server di rete Apache Derby: 10.16.1.1 - (1901046) avviato e pronto ad accettare connessioni sulla porta 1527
 ----------------------------------------------------------------
-Sat May 27 11:46:03 CEST 2023: Shutting down Derby engine
-----------------------------------------------------------------
+Sat May 27 16:05:55 CEST 2023:
+Avvio della versione di Derby The Apache Software Foundation - Apache Derby - 10.16.1.1 - (1901046): istanza a816c00e-0188-5d85-c427-000007413f58
+sulla directory di database D:\Uni\4 Semestre\Introduzione alla programmazione web\Progetto\progettoWeb\Tum4WorldDB con caricatore classi jdk.internal.loader.ClassLoaders$AppClassLoader@33909752 
+Caricato da file:/C:/Users/fusyr/db-derby-10.16.1.1-bin/lib/derby.jar
+java.vendor=Oracle Corporation
+java.runtime.version=20.0.1+9-29
+user.dir=D:\Uni\4 Semestre\Introduzione alla programmazione web\Progetto\progettoWeb
+os.name=Windows 11
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Programma di caricamento classe database avviato - derby.database.classpath=''
