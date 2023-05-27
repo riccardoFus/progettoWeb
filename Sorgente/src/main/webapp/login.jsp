@@ -20,4 +20,6 @@
             </form>
         </div>
     </div>
+
+<script src="javascript/validationLogin.js"></script>
 <jsp:include page="footer.jsp"></jsp:include>
