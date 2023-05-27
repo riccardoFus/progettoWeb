@@ -1,9 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp"/>
 
-<div id="container-main" class="row" >
-    <div class="flex-container">
-        <form method="post" action="<%= response.encodeURL("./registrazione_confermata.jsp")%>" onsubmit="return validate()" id="form">
+<div class="flex-container" id="container-main">
+        <form method="post" action="<%= response.encodeURL("signIn")%>" onsubmit="return validate()" id="form">
             <div class="row">
                 <label>Nome</label>
                 <input type="text" name="nome" class="textbox">
@@ -40,10 +39,11 @@
 
             <div class="row">
                 <label>Sottoscrizione</label>
-                <input type="radio" name="simp" value="simpatizzante" checked>
-                <label>Simpatizzante</label>
-                <input type="radio" name="ad" value="aderente">
-                <label>Aderente</label>
+                <input type="radio" name="sottoscriz" value="simpatizzante" id="simp">
+                <label for="simp">Simpatizzante</label>
+                <input type="radio" name="sottoscriz" value="aderente" id="ader">
+                <label for="ader">Aderente</label>
+                <span id="warnSott" class="warn"></span>
 
             </div>
 
@@ -68,14 +68,13 @@
 
             </div>
 
-            <div class="row">
+            <div class="flex-container">
                 <input type="submit" value="Sign in" class="button">
-                <input type="button" onclick="return reset()" value="Reset" class="button">
+                <input type="button" onclick="reset()" value="Reset" class="button">
             </div>
 
         </form>
-    </div>
 </div>
 
 <script type="text/javascript" src="./javascript/validationSignIn.js"></script>
-<jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"/>
