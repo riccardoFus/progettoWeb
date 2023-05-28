@@ -32,7 +32,7 @@
                 <input type="tel" name="telefono" class="textbox">
                 <span id="warnTel" class="warn"></span>
             </div>
-
+            
             <div class="row">
                 <label class="label">Sottoscrizione</label>
                 <input type="radio" name="sottoscriz" value="simpatizzante" id="simp">
@@ -61,7 +61,7 @@
                 <span id="warnPswConf" class="warn"></span>
             </div>
 
-            <div class="row">
+            <div class="flex-container">
                 <input type="submit" value="Sign in" class="button">
                 <input type="button" onclick="reset()" value="Reset" class="button">
             </div>
