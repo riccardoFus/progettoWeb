@@ -2,7 +2,7 @@
 <jsp:include page="header.jsp"/>
 
 <div class="flex-container" id="container-main">
-        <form method="post" action="<%= response.encodeURL("signIn")%>" onsubmit="return validate()" id="form">
+        <form method="post" action="<%= response.encodeURL("./signIn")%>" onsubmit="return validate()" id="form">
             <div class="row">
                 <label>Nome</label>
                 <input type="text" name="nome" class="textbox">
@@ -49,7 +49,7 @@
 
             <div class="row">
                 <label>Username</label>
-                <input type="text" name="username" class="textbox">
+                <input type="text" name="username" class="textbox" id="username">
                 <span id="warnUser" class="warn"></span>
 
             </div>

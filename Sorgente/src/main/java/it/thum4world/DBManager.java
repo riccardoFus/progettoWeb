@@ -1,73 +1,45 @@
 package it.thum4world;
 
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
 import javax.servlet.http.HttpServlet;
-import javax.sql.DataSource;
 import java.sql.*;
-public class DBManager extends HttpServlet {
 
-    protected DataSource dataSource;
+public class DBManager extends HttpServlet {
+    protected String URLDB= "jdbc:derby://localhost:1527/Tum4WorldDB";
+    //protected String user = "admin";
+    //protected String psw = "admin";
 
     public void init(){
-        try{
-            if(loadDriver()){
-                // usa connection pooling: con tomcat si può definire la datasource necessaria nel fil econtext.xml
-                dataSource = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/CSE");
-                System.out.println("\nLoading ha avuto successo\n");
 
-            }else{
-                // errore nell caricamento del driver
-                System.out.println("\nErrore: caricamento del driver jdbc fallito\n");
-            }
-
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-
-        }finally {
-            if(!unloadDriver()){
-                // errore
-                System.out.println("\nErrore: unloading del driver jdbc fallito\n");
-            }
-        }
-    }
-
-    // metodo carica driver jdbc
-    protected boolean loadDriver(){
+        //caricamento del driver jdbc
         final String DERBY_CLIENT = "org.apache.derby.jdbc.ClientDriver";
         try {
             Class.forName(DERBY_CLIENT);
-            return true;
+            System.out.println("\nLoading ha avuto successo\n");
         } catch (ClassNotFoundException ex) {
-            System.out.println(ex);
-            return false;
+            // errore nell caricamento del driver
+            System.out.println("\nErrore: caricamento del driver jdbc fallito\n");
+            System.out.println("\nDettagli:\n" + ex);
         }
-
     }
 
-    // metodo unload il driver
-    protected boolean unloadDriver() {
+    @Override
+    public void destroy() {
+        super.destroy();
         try {
             DriverManager.getConnection("jdbc:derby:;shutdown=true;deregister=false");
         } catch (SQLException e){
             System.gc();
         }
-        return false;
+
     }
 
     protected ResultSet getInfoDB(String query){
         Connection con;
         ResultSet resultSet;
-        if(dataSource == null) {
-            try {
-                dataSource = (DataSource) (new InitialContext()).lookup("java:/comp/env/jdbc/CSE");
-            } catch (NamingException e) {
-                throw new RuntimeException(e);
-            }
-        }
+
         try {
             // apri/riusa connessione
-            con = dataSource.getConnection();
+            con =  DriverManager.getConnection(URLDB);
             Statement stmnt = con.createStatement();
             resultSet = stmnt.executeQuery(query);
             con.close();
@@ -81,13 +53,15 @@ public class DBManager extends HttpServlet {
     protected boolean updateDB(String update){
         Connection con;
         try {
-            // apri/riusa connessione
-            con = dataSource.getConnection();
+            System.out.println(update);
+            con =  DriverManager.getConnection(URLDB);
             Statement stmnt = con.createStatement();
             stmnt.executeUpdate(update);
+            System.out.println("\nQuery SQL ha avuto successo\n");
             con.close();
             return true;
         } catch (SQLException e) {
+            System.out.println("\nErrore nella query SQL:\n" + e);
             return false;
         }
     }
