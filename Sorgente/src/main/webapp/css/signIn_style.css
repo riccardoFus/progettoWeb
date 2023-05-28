@@ -2,10 +2,11 @@
     display: flex;
     flex-flow: column wrap;
     gap: 1vw;
+    padding-top: 1vw;
 }
 
 #container-main{
-    padding: 1vw 20vw 1vw 35vw;
+    padding: 1vw 35vw 1vw 35vw;
 }
 
 .flex-container .row{
@@ -21,8 +22,9 @@
 }
 
 .warn{
-    height: 2vw;
+    height: 1vw;
     width: 15vw;
+    color: darkslateblue;
 }
 
 input.textbox{

@@ -13,7 +13,7 @@
   </div>
 
   <div id="form" align="center">
-    <form action="<%= response.encodeURL("./invio_confermato.jsp")%>" method="post">
+    <form action="<%= response.encodeURL("./SendEmail")%>" method="post">
       <div>
         <label for="name">Nome: </label>
         <input type="text" name="name" id="name" class="textbox"><br>
@@ -21,13 +21,13 @@
 
       <br>
       <div>
-        <label for="name">Cognome: </label>
+        <label for="surname">Cognome: </label>
         <input type="text" name="surname" id="surname" class="textbox"><br>
       </div>
 
       <br>
       <div>
-        <label for="name">Email: </label>
+        <label for="email">Email: </label>
         <input type="text" name="email" id="email" class="textbox"><br>
       </div>
 
@@ -58,4 +58,6 @@
       <br>
     </form>
   </div>
+
+<script src="javascript/validationContatti.js"></script>
 <jsp:include page="footer.jsp"></jsp:include>

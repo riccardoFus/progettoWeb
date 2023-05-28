@@ -27,4 +27,5 @@
       <span class="navigation-dot" onclick="currentSlide(3)"></span>
     </div>
 
+<script src="javascript/scriptSlider.js"></script>
 <jsp:include page="footer.jsp"/>
