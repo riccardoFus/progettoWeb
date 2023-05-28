@@ -8,8 +8,7 @@
                 <input type="text" class="textbox" id="username" height="50px">
                 </div>
                 <br>
-
-                <div clas="divBottoni">
+                <div class="divBottoni">
                     <b><label>Password</label></b>
                 <input type="password" class="textbox" id="password">
                 </div>
