@@ -32,7 +32,7 @@
                 <input type="tel" name="telefono" class="textbox">
                 <span id="warnTel" class="warn"></span>
             </div>
-            
+
             <div class="row">
                 <label class="label">Sottoscrizione</label>
                 <input type="radio" name="sottoscriz" value="simpatizzante" id="simp">
