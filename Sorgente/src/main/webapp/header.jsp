@@ -18,13 +18,12 @@
     <% }else if(pagina.equals("chisiamo.jsp")){%>
     <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
     <%}%>
-
 </head>
 
 <body>
 <header id="header" >
     <div>
-        <h1>Tum4World</h1>
+        <h1 style="font-family:Papyrus">Tum4World</h1>
         <div class="divBottoni">
             <a class="button" href="<%= response.encodeURL("homepage.jsp")%>">Homepage</a>
             <a class="button" href="<%=response.encodeURL("chisiamo.jsp")%>">Chi siamo</a>
