@@ -1,9 +1,17 @@
 function validate(){
     let form = document.getElementById("form");
+
     // esito scritto invece di return a&& b && c ... per forzare la chiamata di tutte le funzioni in modo che diano tutti warning
-    let esitoDate = validateDate(form), esitoNSU =  validateNSU(form), esitoPsw= validatePsw(form),
-        esitoTel=validateTel(form), esitoEmail = validateEmail(form), esitoCheck=validateCheckbox();
+
+    let esitoDate = validateDate(form);
+    let esitoNSU =  validateNSU(form);
+    let esitoPsw= validatePsw(form);
+    let esitoTel=validateTel(form);
+    let esitoEmail = validateEmail(form);
+    let esitoCheck=validateCheckbox();
+
     return esitoDate && esitoTel && esitoPsw && esitoNSU && esitoEmail&& esitoCheck;
+
 }
 
 function validateEmail(form){
@@ -58,6 +66,7 @@ function validateNSU(form){
     let elemU = form.elements.namedItem("username");
 
     //controlla che siano stati inseriti tutti i campi
+
     let esito = true;
     if(elemN.value === ""){
         esito = false;
@@ -77,7 +86,34 @@ function validateNSU(form){
         esito = false;
         showWarning("Campo obbligatorio", "warnUser")
     }else{
-        document.getElementById("warnUser").style.visibility = "hidden";
+        //url = url servlet + parametro da analizzare
+        let responseU;
+        let url = "?username=" + elemU.value;
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("GET", url, false);
+
+        xhttp.onreadystatechange = function () {
+            var done = 4, ok = 200;
+            if (this.readyState === done && this.status === ok)
+            {
+                responseU = this.response;
+                if(responseU){
+                    //user con lo stesso esername trovato
+                    esito = false;
+                    showWarning("Username già utilizzato", "warnUser");
+                    document.getElementById("username").style.color="darkmagenta";
+                    document.getElementById("warnUser").style.color="darkmagenta";
+
+                }else{
+                    //tutto ok
+                    document.getElementById("warnUser").style.visibility = "hidden";
+                    document.getElementById("username").style.color="black";
+                    document.getElementById("warnUser").style.color="darkslateblue";
+                }
+
+            }
+        };
+        xhttp.send();
     }
 
     return esito;
@@ -86,6 +122,7 @@ function validateNSU(form){
 
 function validatePsw(form){
     // prendi psw e conferma psw
+
     let elemP = form.elements.namedItem("psw");
     let elemPC = form.elements.namedItem("psw confermata");
 
@@ -115,8 +152,10 @@ function validatePsw(form){
 }
 function validateTel(form){
     let elem = form.elements.namedItem("telefono");
-    //standard E.164 internazionale:
-    // numeri di telefono accettati sono in formato [+][codice nazione 1-4 cifre][codice area][numero cell locale]
+
+    /*standard E.164 internazionale:
+    numeri di telefono accettati sono in formato [+][codice nazione 1-4 cifre][codice area][numero cell locale]*/
+
     if(/^[\+]?[(]?[0-9]{1,4}[)]?[-\s\.]?[0-9]{1,5}[-\s\.]?[0-9]{1,6}$/.test(elem.value)) {
         document.getElementById("warnTel").style.visibility = "hidden";
         return true;
