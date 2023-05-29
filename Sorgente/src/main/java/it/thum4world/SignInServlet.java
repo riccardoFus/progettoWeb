@@ -45,7 +45,7 @@ public class SignInServlet extends DBManager {
         *  N.B: si accettano formati diversi (possono includere +, ., parentisi ...)*/
 
         String tel = req.getParameter("telefono");
-        Integer telN = purifyNumber(tel);
+        String telN = purifyNumber(tel);
 
         // N.B nel db aderente è un parametro booleano
 
@@ -55,7 +55,7 @@ public class SignInServlet extends DBManager {
         String updateUtenti = "INSERT INTO utenti VALUES ('"+ username+"','"+ sha3Hex +"','" + req.getParameter("email") + "')";
         String updateClienti = "INSERT INTO clienti VALUES ('"+ req.getParameter("nome")
                         + "', '" + req.getParameter("cognome") + "', '" + req.getParameter("data di nascita") +
-                        "', " + telN + ", " + aderente + ", '" + username+ "')";
+                        "', '" + telN + "', " + aderente + ", '" + username+ "')";
         if(updateDB(updateUtenti) && updateDB(updateClienti)){
             //iscrizione andata a buon fine, redirect corretto
             req.getRequestDispatcher("./registrazione_confermata.jsp").forward(req,resp);
@@ -81,7 +81,7 @@ public class SignInServlet extends DBManager {
         return hexString.toString();
     }
 
-    private Integer purifyNumber(String str){
+    private String purifyNumber(String str){
         String purified = "";
         int lastIndex = 0;
         for(int i = 0; i <str.length(); i++){
@@ -98,7 +98,7 @@ public class SignInServlet extends DBManager {
 
         }
 
-        return Integer.parseInt(purified);
+        return purified;
     }
 
     /*
@@ -106,7 +106,6 @@ public class SignInServlet extends DBManager {
     * */
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         String username = req.getParameter("username");
         String queryUsername = "SELECT username FROM utenti WHERE username='" + username + "'";
         ResultSet result = getInfoDB(queryUsername);
