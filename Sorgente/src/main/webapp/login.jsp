@@ -2,7 +2,7 @@
     <div>
         <h1>Login</h1>
         <div class="divBottoni" align="center">
-            <form method="post" action="<%= response.encodeURL("./logIn")%>" onsubmit="return checkLogin(this.form)" id="form">
+            <form method="post" action="<%= response.encodeURL("./logIn")%>"id="form">
                 <div class="divBottoni">
                 <b><label>Username</label></b>
                 <input type="text" class="textbox" name="username" height="50px">

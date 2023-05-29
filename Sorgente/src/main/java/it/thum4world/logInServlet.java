@@ -17,7 +17,7 @@ public class logInServlet extends DBManager {
         // riceve i dati del form di login
         String username = req.getParameter("username");
         /* applichiamo l'algoritmo SHA-256 e memorizziamo il digest? * */
-        String psw = req.getParameter("psw");
+        String psw = req.getParameter("password");
         MessageDigest digest = null;
         String sha3Hex;
 
