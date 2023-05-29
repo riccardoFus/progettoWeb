@@ -17,32 +17,33 @@ public class logInServlet extends DBManager {
         // riceve i dati del form di login
         String username = req.getParameter("username");
         /* applichiamo l'algoritmo SHA-256 e memorizziamo il digest? * */
-        String psw = req.getParameter("password");
+        String password = req.getParameter("password");
         MessageDigest digest = null;
         String sha3Hex;
 
         System.out.println("\nTrattamento dati login ...\n");
+        if (username.length() == 0 || password.length() == 0) {
+            System.out.println("Dati mancanti!");
+        } else {
+            String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + password + "'";
+            String checkEmail = "SELECT * FROM UTENTI WHERE EMAIL='" + username + "'AND PASSWORD='" + password + "'";
+            System.out.println(checkUtente);
+            System.out.println(checkEmail);
+            //Ricevo i risultati delle due query
+            ResultSet user = getInfoDB(checkUtente);
+            ResultSet email = getInfoDB(checkEmail);
+            try {
+                //Se una delle due riceve delle righe, allora il login è valido
+                if (user.next() == true || email.next() == true) {
 
-        String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='"+ username +"'AND PASSWORD='"+ psw +"'";
-        String checkEmail = "SELECT * FROM UTENTI WHERE EMAIL='"+ username +"'AND PASSWORD='"+ psw +"'";
-        System.out.println(checkUtente);
-        System.out.println(checkEmail);
-        //Ricevo i risultati delle due query
-        ResultSet user=getInfoDB(checkUtente);
-        ResultSet email=getInfoDB(checkEmail);
-        try {
-            //Se una delle due riceve delle righe, allora il login è valido
-            if(user.next()==true || email.next()==true){
-
-                System.out.println("\nLogin avvenuto!\n");
+                    System.out.println("\nLogin avvenuto!\n");
+                } else {
+                    System.out.println("\nErrore: login fallito\n");
+                }
+            } catch (SQLException e) {
+                throw new RuntimeException(e);
             }
 
-                else{
-                System.out.println("\nErrore: login fallito\n");
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         }
-
     }
 }
