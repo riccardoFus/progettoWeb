@@ -1,0 +1,43 @@
+.imageCircular{
+    width: 20vw;
+    height: 20vw;
+    border: 0.1vw solid gray;
+    border-radius: 35vw;
+}
+
+.row{
+    display: flex;
+    flex-flow: row wrap;
+    gap: 0.1vh;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.column {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1vw;
+    margin: 5vw 11vw 3vw 11vw;
+}
+
+p{
+    width: 35vw;
+    height: fit-content;
+    font-size: 1.3em;
+    margin:0;
+    font-family: "Roboto Mono";
+}
+
+h2,h3{
+    font-family: "Major Mono Display";
+    text-align: center;
+
+}
+h2{
+    font-size: 4em;
+}
+
+h3{
+    font-size: 2em;
+    margin: 0 0 4vw 0;
+}

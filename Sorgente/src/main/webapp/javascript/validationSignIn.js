@@ -88,17 +88,17 @@ function validateNSU(form){
     }else{
         //url = url servlet + parametro da analizzare
         let responseU;
-        let url = "?username=" + elemU.value;
+        let url = "signIn?username=" + elemU.value;
         let xhttp = new XMLHttpRequest();
         xhttp.open("GET", url, false);
-
         xhttp.onreadystatechange = function () {
             var done = 4, ok = 200;
             if (this.readyState === done && this.status === ok)
             {
                 responseU = this.response;
-                if(responseU){
+                if(responseU === "true"){
                     //user con lo stesso esername trovato
+                    alert("esiste un altro user ");
                     esito = false;
                     showWarning("Username già utilizzato", "warnUser");
                     document.getElementById("username").style.color="darkmagenta";
@@ -106,6 +106,7 @@ function validateNSU(form){
 
                 }else{
                     //tutto ok
+                    alert("non esiste un altro user ");
                     document.getElementById("warnUser").style.visibility = "hidden";
                     document.getElementById("username").style.color="black";
                     document.getElementById("warnUser").style.color="darkslateblue";

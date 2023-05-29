@@ -7,16 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Tum4World</title>
     <link rel="stylesheet" href="css/style.css" type="text/css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Major+Mono+Display">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
 
     <!-- gestione dei diversi file css da includere-->
     <%
         String[] URI = (request.getRequestURI()).split("/");
         String pagina = URI[URI.length-1];
-        if(pagina.equals("sign_in.jsp")){
+        if(pagina.contains("sign_in.jsp")){
     %>
     <link rel="stylesheet" href="css/signIn_style.css" type="text/css">
-    <% }else if(pagina.equals("chisiamo.jsp")){%>
+    <% }else if(pagina.contains("chisiamo.jsp")){%>
     <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
+    <% }else if(pagina.contains("attivita_generale.jsp")){%>
+    <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
     <%}%>
 </head>
 
