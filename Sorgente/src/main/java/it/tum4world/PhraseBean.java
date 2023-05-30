@@ -1,4 +1,4 @@
-package it.thum4world;
+package it.tum4world;
 
 import java.io.Serializable;
 import java.util.ArrayList;

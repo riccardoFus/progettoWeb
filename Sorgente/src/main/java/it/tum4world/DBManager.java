@@ -1,6 +1,9 @@
-package it.thum4world;
+package it.tum4world;
 
 import javax.servlet.http.HttpServlet;
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.sql.*;
 
 public class DBManager extends HttpServlet {
@@ -67,5 +70,42 @@ public class DBManager extends HttpServlet {
             System.out.println("\nErrore nella query SQL:\n" + e);
             return false;
         }
+    }
+
+    public static String bytesToHex(byte[] hash) {
+        /* conversione bytes in caratteri*/
+
+        StringBuilder hexString = new StringBuilder(2 * hash.length);
+        for (int i = 0; i < hash.length; i++) {
+            String hex = Integer.toHexString(0xff & hash[i]);
+            if(hex.length() == 1) {
+                hexString.append('0');
+            }
+            hexString.append(hex);
+        }
+        return hexString.toString();
+    }
+
+    public static String createDigest(String psw){
+        MessageDigest digest = null;
+        String sha3Hex;
+
+        try {
+            /* cerchiamo l'algoritmo che dobbiamo usare, lo applichiamo e viene restituito un array di byte
+             *  del message digest
+             *  N.B dobbiamo convertire i byte in stringa
+             */
+
+            digest = MessageDigest.getInstance("SHA3-256");
+            final byte[] hashbytes = digest.digest(psw.getBytes(StandardCharsets.UTF_8));
+            sha3Hex = bytesToHex(hashbytes);
+
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+
+        /* prendi la stringa del numero telefonico e convertilo in intero
+         *  N.B: si accettano formati diversi (possono includere +, ., parentesi ...)*/
+        return sha3Hex;
     }
 }
