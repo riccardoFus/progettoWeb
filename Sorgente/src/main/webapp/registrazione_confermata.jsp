@@ -1,9 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp"></jsp:include>
 
-<div>
+<div id="divBottoni">
     <h1>Ti diamo il benvenuto!</h1>
-    <p>Hai completato la registrazione con successo!</p>
+    <p><h2>Hai completato la registrazione con successo!</h2></p>
 
 </div>
 

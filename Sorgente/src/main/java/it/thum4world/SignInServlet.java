@@ -42,7 +42,7 @@ public class SignInServlet extends DBManager {
         }
 
         /* prendi la stringa del numero telefonico e convertilo in intero
-        *  N.B: si accettano formati diversi (possono includere +, ., parentisi ...)*/
+        *  N.B: si accettano formati diversi (possono includere +, ., parentesi ...)*/
 
         String tel = req.getParameter("telefono");
         String telN = purifyNumber(tel);
@@ -65,20 +65,6 @@ public class SignInServlet extends DBManager {
 
         }
 
-    }
-
-    private static String bytesToHex(byte[] hash) {
-        /* conversione bytes in caratteri*/
-
-        StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-        return hexString.toString();
     }
 
     private String purifyNumber(String str){
