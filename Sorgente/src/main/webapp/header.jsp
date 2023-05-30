@@ -41,11 +41,34 @@
                 -->
         </div>
     </div>
-    <!--
-    <div>
-        <!jsp:useBean id="phraseBean" class="it.tum4world.PhraseBean" scope="application"/>
-        <p>Frase ispirante: <span><!%= phraseBean.toString() %></span></p>
-    </div>
-    -->
+    <script>
+        // Aggiorna la frase nell'intestazione delle pagine ogni 20 secondi
+        function updatePhrase() {
+            let jsonObject;
+            let URL = window.location.origin + '/' + window.location.pathname.split('/')[1] + '/PhraseFetcher';
 
+            let xhttp = new XMLHttpRequest();
+
+            xhttp.open("GET", URL, true);
+            xhttp.responseType = "json";
+
+            xhttp.onreadystatechange = function () {
+                let done = 4, ok = 200;
+                if (this.readyState === done && this.status === ok){
+                    jsonObject = this.response;
+
+                    document.getElementById("phraseHeader").innerText =
+                        jsonObject.frase;
+                }
+            };
+
+            xhttp.send();
+        }
+
+        updatePhrase();
+        window.setInterval(updatePhrase, 20000);
+    </script>
+    <div>
+        <span>Frase ispirante: "<span id="phraseHeader"></span>"</span>
+    </div>
 </header>
