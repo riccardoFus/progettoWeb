@@ -1,4 +1,4 @@
-package it.thum4world;
+package it.tum4world;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

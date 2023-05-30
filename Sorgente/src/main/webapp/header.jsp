@@ -43,7 +43,7 @@
     </div>
     <!--
     <div>
-        <!jsp:useBean id="phraseBean" class="it.thum4world.PhraseBean" scope="application"/>
+        <!jsp:useBean id="phraseBean" class="it.tum4world.PhraseBean" scope="application"/>
         <p>Frase ispirante: <span><!%= phraseBean.toString() %></span></p>
     </div>
     -->

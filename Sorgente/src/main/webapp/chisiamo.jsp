@@ -9,13 +9,13 @@
     </div>
     <div class="carousel-container">
       <div class="images fade">
-        <img src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__480.jpg" class="imageStandard">
+        <img src="images/aquagym.jpg" class="imageStandard">
       </div>
       <div class="images fade">
-        <img src="https://cdn.pixabay.com/photo/2014/02/27/16/10/tree-276014_960_720.jpg" class="imageStandard">
+        <img src="images/giochi_da_tavolo.jpg" class="imageStandard">
       </div>
       <div class="images fade">
-        <img src="https://cdn.pixabay.com/photo/2015/04/23/22/00/tree-736885_960_720.jpg" class="imageStandard">
+        <img src="images/psicologia.jpg" class="imageStandard">
       </div>
     </div>
     <br>
