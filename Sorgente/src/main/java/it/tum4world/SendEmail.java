@@ -1,4 +1,4 @@
-package it.thum4world;
+package it.tum4world;
 
 import javax.mail.Message;
 import javax.mail.MessagingException;
@@ -15,7 +15,7 @@ import java.util.Properties;
 
 @WebServlet(name = "SendEmail", value = "/SendEmail")
 public class SendEmail extends HttpServlet {
-    protected void processRequest(HttpServletRequest request, HttpServletResponse response){
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws IOException {
         // Mittente email : il nostro utente
         String to = request.getParameter("email");
         // Destinazione email : l'associazione
@@ -44,15 +44,15 @@ public class SendEmail extends HttpServlet {
             // Imposto il testo effettivo del messaggio
             msg.setText("Motivazione richiesta : " + request.getParameter("reasons") + "\nAltre informazioni : " + request.getParameter("altro"));
             // Invio la mail effettiva
-            //Transport.send(msg);
+            Transport.send(msg);
             // Torno alla pagina di invio confermato
             response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
         } catch (AddressException e) {
-            throw new RuntimeException(e);
+            response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
         } catch (MessagingException e) {
-            throw new RuntimeException(e);
+            response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
         }
     }
 

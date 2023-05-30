@@ -1,4 +1,4 @@
-package it.thum4world;
+package it.tum4world;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,6 +24,9 @@ public class SignInServlet extends DBManager {
 
         /* non memorizziamo la psw in chiaro, ma applichiamo l'algoritmo SHA-256 e memorizziamo il digest * */
         String psw = req.getParameter("psw");
+
+        String sha3Hex = createDigest(psw);
+        /*
         MessageDigest digest = null;
         String sha3Hex;
 
@@ -33,16 +36,16 @@ public class SignInServlet extends DBManager {
             *  N.B dobbiamo convertire i byte in stringa
             */
 
-            digest = MessageDigest.getInstance("SHA3-256");
-            final byte[] hashbytes = digest.digest(psw.getBytes(StandardCharsets.UTF_8));
-            sha3Hex = bytesToHex(hashbytes);
+            //digest = MessageDigest.getInstance("SHA3-256");
+            //final byte[] hashbytes = digest.digest(psw.getBytes(StandardCharsets.UTF_8));
+            //sha3Hex = bytesToHex(hashbytes);
 
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
+        //} catch (NoSuchAlgorithmException e) {
+            //throw new RuntimeException(e);
+        //}
 
         /* prendi la stringa del numero telefonico e convertilo in intero
-        *  N.B: si accettano formati diversi (possono includere +, ., parentisi ...)*/
+        *  N.B: si accettano formati diversi (possono includere +, ., parentesi ...)*/
 
         String tel = req.getParameter("telefono");
         String telN = purifyNumber(tel);
@@ -65,20 +68,6 @@ public class SignInServlet extends DBManager {
 
         }
 
-    }
-
-    private static String bytesToHex(byte[] hash) {
-        /* conversione bytes in caratteri*/
-
-        StringBuilder hexString = new StringBuilder(2 * hash.length);
-        for (int i = 0; i < hash.length; i++) {
-            String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
-                hexString.append('0');
-            }
-            hexString.append(hex);
-        }
-        return hexString.toString();
     }
 
     private String purifyNumber(String str){
