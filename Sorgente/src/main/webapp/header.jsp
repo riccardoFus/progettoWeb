@@ -21,26 +21,24 @@
     <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
     <% }else if(pagina.contains("attivita_generale.jsp")){%>
     <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
-    <%}%>
+    <% }else if(pagina.contains("homepage.jsp")){%>
+    <link rel="stylesheet" href="css/home_style.css" type="text/css">
+    <% }%>
 </head>
 
 <body>
 <header id="header" >
+    <h1>Tum4World</h1>
     <div>
-        <h1 style="font-family:Papyrus">Tum4World</h1>
-        <div class="divBottoni">
-            <a class="button" href="<%= response.encodeURL("homepage.jsp")%>">Homepage</a>
-            <a class="button" href="<%=response.encodeURL("chisiamo.jsp")%>">Chi siamo</a>
-            <a class="button" href="<%=response.encodeURL("attivita_generale.jsp")%>">Attività</a>
-            <a class="button" href="<%=response.encodeURL("contatti.jsp")%>">Contatti</a>
-            <a class="button" href="<%=response.encodeURL("sign_in.jsp")%>">Sign-In</a>
-            <a class="button" href="<%=response.encodeURL("login.jsp")%>">Login</a>
-            <!--
-                add-logout mechanism
-                <a class="button" href="< % response.encodeurl(homepage.jsp) % >" >Logout</a>
-                -->
-        </div>
+        <a href="<%= response.encodeURL("homepage.jsp")%>">Homepage</a>
+        <a href="<%=response.encodeURL("chisiamo.jsp")%>">Chi siamo</a>
+        <a href="<%=response.encodeURL("attivita_generale.jsp")%>">Attività</a>
+        <a href="<%=response.encodeURL("contatti.jsp")%>">Contatti</a>
+        <a href="<%=response.encodeURL("sign_in.jsp")%>">Sign-In</a>
+        <a href="<%=response.encodeURL("login.jsp")%>">Login</a>
+
     </div>
+
     <!--
     <div>
         <!jsp:useBean id="phraseBean" class="it.thum4world.PhraseBean" scope="application"/>
