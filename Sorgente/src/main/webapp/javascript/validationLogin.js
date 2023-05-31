@@ -23,6 +23,6 @@ function setAlert(trigger) {
             return alert("Password mancante! Si prega di inserirla");
     }
 }
-    function checkLogin(form){
-        return checkInput(form.elements['username'],'username') || checkInput(form.elements['password'], 'password');
+function checkLogin(){
+    return checkInput(form.elements['username'],'username') || checkInput(form.elements['password'], 'password');
 }

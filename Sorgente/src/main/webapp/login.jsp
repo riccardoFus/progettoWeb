@@ -1,4 +1,4 @@
-<jsp:include page="header.jsp"></jsp:include>
+<jsp:include page="header.jsp"/>
     <div>
         <h1>Login</h1>
         <div class="divBottoni" align="center">
@@ -14,11 +14,11 @@
                 </div>
 
                 <br>
-                <input type="submit" value="Login" class="button"  onclick="return checkLogin(this.form)" align="center">
+                <input type="submit" value="Login" class="button"  onclick="return checkLogin()">
                 <br>
             </form>
         </div>
     </div>
 
-<script src="javascript/validationLogin.js"></script>
-<jsp:include page="footer.jsp"></jsp:include>
+<script src="./javascript/validationLogin.js"></script>
+<jsp:include page="footer.jsp"/>
