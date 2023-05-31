@@ -104,10 +104,7 @@ public class logInServlet extends DBManager {
                 //TO_DO: in base al tipo di utente, andare alla determina pagina privata
                 if (user.next() == true) {
                     resp.sendRedirect(resp.encodeURL("private_page_aderente.jsp"));
-                } else {
-                    System.out.println("non dovrei mai entrare qui");
-                    //Invia un errore alla richiesta
-                    }
+                }
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
