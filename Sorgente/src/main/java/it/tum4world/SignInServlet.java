@@ -26,23 +26,6 @@ public class SignInServlet extends DBManager {
         String psw = req.getParameter("psw");
 
         String sha3Hex = createDigest(psw);
-        /*
-        MessageDigest digest = null;
-        String sha3Hex;
-
-        try {
-            /* cerchiamo l'algoritmo che dobbiamo usare, lo applichiamo e viene restituito un array di byte
-            *  del message digest
-            *  N.B dobbiamo convertire i byte in stringa
-            */
-
-            //digest = MessageDigest.getInstance("SHA3-256");
-            //final byte[] hashbytes = digest.digest(psw.getBytes(StandardCharsets.UTF_8));
-            //sha3Hex = bytesToHex(hashbytes);
-
-        //} catch (NoSuchAlgorithmException e) {
-            //throw new RuntimeException(e);
-        //}
 
         /* prendi la stringa del numero telefonico e convertilo in intero
         *  N.B: si accettano formati diversi (possono includere +, ., parentesi ...)*/
@@ -99,11 +82,11 @@ public class SignInServlet extends DBManager {
         String queryUsername = "SELECT username FROM utenti WHERE username='" + username + "'";
         ResultSet result = getInfoDB(queryUsername);
         //basta ritornare un valore booleano che indico se c'è o non c'è conflitto
-        boolean usernameFound = false;
+        String usernameFound = "false";
 
         try {
             if(result.next()){
-                usernameFound = true;
+                usernameFound = "true";
             }
             result.close();
         } catch (SQLException e) {
