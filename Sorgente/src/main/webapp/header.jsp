@@ -38,22 +38,12 @@
         <a href="<%=response.encodeURL("login.jsp")%>">Login</a>
 
     </div>
-<<<<<<< HEAD
 
-    <!--
-    <div>
-        <!jsp:useBean id="phraseBean" class="it.tum4world.PhraseBean" scope="application"/>
-        <p>Frase ispirante: <span><!%= phraseBean.toString() %></span></p>
-    </div>
-    -->
-=======
     <script>
         // Aggiorna la frase nell'intestazione delle pagine ogni 20 secondi
         function updatePhrase() {
             let jsonObject;
             let URL = window.location.origin + '/' + window.location.pathname.split('/')[1] + '/PhraseFetcher';
->>>>>>> origin/main
-
             let xhttp = new XMLHttpRequest();
 
             xhttp.open("GET", URL, true);

@@ -52,7 +52,8 @@ public class SignInServlet extends DBManager {
 
     }
 
-    private String purifyNumber(String str){
+    priv
+    ate String purifyNumber(String str){
         String purified = "";
         int lastIndex = 0;
         for(int i = 0; i <str.length(); i++){
