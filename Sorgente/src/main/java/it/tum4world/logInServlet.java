@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,39 +21,23 @@ public class logInServlet extends DBManager {
     @Override
     synchronized protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        MessageDigest digest;
-        String sha3Hex;
+        String psw = req.getParameter("password");
+        String password=createDigest(psw);
 
-        System.out.println("\nTrattamento dati login ...\n");
-
-        if (username.length() == 0 || password.length() == 0) {
-            System.out.println("Dati mancanti!");
-
-        } else {
-            try {
-                //Uguale al sign in
-                digest = MessageDigest.getInstance("SHA3-256");
-                final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-                sha3Hex = bytesToHex(hashbytes);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-
-            String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + sha3Hex + "'";
-            System.out.println(checkUtente);
+            String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + password + "'";
             //Ricevo i risultati delle due query
             ResultSet user = getInfoDB(checkUtente);
             String response;
 
             try {
-                //Se una delle due riceve una riga, allora il login è valido
+                //Se riceve una riga, allora il login è valido
                 //TO_DO: in base al tipo di utente, andare alla determina pagina privata
                 if (user.next() == true) {
                     response = "";
+                    String userType = getUserType(username);
+                    System.out.println(userType);
                 } else {
                     response = "07: Login fallito!";
-                    //Invia un errore alla richiesta
                 }
                 user.close();
             } catch (SQLException e) {
@@ -71,43 +56,8 @@ public class logInServlet extends DBManager {
             }
         }
 
-    }
-
     @Override
     synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        MessageDigest digest;
-        String sha3Hex;
 
-        System.out.println("\nTrattamento dati login ...\n");
-
-        if (username.length() == 0 || password.length() == 0) {
-            System.out.println("Dati mancanti!");
-
-        } else {
-            try {
-                //Uguale al sign in
-                digest = MessageDigest.getInstance("SHA3-256");
-                final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-                sha3Hex = bytesToHex(hashbytes);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-
-            String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + sha3Hex + "'";
-            //Ricevo i risultati delle due query
-            ResultSet user = getInfoDB(checkUtente);
-
-            try {
-                //Se una delle due riceve una riga, allora il login è valido
-                //TO_DO: in base al tipo di utente, andare alla determina pagina privata
-                if (user.next() == true) {
-                    resp.sendRedirect(resp.encodeURL("private_page_aderente.jsp"));
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
-    }
 }
