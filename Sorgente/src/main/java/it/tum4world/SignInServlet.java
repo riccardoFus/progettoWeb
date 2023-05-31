@@ -24,7 +24,6 @@ public class SignInServlet extends DBManager {
 
         /* non memorizziamo la psw in chiaro, ma applichiamo l'algoritmo SHA-256 e memorizziamo il digest * */
         String psw = req.getParameter("psw");
-
         String sha3Hex = createDigest(psw);
 
         /* prendi la stringa del numero telefonico e convertilo in intero
