@@ -9,11 +9,7 @@
     </div>
     <div class="carousel-container">
       <div class="images fade">
-<<<<<<< HEAD
-          <img src="images/aquagym.jpg" class="imageStandard">
-=======
-        <img src="images/aquagym.jpg" class="imageStandard">
->>>>>>> origin/main
+          <img src="images/aquagym.jpg" class="imageStandard">+
       </div>
       <div class="images fade">
         <img src="images/giochi_da_tavolo.jpg" class="imageStandard">
