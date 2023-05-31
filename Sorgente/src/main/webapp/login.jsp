@@ -2,7 +2,7 @@
     <div>
         <h1>Login</h1>
         <div class="divBottoni" align="center">
-            <form method="post" action="<%= response.encodeURL("./logIn")%>" onsubmit="return checkLogin(this.form)" id="form">
+            <form method="post" action="<%= response.encodeURL("./logIn")%>" id="form">
                 <div class="divBottoni">
                 <b><label>Username</label></b>
                 <input type="text" class="textbox" name="username" height="50px">
@@ -14,8 +14,10 @@
                 </div>
 
                 <br>
-                <input type="submit" value="Login" class="button"  onclick="return checkLogin(this.form)" align="center">
+                <input type="button" value="Login" class="button" onclick="if (checkLogin()) document.getElementById('fakeSubmit').click();" align="center">
+                <input type="submit" id="fakeSubmit" hidden>
                 <br>
+                <div>  <h2><label class="label" id="labelError"> </label>  </h2> </div>
             </form>
         </div>
     </div>

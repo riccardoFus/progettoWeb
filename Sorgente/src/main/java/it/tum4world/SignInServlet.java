@@ -24,33 +24,9 @@ public class SignInServlet extends DBManager {
 
         /* non memorizziamo la psw in chiaro, ma applichiamo l'algoritmo SHA-256 e memorizziamo il digest * */
         String psw = req.getParameter("psw");
-
         String sha3Hex = createDigest(psw);
-        /*
-        MessageDigest digest = null;
-        String sha3Hex;
-
-        try {
-            /* cerchiamo l'algoritmo che dobbiamo usare, lo applichiamo e viene restituito un array di byte
-            *  del message digest
-            *  N.B dobbiamo convertire i byte in stringa
-            */
-
-            //digest = MessageDigest.getInstance("SHA3-256");
-            //final byte[] hashbytes = digest.digest(psw.getBytes(StandardCharsets.UTF_8));
-            //sha3Hex = bytesToHex(hashbytes);
-
-        //} catch (NoSuchAlgorithmException e) {
-            //throw new RuntimeException(e);
-        //}
-
-        /* prendi la stringa del numero telefonico e convertilo in intero
-        *  N.B: si accettano formati diversi (possono includere +, ., parentesi ...)*/
-
         String tel = req.getParameter("telefono");
         String telN = purifyNumber(tel);
-
-        // N.B nel db aderente è un parametro booleano
 
         boolean aderente = req.getParameter("sottoscriz").equals("aderente");
         System.out.println("\nTrattamento dati signin ...\n");
@@ -120,7 +96,7 @@ public class SignInServlet extends DBManager {
         }catch (IOException ex){
             //errore
             System.out.println("\nErrore: impossibile creare un json di risposta\n");
-            System.out.println("\nDEttagli:\n" + ex);
+            System.out.println("\nDettagli:\n" + ex);
         }
 
 
