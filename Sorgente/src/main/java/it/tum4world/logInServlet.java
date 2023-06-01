@@ -25,11 +25,8 @@ public class logInServlet extends DBManager {
 
             try {
                 //Se riceve una riga, allora il login è valido
-                //TO_DO: in base al tipo di utente, andare alla determina pagina privata
                 if (user.next() == true) {
                     response = "";
-                    String userType = getUserType(user.getObject("username").toString());
-                    redirectUserType(userType);
                 } else {
                     response = "07: Login fallito!";
                 }
