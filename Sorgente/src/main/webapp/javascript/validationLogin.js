@@ -26,7 +26,7 @@ function checkInput(field, dataType){
         let response;
         let url = "logIn?username="+form.elements.namedItem("username").value+"&password="+form.elements.namedItem("password").value;
         let xhttp = new XMLHttpRequest();
-        xhttp.open("GET", url, false);
+        xhttp.open("GET", url, true);
         xhttp.onreadystatechange = function(){
             if(this.readyState===4 && this.status===200){
                 response = this.response;

@@ -15,7 +15,7 @@
 
                 <br>
                 <input type="button" value="Login" class="button" onclick="if (checkLogin()) document.getElementById('fakeSubmit').click();" align="center">
-                <input type="submit" id="fakeSubmit" hidden>
+                <input type="submit" id="fakeSubmit"  formmethod="post" hidden>
                 <br>
                 <div>  <h2><label class="label" id="labelError"> </label>  </h2> </div>
             </form>
