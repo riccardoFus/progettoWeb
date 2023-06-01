@@ -25,7 +25,7 @@ public class logInServlet extends DBManager {
 
             try {
                 //Se riceve una riga, allora il login è valido
-                if (user.next() == true) {
+                if (user.next()) {
                     response = "";
                 } else {
                     response = "07: Login fallito!";
@@ -57,7 +57,7 @@ public class logInServlet extends DBManager {
         //Ma non capisco come funzioni il collegamento tra questa servlet e la pagina di login
         //La post viene chiamata solamente quando viene premuto invio, senza toccare il bottone
         try {
-            if (user.next() == true) {
+            if (user.next()) {
                 String userType = getUserType(user.getObject("username").toString());
                 System.out.println(userType);
                 req.getRequestDispatcher(redirectUserType(userType)).forward(req, resp);
