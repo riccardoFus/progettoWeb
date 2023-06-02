@@ -1,13 +1,16 @@
-<jsp:include page="header.jsp"></jsp:include>
-<div>
-    <h1>Feed your brain: divertiti in compagnia</h1>
+<jsp:include page="header.jsp"/>
+
+<div class="column" id="col2">
+    <h2>FEED YOUR BRAIN</h2>
+    <h3>divertiti in compagnia</h3>
 
     <p>
-        Non tutti giochi sono gli stessi: quello che può sembrare un'attività per bambini in realtà può mostrarsi non solo interessante ma anche stimolante.
+        Non tutti giochi sono gli stessi: quello che può sembrare un'attività per bambini in realtà può mostrarsi non solo
+        interessante ma anche stimolante.
         Questi sono alcuni dei loro benefici:
     </p>
 
-    <ul>
+    <ul class="left">
         <li>Riduzione dello stress</li>
         <li>Controllo dell'impulsività</li>
         <li>Miglioramento il livello di concentrazione, attenzione, memoria e capacità cognitive</li>
@@ -17,7 +20,7 @@
         Qualsiasi sia la vostra età c'è sempre qualcosa da imparare o insegnare come testimoniano i nostri partecipanti:
     </p>
 
-    <ul>
+    <ul class="right" id="fybNotes">
         <li>"L'edizione con D&D è stata una delle migliori esperienze della mia vita"</li>
         <li>"Ho finalmente imparato a giocare a scacchi dopo 70 anni"</li>
         <li>"Un ragazzo di 15 anni mi ha battuto a Monopoli, sono a ncora incredulo"</li>
@@ -29,9 +32,11 @@
     <p>
         Gli eventi vengono organizzati ogni mese all'aperto (quando possibile).
         La lista di attività non è sempre fissa! Se hai qualche suggerimento su che nuovi giochi includere contattaci.
-        Per bevande e alimenti sono presenti degli stand disponibili fino a sera, intolleranze verranno prese in considerazione data previa comunicazione.
+        Per bevande e alimenti sono presenti degli stand disponibili fino a sera, intolleranze verranno prese in
+        considerazione data previa comunicazione.
 
     </p>
+
 </div>
-<br>
-<jsp:include page="footer.jsp"></jsp:include>
+
+<jsp:include page="footer.jsp"/>

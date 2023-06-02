@@ -101,7 +101,6 @@ function validateNSU(form){
                 let purifyResp =responseU.split("\"");
                 if( purifyResp[1] === "true"){
                     //user con lo stesso esername trovato
-                    alert("esiste un altro user " + responseU);
                     esito = false;
                     showWarning("Username già utilizzato", "warnUser");
                     document.getElementById("username").style.color="darkmagenta";
@@ -109,7 +108,6 @@ function validateNSU(form){
 
                 }else{
                     //tutto ok
-                    alert("non esiste un altro user " + responseU);
                     document.getElementById("warnUser").style.visibility = "hidden";
                     document.getElementById("username").style.color="black";
                     document.getElementById("warnUser").style.color="darkslateblue";

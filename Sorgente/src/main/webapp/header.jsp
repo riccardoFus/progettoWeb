@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" session="true" %>
 
 <html lang="en">
 <head>
@@ -12,60 +12,61 @@
 
     <!-- gestione dei diversi file css da includere-->
     <%
-        String[] URI = (request.getRequestURI()).split("/");
-        String pagina = URI[URI.length-1];
-        if(pagina.contains("sign_in.jsp")){
+        String[] URI = (request.getRequestURL().toString()).split("/");
+        String pagina = URI[URI.length - 1];
+        if (pagina.contains("SignIn")) {
     %>
     <link rel="stylesheet" href="css/signIn_style.css" type="text/css">
-    <% }else if(pagina.contains("chisiamo.jsp")){%>
+    <% } else if (pagina.contains("ChiSiamo")) {%>
     <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
-    <% }else if(pagina.contains("attivita_generale.jsp")){%>
+    <% } else if (pagina.contains("Attivita") ) {%>
     <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
-    <% }else if(pagina.contains("homepage.jsp")){%>
+    <% } else if (pagina.contains("WaterWeek")
+            || pagina.contains("FeedYourBrain") || pagina.contains("MindCheckUp") ) {%>
+    <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
+    <link rel="stylesheet" href="css/attivitaSpec_style.css" type="text/css">
+    <% } else {%>
     <link rel="stylesheet" href="css/home_style.css" type="text/css">
     <% }%>
 </head>
 
 <body>
-<header id="header" >
-    <h1>Tum4World</h1>
-    <div>
-        <a href="<%= response.encodeURL("homepage.jsp")%>">Homepage</a>
-        <a href="<%=response.encodeURL("chisiamo.jsp")%>">Chi siamo</a>
-        <a href="<%=response.encodeURL("attivita_generale.jsp")%>">Attività</a>
-        <a href="<%=response.encodeURL("contatti.jsp")%>">Contatti</a>
-        <a href="<%=response.encodeURL("sign_in.jsp")%>">Sign-In</a>
-        <a href="<%=response.encodeURL("login.jsp")%>">Login</a>
+<header id="header">
+    <div id="nav">
+        <h1>Tum4World</h1>
+        <a href="<%= response.encodeURL("Home.jsp")%>">Homepage</a>
+        <a href="<%=response.encodeURL("ChiSiamo.jsp")%>">Chi siamo</a>
+        <a href="<%=response.encodeURL("Attivita.jsp")%>">Attività</a>
+        <a href="<%=response.encodeURL("Contatti.jsp")%>">Contatti</a>
+
+        <!-- controlla che tipo di utente è e decide di aggiungere o meno sign in, log out, log in,
+        pagina privata nell'header-->
+        <%
+            String tipo = (String) request.getAttribute("tipo");
+            if (tipo.equals("standard")) {
+                //l'utente non è loggato
+        %>
+
+        <a href="<%=response.encodeURL("SignIn.jsp")%>">Sign-In</a>
+        <a href="<%=response.encodeURL("Login.jsp")%>">Login</a>
+
+        <%
+        } else if (tipo.equals("aderente")) {
+        %>
+        <a href="<%=response.encodeURL("AreaPersonaleAd")%>">Area personale</a>
+        <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
+
+        <%
+        } else {
+        %>
+        <a href="<%=response.encodeURL("AreaPersonaleSim")%>">Area Personale</a>
+        <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
+
+        <%}%>
+
 
     </div>
-
-    <script>
-        // Aggiorna la frase nell'intestazione delle pagine ogni 20 secondi
-        function updatePhrase() {
-            let jsonObject;
-            let URL = window.location.origin + '/' + window.location.pathname.split('/')[1] + '/PhraseFetcher';
-            let xhttp = new XMLHttpRequest();
-
-            xhttp.open("GET", URL, true);
-            xhttp.responseType = "json";
-
-            xhttp.onreadystatechange = function () {
-                let done = 4, ok = 200;
-                if (this.readyState === done && this.status === ok){
-                    jsonObject = this.response;
-
-                    document.getElementById("phraseHeader").innerText =
-                        jsonObject.frase;
-                }
-            };
-
-            xhttp.send();
-        }
-
-        updatePhrase();
-        window.setInterval(updatePhrase, 20000);
-    </script>
-    <div>
-        <span>Frase ispirante: "<span id="phraseHeader"></span>"</span>
-    </div>
+    <div id="phraseHeader"></div>
 </header>
+
+<script src="./javascript/headerScript.js"></script>

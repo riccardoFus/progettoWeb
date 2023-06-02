@@ -41,7 +41,8 @@ public class SignInServlet extends DBManager {
         String updateClienti = "INSERT INTO clienti VALUES ('"+ req.getParameter("nome")
                         + "', '" + req.getParameter("cognome") + "', '" + req.getParameter("data di nascita") +
                         "', '" + telN + "', " + aderente + ", '" + username+ "')";
-        if(updateDB(updateUtenti) && updateDB(updateClienti)){
+        String updateIscriz = "INSERT INTO iscrizioni VALUES ('" + username +"',false, false, false)";
+        if(updateDB(updateUtenti) && updateDB(updateClienti) && updateDB(updateIscriz)){
             //iscrizione andata a buon fine, redirect corretto
             req.getRequestDispatcher("./registrazione_confermata.jsp").forward(req,resp);
 
@@ -102,7 +103,7 @@ public class SignInServlet extends DBManager {
         }catch (IOException ex){
             //errore
             System.out.println("\nErrore: impossibile creare un json di risposta\n");
-            System.out.println("\nDEttagli:\n" + ex);
+            System.out.println("\nDettagli:\n" + ex);
         }
 
 
