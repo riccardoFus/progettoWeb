@@ -100,7 +100,7 @@ function validateNSU(form){
                 if( purifyResp[1] === "true"){
                     //user con lo stesso esername trovato
                     esito = false;
-                    showWarning("Username già utilizzato", "warnUser");
+                    showWarning("07 : Username già utilizzato", "warnUser");
                     document.getElementById("username").style.color="salmom";
                     document.getElementById("warnUser").style.color="salmon";
 

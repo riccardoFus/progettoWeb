@@ -80,11 +80,11 @@ public class logInServlet extends DBManager {
 
             case "aderente":
                 System.out.println("Hello " + userType);
-                return "private_page_aderente.jsp";
+                return "AreaPersonaleAd.jsp";
 
             case "simpatizzante":
                 System.out.println("Hello " + userType);
-                return "private_page_simp.jsp";
+                return "AreaPersonaleSim.jsp";
         }
         return null;
     }
