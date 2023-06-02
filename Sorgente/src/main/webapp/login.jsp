@@ -1,26 +1,29 @@
-<jsp:include page="header.jsp"></jsp:include>
-    <div>
-        <h1>Login</h1>
-        <div class="divBottoni" align="center">
-            <form method="post" action="<%= response.encodeURL("./logIn")%>" id="form">
-                <div class="divBottoni">
-                <b><label>Username</label></b>
-                <input type="text" class="textbox" name="username" height="50px">
-                </div>
-                <br>
-                <div class="divBottoni">
-                    <b><label>Password</label></b>
-                <input type="password" class="textbox" name="password">
-                </div>
+<jsp:include page="header.jsp"/>
 
-                <br>
-                <input type="button" value="Login" class="button" onclick="if (checkLogin()) document.getElementById('fakeSubmit').click();" align="center">
-                <input type="submit" id="fakeSubmit"  formmethod="post" hidden>
-                <br>
-                <div>  <h2><label class="label" id="labelError"> </label>  </h2> </div>
-            </form>
+<div class="flex-container" id="login">
+    <form method="post" action="<%= response.encodeURL("./logIn")%>" onsubmit="return checkLogin(this)"
+          onkeydown="return event.key != 'Enter';">
+        <div class="column">
+            <span id="warnNome" class="warn"></span>
+            <div class="row">
+                <label>Username</label>
+                <input type="text" class="textbox" name="username">
+            </div>
         </div>
-    </div>
 
-<script src="javascript/validationLogin.js"></script>
-<jsp:include page="footer.jsp"></jsp:include>
+        <div class="column">
+            <span id="warnPsw" class="warn"></span>
+            <div class="row">
+                <label>Password</label>
+                <input type="password" class="textbox" name="password">
+            </div>
+        </div>
+
+        <div class="row" id="buttons">
+            <input type="submit" value="Login" class="button">
+        </div>
+    </form>
+</div>
+
+<script src="./javascript/validationLogin.js"></script>
+<jsp:include page="footer.jsp"/>
