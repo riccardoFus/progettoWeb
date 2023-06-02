@@ -7,7 +7,7 @@
             <span id="warnNome" class="warn"></span>
             <div class="row">
                 <label>Username</label>
-                <input type="text" class="textbox" name="username">
+                <input type="text" class="textbox" name="username" id="username">
             </div>
         </div>
 
