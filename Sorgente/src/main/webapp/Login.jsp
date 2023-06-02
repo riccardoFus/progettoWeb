@@ -1,21 +1,27 @@
 <jsp:include page="header.jsp"/>
 
-<h1>Login</h1>
-<div class="divBottoni">
-    <form method="post" action="<%= response.encodeURL("./logIn")%>" onsubmit="return checkLogin(this.form)" id="form">
-        <div class="divBottoni">
-            <label>Username</label>
-            <input type="text" class="textbox" name="username" height="50px">
-        </div>
-        <br>
-        <div class="divBottoni">
-            <b><label>Password</label></b>
-            <input type="password" class="textbox" name="password">
+<div class="flex-container" id="login">
+    <form method="post" action="<%= response.encodeURL("./logIn")%>" onsubmit="return checkLogin(this)"
+          onkeydown="return event.key != 'Enter';">
+        <div class="column">
+            <span id="warnNome" class="warn"></span>
+            <div class="row">
+                <label>Username</label>
+                <input type="text" class="textbox" name="username">
+            </div>
         </div>
 
-        <br>
-        <input type="submit" value="Login" class="button" onclick="return checkLogin()">
-        <br>
+        <div class="column">
+            <span id="warnPsw" class="warn"></span>
+            <div class="row">
+                <label>Password</label>
+                <input type="password" class="textbox" name="password">
+            </div>
+        </div>
+
+        <div class="row" id="buttons">
+            <input type="submit" value="Login" class="button">
+        </div>
     </form>
 </div>
 

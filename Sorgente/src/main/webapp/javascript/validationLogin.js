@@ -1,28 +1,37 @@
 function isEmpty(x){
-    if(x=="")
+    if(x==="")
         return true;
     else return false;
 }
 
-function checkInput(field, dataType){
-    if(isEmpty(field.value) && dataType=='username'){
-        setAlert('usernameMissing');
+function checkLogin(form){
+    let esito = true
+    let msg = "Campo obbligatorio"
+
+    if(isEmpty(form.elements['username'].value)){
+        showWarning(msg, "warnNome");
+        esito=false;
+
+    }else{
+        document.getElementById("warnNome").style.visibility = "hidden";
+
     }
 
-    else if(isEmpty(field.value) && dataType=='password'){
-        setAlert('passwordMissing');
+    if(isEmpty(form.elements['password'].value)){
+        showWarning(msg, "warnPsw");
+        esito=false;
+    }else{
+        document.getElementById("warnPsw").style.visibility = "hidden";
+
     }
+
+    return esito;
+
 }
 
-function setAlert(trigger) {
-    switch (trigger) {
-        case 'usernameMissing':
-            return alert("Username mancante! Si prega di compilarlo");
-            break;
-        case 'passwordMissing':
-            return alert("Password mancante! Si prega di inserirla");
-    }
-}
-function checkLogin(){
-    return checkInput(form.elements['username'],'username') || checkInput(form.elements['password'], 'password');
+function showWarning(msg, id){
+    //imposta il messaggio dello warning emostralo
+    let el = document.getElementById(id);
+    el.innerText = msg;
+    el.style.visibility = "visible";
 }

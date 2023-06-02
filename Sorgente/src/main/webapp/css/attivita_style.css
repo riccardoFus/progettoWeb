@@ -19,7 +19,7 @@ img{
 
 #col3 img{
     transform: rotate(-5deg);
-    box-shadow: -0.2vw 0.2vw 1vw rgba(0,0,0,0.6), 1.5vw 1.5vw palegreen, 2.2vw 2.2vw 2.2vw rgba(0,0,0,0.7);
+    box-shadow: -0.2vw 0.2vw 1vw rgba(0,0,0,0.6), 1.5vw 1.5vw lightgreen, 2.2vw 2.2vw 2.2vw rgba(0,0,0,0.7);
 
 }
 

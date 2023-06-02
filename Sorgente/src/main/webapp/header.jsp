@@ -14,20 +14,22 @@
     <%
         String[] URI = (request.getRequestURL().toString()).split("/");
         String pagina = URI[URI.length - 1];
-        if (pagina.contains("SignIn")) {
-    %>
-    <link rel="stylesheet" href="css/signIn_style.css" type="text/css">
-    <% } else if (pagina.contains("ChiSiamo")) {%>
+        if (pagina.contains("ChiSiamo")) {%>
     <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
+    <link rel="stylesheet" href="css/basicPage_style.css" type="text/css">
     <% } else if (pagina.contains("Attivita") ) {%>
     <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
-    <% } else if (pagina.contains("WaterWeek")
+    <% } else if ( pagina.contains("WaterWeek")
             || pagina.contains("FeedYourBrain") || pagina.contains("MindCheckUp") ) {%>
     <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
     <link rel="stylesheet" href="css/attivitaSpec_style.css" type="text/css">
+    <% } else if (pagina.contains("SignIn")
+            || pagina.contains("Contatti") || pagina.contains("Login") ) {%>
+    <link rel="stylesheet" href="css/otherPages_style.css" type="text/css">
     <% } else {%>
     <link rel="stylesheet" href="css/home_style.css" type="text/css">
     <% }%>
+
 </head>
 
 <body>
