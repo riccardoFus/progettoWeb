@@ -1,57 +1,91 @@
 package it.tum4world;
 
+import com.google.gson.Gson;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
+import java.io.PrintWriter;
 import java.sql.*;
 
 @WebServlet(name = "logIn", value = "/logIn")
 public class logInServlet extends DBManager {
     @Override
-    synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // riceve i dati del form di login
-        String username = req.getParameter("username");
-        /* applichiamo l'algoritmo SHA-256 e memorizziamo il digest? * */
-        String password = req.getParameter("password");
-        MessageDigest digest;
-        String sha3Hex;
-
-        try {
-            //Uguale al sign in
-            digest = MessageDigest.getInstance("SHA3-256");
-            final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-            sha3Hex = bytesToHex(hashbytes);
-        } catch (NoSuchAlgorithmException e) {
-            throw new RuntimeException(e);
-        }
-
-        System.out.println("\nTrattamento dati login ...\n");
-
-        if (username.length() == 0 || password.length() == 0) {
-            System.out.println("Dati mancanti!");
-        } else {
-            String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + sha3Hex + "'";
-            String checkEmail = "SELECT * FROM UTENTI WHERE EMAIL='" + username + "'AND PASSWORD='" + sha3Hex + "'";
-            //Ricevo i risultati delle due query
-            ResultSet user = getInfoDB(checkUtente);
-            ResultSet email = getInfoDB(checkEmail);
+    synchronized protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ResultSet user = getLoginValues(req, resp);
+        String response;
 
             try {
-                //Se una delle due riceve duna riga, allora il login è valido
-                if (user.next() == true || email.next() == true) {
-
-                    System.out.println("\nLogin avvenuto!\n");
+                //Se riceve una riga, allora il login è valido
+                if (user.next()) {
+                    response = "";
                 } else {
-                    System.out.println("\nErrore: login fallito\n");
+                    response = "07: Login fallito!";
                 }
+                user.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
+            resp.setContentType("application/json");
+            resp.setCharacterEncoding("utf-8");
+
+            try(PrintWriter writer = resp.getWriter()){
+                Gson gson = new Gson();
+                writer.println(gson.toJson(response));
+                writer.flush();
+            }catch (IOException ex){
+                //errore
+                System.out.println("\nErrore: impossibile creare un json di risposta\n");
+                System.out.println("\nDettagli:\n" + ex);
+            }
         }
+
+    @Override
+    synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        ResultSet user = getLoginValues(req, resp);
+        System.err.println("Ciao sono la post");
+        //Funziona
+        //Ma non capisco come funzioni il collegamento tra questa servlet e la pagina di login
+        //La post viene chiamata solamente quando viene premuto invio, senza toccare il bottone
+        try {
+            if (user.next()) {
+                String userType = getUserType(user.getObject("username").toString());
+                System.out.println(userType);
+                req.getRequestDispatcher(redirectUserType(userType)).forward(req, resp);
+            } else {
+                System.err.println("Non funziona");
+            }
+            user.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private ResultSet getLoginValues(HttpServletRequest req, HttpServletResponse resp){
+        String username = req.getParameter("username");
+        String psw = req.getParameter("password");
+        String password=createDigest(psw);
+        String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + password + "'";
+        ResultSet user = getInfoDB(checkUtente);
+        return user;
+    }
+    private String redirectUserType(String userType){
+        switch (userType){
+            case "admin":
+                System.out.println("Hello " + userType);
+                return "private_page_admin.jsp";
+
+            case "aderente":
+                System.out.println("Hello " + userType);
+                return "private_page_aderente.jsp";
+
+            case "simpatizzante":
+                System.out.println("Hello " + userType);
+                return "private_page_simp.jsp";
+        }
+        return null;
     }
 }

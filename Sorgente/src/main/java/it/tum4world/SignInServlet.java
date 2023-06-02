@@ -28,11 +28,8 @@ public class SignInServlet extends DBManager {
 
         /* prendi la stringa del numero telefonico e convertilo in intero
         *  N.B: si accettano formati diversi (possono includere +, ., parentesi ...)*/
-
         String tel = req.getParameter("telefono");
         String telN = purifyNumber(tel);
-
-        // N.B nel db aderente è un parametro booleano
 
         boolean aderente = req.getParameter("sottoscriz").equals("aderente");
         System.out.println("\nTrattamento dati signin ...\n");

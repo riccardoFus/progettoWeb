@@ -1,7 +1,8 @@
 function isEmpty(x){
     if(x==="")
         return true;
-    else return false;
+    else
+        return false;
 }
 
 function checkLogin(form){
@@ -22,8 +23,9 @@ function checkLogin(form){
         esito=false;
     }else{
         document.getElementById("warnPsw").style.visibility = "hidden";
-
     }
+
+    esito = esito && checkLoginValid(form)
 
     return esito;
 
@@ -34,4 +36,32 @@ function showWarning(msg, id){
     let el = document.getElementById(id);
     el.innerText = msg;
     el.style.visibility = "visible";
+}
+
+function checkLoginValid(form){
+    //Riceve l'errore
+        let esito = true;
+        let response;
+        let url = "logIn?username="+form.elements.namedItem("username").value+"&password="+form.elements.namedItem("password").value;
+        let xhttp = new XMLHttpRequest();
+        xhttp.open("GET", url, true);
+        xhttp.onreadystatechange = function(){
+            if(this.readyState===4 && this.status===200){
+                response = this.response;
+                if(response === ""){
+                    document.getElementById("labelError").innerHTML="";
+                }
+                else{
+                    document.getElementById("labelError").innerHTML=response.split("\"")[1];
+                }
+            }
+        };
+        xhttp.send();
+        if(response === ""){
+            esito = true;
+        }else{
+            esito = false;
+        }
+        return esito;
+
 }

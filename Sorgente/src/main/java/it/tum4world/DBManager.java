@@ -45,7 +45,7 @@ public class DBManager extends HttpServlet {
 
     }
 
-    protected ResultSet getInfoDB(String query){
+    public ResultSet getInfoDB(String query){
         ResultSet resultSet;
 
         try {
@@ -108,4 +108,29 @@ public class DBManager extends HttpServlet {
          *  N.B: si accettano formati diversi (possono includere +, ., parentesi ...)*/
         return sha3Hex;
     }
+
+    public String getUserType(String username){
+        String searchAdmin = "SELECT * FROM AMMINISTRATORI WHERE USERNAME='" + username + "'";
+        String searchClienti = "SELECT * FROM CLIENTI WHERE USERNAME='" + username + "'";
+        ResultSet clienti = getInfoDB(searchClienti);
+        try{
+            if(clienti.next()){
+                boolean isAderente= (boolean) clienti.getObject("ADERENTE");
+                if(isAderente){
+                    return "aderente";
+                }
+                else return "simpatizzante";
+            }
+            else {
+                ResultSet admin = getInfoDB(searchAdmin);
+                if(admin.next()) {
+                    return "admin";
+                }
+            }
+        }
+        catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+        return "Errore nella ricerca dell'utente";
+     }
 }
