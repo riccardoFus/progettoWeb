@@ -7,6 +7,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.Response;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -19,47 +20,24 @@ import java.sql.*;
 public class logInServlet extends DBManager {
     @Override
     synchronized protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        MessageDigest digest;
-        String sha3Hex;
-
-        System.out.println("\nTrattamento dati login ...\n");
-
-        if (username.length() == 0 || password.length() == 0) {
-            System.out.println("Dati mancanti!");
-
-        } else {
-            try {
-                //Uguale al sign in
-                digest = MessageDigest.getInstance("SHA3-256");
-                final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-                sha3Hex = bytesToHex(hashbytes);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
-            }
-
-            String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + sha3Hex + "'";
-            System.out.println(checkUtente);
-            //Ricevo i risultati delle due query
-            ResultSet user = getInfoDB(checkUtente);
-            String response;
+        ResultSet user = getLoginValues(req, resp);
+        String response;
 
             try {
-                //Se una delle due riceve una riga, allora il login è valido
-                //TO_DO: in base al tipo di utente, andare alla determina pagina privata
-                if (user.next() == true) {
+                //Se riceve una riga, allora il login è valido
+                if (user.next()) {
                     response = "";
                 } else {
                     response = "07: Login fallito!";
-                    //Invia un errore alla richiesta
                 }
                 user.close();
             } catch (SQLException e) {
                 throw new RuntimeException(e);
             }
+
             resp.setContentType("application/json");
             resp.setCharacterEncoding("utf-8");
+
             try(PrintWriter writer = resp.getWriter()){
                 Gson gson = new Gson();
                 writer.println(gson.toJson(response));
@@ -71,46 +49,49 @@ public class logInServlet extends DBManager {
             }
         }
 
-    }
-
     @Override
     synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String username = req.getParameter("username");
-        String password = req.getParameter("password");
-        MessageDigest digest;
-        String sha3Hex;
-
-        System.out.println("\nTrattamento dati login ...\n");
-
-        if (username.length() == 0 || password.length() == 0) {
-            System.out.println("Dati mancanti!");
-
-        } else {
-            try {
-                //Uguale al sign in
-                digest = MessageDigest.getInstance("SHA3-256");
-                final byte[] hashbytes = digest.digest(password.getBytes(StandardCharsets.UTF_8));
-                sha3Hex = bytesToHex(hashbytes);
-            } catch (NoSuchAlgorithmException e) {
-                throw new RuntimeException(e);
+        ResultSet user = getLoginValues(req, resp);
+        System.err.println("Ciao sono la post");
+        //Funziona
+        //Ma non capisco come funzioni il collegamento tra questa servlet e la pagina di login
+        //La post viene chiamata solamente quando viene premuto invio, senza toccare il bottone
+        try {
+            if (user.next()) {
+                String userType = getUserType(user.getObject("username").toString());
+                System.out.println(userType);
+                req.getRequestDispatcher(redirectUserType(userType)).forward(req, resp);
+            } else {
+                System.err.println("Non funziona");
             }
-
-            String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + sha3Hex + "'";
-            //Ricevo i risultati delle due query
-            ResultSet user = getInfoDB(checkUtente);
-
-            try {
-                //Se una delle due riceve una riga, allora il login è valido
-                //TO_DO: in base al tipo di utente, andare alla determina pagina privata
-                if (user.next() == true) {
-                    resp.sendRedirect(resp.encodeURL("private_page_aderente.jsp"));
-                } else {
-                    System.out.println("non dovrei mai entrare qui");
-                    //Invia un errore alla richiesta
-                    }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
+            user.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
+    }
+
+    private ResultSet getLoginValues(HttpServletRequest req, HttpServletResponse resp){
+        String username = req.getParameter("username");
+        String psw = req.getParameter("password");
+        String password=createDigest(psw);
+        String checkUtente = "SELECT * FROM UTENTI WHERE USERNAME='" + username + "'AND PASSWORD='" + password + "'";
+        ResultSet user = getInfoDB(checkUtente);
+        return user;
+    }
+    private String redirectUserType(String userType){
+        switch (userType){
+            case "admin":
+                System.out.println("Hello " + userType);
+                return "private_page_admin.jsp";
+
+            case "aderente":
+                System.out.println("Hello " + userType);
+                return "private_page_aderente.jsp";
+
+            case "simpatizzante":
+                System.out.println("Hello " + userType);
+                return "private_page_simp.jsp";
+        }
+        return null;
     }
 }
