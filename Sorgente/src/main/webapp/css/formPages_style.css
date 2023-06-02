@@ -69,6 +69,7 @@ input.textbox{
     align-content: center;
     justify-content: center;
     margin-bottom: 1vw;
+    margin-top:3vw;
 }
 
 form+.button{
