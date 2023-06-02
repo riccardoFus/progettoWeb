@@ -1,0 +1,51 @@
+ul+h2{
+    font-size: 3em;
+}
+
+#col1 p, #col2 p, #col3 p{
+    text-align: center;
+    width: auto;
+}
+
+.column{
+    align-items: center;
+    padding-bottom: 4vw;
+}
+
+ul{
+    list-style: none;
+    text-align: center;
+    font-family: "Major Mono Display";
+    margin-bottom: 2vw;
+}
+
+.left, .right{
+    padding: 2vw;
+    margin-top: 3vw;
+    border: dotted #2c3342;
+    width: 60vw;
+}
+
+.left{
+    background-color: floralwhite;
+    box-shadow: -1vw 1vw 0 #2c3342;
+    transform: rotate(3.5deg);
+    border-width: 0vw 0vw 0vw 1vw;
+
+}
+
+.right{
+    background-color: lightsalmon;
+    box-shadow: 1vw 1vw 0 #2c3342;
+    transform: rotate(-3.5deg);
+    border-width: 0vw 1vw 0vw 0vw;
+
+}
+
+li{
+    margin-bottom: 0.5vw;
+}
+
+#fybNotes{
+    background-color: mediumturquoise;
+}

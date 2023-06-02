@@ -25,6 +25,9 @@ public class SignInServlet extends DBManager {
         /* non memorizziamo la psw in chiaro, ma applichiamo l'algoritmo SHA-256 e memorizziamo il digest * */
         String psw = req.getParameter("psw");
         String sha3Hex = createDigest(psw);
+
+        /* prendi la stringa del numero telefonico e convertilo in intero
+        *  N.B: si accettano formati diversi (possono includere +, ., parentesi ...)*/
         String tel = req.getParameter("telefono");
         String telN = purifyNumber(tel);
 
@@ -35,7 +38,8 @@ public class SignInServlet extends DBManager {
         String updateClienti = "INSERT INTO clienti VALUES ('"+ req.getParameter("nome")
                         + "', '" + req.getParameter("cognome") + "', '" + req.getParameter("data di nascita") +
                         "', '" + telN + "', " + aderente + ", '" + username+ "')";
-        if(updateDB(updateUtenti) && updateDB(updateClienti)){
+        String updateIscriz = "INSERT INTO iscrizioni VALUES ('" + username +"',false, false, false)";
+        if(updateDB(updateUtenti) && updateDB(updateClienti) && updateDB(updateIscriz)){
             //iscrizione andata a buon fine, redirect corretto
             req.getRequestDispatcher("./registrazione_confermata.jsp").forward(req,resp);
 
@@ -75,11 +79,11 @@ public class SignInServlet extends DBManager {
         String queryUsername = "SELECT username FROM utenti WHERE username='" + username + "'";
         ResultSet result = getInfoDB(queryUsername);
         //basta ritornare un valore booleano che indico se c'è o non c'è conflitto
-        boolean usernameFound = false;
+        String usernameFound = "false";
 
         try {
             if(result.next()){
-                usernameFound = true;
+                usernameFound = "true";
             }
             result.close();
         } catch (SQLException e) {

@@ -5,22 +5,40 @@ function isEmpty(x){
         return false;
 }
 
-function checkInput(field, dataType){
-    if(isEmpty(field.value)){
-        document.getElementById("labelError").innerHTML = "07: " + dataType + " mancante! Si prega di ricompilare";
-        return false;
+function checkLogin(form){
+    let esito = true
+    let msg = "Campo obbligatorio"
+
+    if(isEmpty(form.elements['username'].value)){
+        showWarning(msg, "warnNome");
+        esito=false;
+
     }else{
-        document.getElementById("labelError").innerHTML = "";
-        return true;
+        document.getElementById("warnNome").style.visibility = "hidden";
+
     }
+
+    if(isEmpty(form.elements['password'].value)){
+        showWarning(msg, "warnPsw");
+        esito=false;
+    }else{
+        document.getElementById("warnPsw").style.visibility = "hidden";
+    }
+
+    esito = esito && checkLoginValid(form)
+
+    return esito;
+
 }
 
-    function checkLogin(){
-        let form = document.getElementById("form");
-        return checkInput(form.elements.namedItem("username"), 'Username') && checkInput(form.elements.namedItem("password"), 'Password') && checkLoginValid(form);
+function showWarning(msg, id){
+    //imposta il messaggio dello warning emostralo
+    let el = document.getElementById(id);
+    el.innerText = msg;
+    el.style.visibility = "visible";
 }
 
-    function checkLoginValid(form){
+function checkLoginValid(form){
     //Riceve l'errore
         let esito = true;
         let response;
@@ -46,4 +64,4 @@ function checkInput(field, dataType){
         }
         return esito;
 
-    }
+}
