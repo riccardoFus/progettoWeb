@@ -1,8 +1,5 @@
-    <footer id="footer">
-        <div>
-            <p> Associazione Tum4World, Via Terzo, 3 - 07000 Napoli (Italia)
-            </p>
-        </div>
-        </footer>
-    </body>
+<footer id="footer">
+    <p> Associazione Tum4World <br> Via Terzo, 3 - 07000 Napoli (Italia)</p>
+</footer>
+</body>
 </html>

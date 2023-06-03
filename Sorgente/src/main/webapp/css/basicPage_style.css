@@ -1,0 +1,46 @@
+h2{
+    font-size: 3em;
+    text-shadow: 0.3vw 0vw floralwhite;
+    font-family: "Major Mono Display";
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    width: auto;
+    padding: 0 6vw 0 6vw;
+}
+
+.column{
+    align-items: center;
+    padding-bottom: 4vw;
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1vw;
+    margin: 4vw 11vw 2vw 11vw;
+    border: dotted antiquewhite;
+    border-width: 1vw 0vw 1vw 0vw;
+    box-shadow: -2vw 0vw 1vw -1vw grey;
+}
+#left1, #left2, #right{
+    padding: 2vw;
+    margin-top: 3vw;
+    border: dotted #2c3342;
+    width: 60vw;
+}
+
+#left1, #left2{
+    background-color: floralwhite;
+    box-shadow: -1vw 1vw 0 #2c3342;
+    transform: rotate(3.5deg);
+    border-width: 0vw 0vw 0vw 1vw;
+
+}
+
+#right{
+    background-color: lightsalmon;
+    box-shadow: 1vw 1vw 0 #2c3342;
+    transform: rotate(-3.5deg);
+    border-width: 0vw 1vw 0vw 0vw;
+
+}

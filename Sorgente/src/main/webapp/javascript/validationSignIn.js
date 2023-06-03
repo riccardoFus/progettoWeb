@@ -1,8 +1,6 @@
 function validate(){
-    let form = document.getElementById("form");
-
     // esito scritto invece di return a&& b && c ... per forzare la chiamata di tutte le funzioni in modo che diano tutti warning
-
+    let form = document.getElementById("form")
     let esitoDate = validateDate(form);
     let esitoNSU =  validateNSU(form);
     let esitoPsw= validatePsw(form);
@@ -95,21 +93,22 @@ function validateNSU(form){
             var done = 4, ok = 200;
             if (this.readyState === done && this.status === ok)
             {
+                /* la risposta include le "" come parte della stringa quindi le eliminiamo
+                * */
                 responseU = this.response;
-                if(responseU === "true"){
+                let purifyResp =responseU.split("\"");
+                if( purifyResp[1] === "true"){
                     //user con lo stesso esername trovato
-                    alert("esiste un altro user ");
                     esito = false;
-                    showWarning("Username già utilizzato", "warnUser");
-                    document.getElementById("username").style.color="darkmagenta";
-                    document.getElementById("warnUser").style.color="darkmagenta";
+                    showWarning("07 : Username già utilizzato", "warnUser");
+                    document.getElementById("username").style.color="salmom";
+                    document.getElementById("warnUser").style.color="salmon";
 
                 }else{
                     //tutto ok
-                    alert("non esiste un altro user ");
                     document.getElementById("warnUser").style.visibility = "hidden";
-                    document.getElementById("username").style.color="black";
-                    document.getElementById("warnUser").style.color="darkslateblue";
+                    document.getElementById("username").style.color="#2c3342";
+                    document.getElementById("warnUser").style.color="mediumpurple";
                 }
 
             }
@@ -174,21 +173,17 @@ function validateTel(form){
 
 function reset(){
     //reset a vuoto di tutti i campi
-    let form = document.getElementById("form");
-    form.elements.namedItem("psw").setAttribute("value", "");
-    form.elements.namedItem("psw confermata").setAttribute("value", "");
-    form.elements.namedItem("telefono").setAttribute("value", "");
-    form.elements.namedItem("username").setAttribute("value", "");
-    form.elements.namedItem("nome").setAttribute("value", "");
-    form.elements.namedItem("cognome").setAttribute("value", "");
-    form.elements.namedItem("data di nascita").setAttribute("value", "");
-    form.elements.namedItem("email").setAttribute("value", "");
-    document.getElementById("simp").setAttribute("checked", false);
-    document.getElementById("ader").setAttribute("checked", false);
+    let form = document.getElementsByTagName("form").item(0);
+    for(let el of form.elements){
+        if(el.id === "simp" || el.id === "ader")
+            el.checked = false
+        else if(el.type !== "submit")
+            el.value = ""
 
+    }
     //reset tutti i warning
-    let warnings = document.getElementsByClassName("warn");
-    for (let el of warnings){
+    let warnings = form.getElementsByClassName("warn");
+    for (el of warnings){
         el.style.visibility="hidden";
     }
 }
