@@ -45,9 +45,8 @@ public class ConsensoCookie extends HttpServlet {
             session.setAttribute("acceptCookies", false);
 
             for (Cookie c : req.getCookies()) {
-                System.out.println("Cookie: " + c.getName() + ", maxAge: " + c.getMaxAge());
                 c.setMaxAge(0);
-                System.out.println("Metto a " + c.getMaxAge() + " la scadenza di " + c.getName());
+                resp.addCookie(c);
             }
         }
 
