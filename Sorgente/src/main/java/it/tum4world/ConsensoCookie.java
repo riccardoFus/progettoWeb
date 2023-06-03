@@ -1,0 +1,61 @@
+package it.tum4world;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.PrintWriter;
+import java.lang.reflect.Type;
+
+import com.google.gson.FieldAttributes;
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+import com.google.gson.stream.JsonReader;
+
+@WebServlet(name = "ConsensoCookie", value = "/ConsensoCookie")
+public class ConsensoCookie extends HttpServlet {
+
+    @Override
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        doPost(req, resp);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        HttpSession session = req.getSession();
+
+        StringBuilder sb = new StringBuilder();
+        BufferedReader reader = req.getReader();
+        String line;
+        while ((line = reader.readLine()) != null) {
+            sb.append(line);
+        }
+        String requestBody = sb.toString();
+
+        JsonObject json = new Gson().fromJson(requestBody, JsonObject.class);
+        Boolean consent = json.get("consenso").getAsBoolean();
+
+        if (consent == true) {
+            session.setAttribute("acceptCookies", true);
+        }
+        else {
+            session.setAttribute("acceptCookies", false);
+
+            for (Cookie c : req.getCookies()) {
+                System.out.println("Cookie: " + c.getName() + ", maxAge: " + c.getMaxAge());
+                c.setMaxAge(0);
+                System.out.println("Metto a " + c.getMaxAge() + " la scadenza di " + c.getName());
+            }
+        }
+
+        resp.setContentType("text/html");
+        resp.setCharacterEncoding("utf-8");
+
+        try (PrintWriter writer = resp.getWriter()) {
+            writer.write("Consent: " + consent.toString());
+        }
+    }
+}
