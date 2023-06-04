@@ -3,7 +3,7 @@
     <%
         session = request.getSession();
 
-        if (session.getAttribute("userType")=="simpatizzante") {
+        if (session.getAttribute("userType")=="simpatizzante" || session.getAttribute("userType")=="admin")  {
 
     %>
     <div>

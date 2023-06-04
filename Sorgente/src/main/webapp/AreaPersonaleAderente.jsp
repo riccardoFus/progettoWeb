@@ -3,7 +3,7 @@
     <%
         session = request.getSession();
 
-        if (session.getAttribute("userType")=="aderente") {
+        if (session.getAttribute("userType")== ("aderente") || session.getAttribute("userType")=="admin") {
 
     %>
     <a>Dati personali</a>
