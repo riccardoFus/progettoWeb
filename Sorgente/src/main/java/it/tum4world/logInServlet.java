@@ -46,10 +46,6 @@ public class logInServlet extends DBManager {
     @Override
     synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ResultSet user = getLoginValues(req, resp);
-        System.err.println("Ciao sono la post");
-        //Funziona
-        //Ma non capisco come funzioni il collegamento tra questa servlet e la pagina di login
-        //La post viene chiamata solamente quando viene premuto invio, senza toccare il bottone
         try {
             if (user.next()) {
                 String userType = getUserType(user.getObject("username").toString());
@@ -76,11 +72,11 @@ public class logInServlet extends DBManager {
         switch (userType){
             case "admin":
                 System.out.println("Hello " + userType);
-                return "private_page_admin.jsp";
+                return "AreaPersonaleAdmin.jsp";
 
             case "aderente":
                 System.out.println("Hello " + userType);
-                return "AreaPersonaleAd.jsp";
+                return "AreaPersonaleAderente.jsp";
 
             case "simpatizzante":
                 System.out.println("Hello " + userType);
