@@ -1,5 +1,11 @@
 <jsp:include page="header.jsp"/>
 <div>
+    <%
+        session = request.getSession();
+
+        if (session.getAttribute("userType")=="aderente") {
+
+    %>
     <a>Dati personali</a>
     <div>
         <h3>Iscriviti/Disiscriviti</h3>
@@ -13,5 +19,11 @@
     <input type="number" value="donazione">
     <input type="button" value="DONA">
     <a>Disiscriviti</a>
+    <%
+    } else {
+
+    %>
+    <label id="text1">Siamo spiacenti, è necessario essere aderenti per poter accedere a questa pagina</label>
+    <% } %>
 </div>
 <jsp:include page="footer.jsp"/>
