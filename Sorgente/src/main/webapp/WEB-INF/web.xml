@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
          version="4.0">
     <welcome-file-list>
-        <welcome-file>Home.jsp</welcome-file>
+        <welcome-file>InitServer</welcome-file>
     </welcome-file-list>
     <session-config>
         <session-timeout>30</session-timeout>
@@ -15,4 +15,23 @@
             <page-encoding>UTF-8</page-encoding>
         </jsp-property-group>
     </jsp-config>
+    <filter>
+        <description>Check if a user is logged or not, if it is change the header in base of its user type</description>
+        <filter-name>FilterAuthentication</filter-name>
+        <filter-class>it.tum4world.FilterAuthentication</filter-class>
+    </filter>
+    <filter>
+        <description>Increment the counter of visit for every .jsp page</description>
+        <filter-name>FilterUpdatePages</filter-name>
+        <filter-class>it.tum4world.FilterUpdatePages</filter-class>
+    </filter>
+
+    <filter-mapping>
+        <filter-name>FilterAuthentication</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>FilterUpdatePages</filter-name>
+        <url-pattern>*.jsp</url-pattern>
+    </filter-mapping>
 </web-app>
