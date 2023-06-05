@@ -1,85 +1,150 @@
-// query per richiedere i dati
-
-let respInfo;
-let url = "paginaPrivata";
-let xhttp = new XMLHttpRequest();
-xhttp.open("GET", url, true);
-xhttp.responseType = "json";
-xhttp.onreadystatechange = function () {
-    var done = 4, ok = 200;
-    if (this.readyState === done && this.status === ok) {
-        /* chiami la servlet per fare la query al db, e poi modifichi tutti i campi appropriati con le info
-        * */
-        respInfo = this.response;
-        let campi = document.getElementsByClassName("info");
-        campi.item(0).innerHTML=respInfo.username;
-        campi.item(1).innerHTML=respInfo.nome;
-        campi.item(2).innerHTML=respInfo.cognome;
-        campi.item(3).innerHTML=respInfo.dataDiNascita;
-        campi.item(4).innerHTML=respInfo.numTel;
-
-        let iscrizioni = document.getElementsByClassName("iscriz");
-        iscrizioni.item(0).checked = respInfo.iscrizWW;
-        iscrizioni.item(1).checked = respInfo.iscrizFYB;
-        iscrizioni.item(2).checked = respInfo.iscrizMC;
+//al caricamento della pagina vengono cercate tutte le info (comprese le iscrizioni) e riempe l'oggetto client
+let cliente = {}
+let iscrizioni
+//richiesta fetch che ritorna tutti i valori
+requestData().then(
+    () => {
+        //check/uncheck a seconda delle iscrizioni
+        iscrizioni = document.getElementsByClassName("iscriz");
+        iscrizioni.item(0).checked = cliente.iscrizWW
+        iscrizioni.item(1).checked = cliente.iscrizFYB
+        iscrizioni.item(2).checked = cliente.iscrizMC
 
     }
-};
-xhttp.send();
+)
 
-function subUnsub(elem){
-
-    let responseVal;
+//fetch funzione per unsub/SUB
+async function subUnsub(elem) {
+    //fetch
     let url = "paginaPrivata";
-    let xhttp = new XMLHttpRequest();
-    let params = "operazione=subUnsub&campo=" + elem.value+ "&nuovoVal="+(!elem.checked).toString()
-    xhttp.open("POST", url, false);
-    xhttp.onreadystatechange = function () {
-        var done = 4, ok = 200;
-        if (this.readyState === done && this.status === ok) {
-            respInfo = this.response;
-            let pos = 0
-            switch (elem.value) {
-                case "Water Week":
-                    pos = 0
-                    break;
-                case "Feed Your Brain":
-                    pos = 1
-                    break;
-                case "Mind Checkup":
-                    pos = 2
-                    break;
+
+    await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            "operazione": "subUnsub",
+            "campo": elem.value,
+            "nuovoVal": (elem.checked).toString()
+        })
+    }).then(resp => resp.json())
+        .then(respInfo => {
+                // riceve risposta
+                alert(respInfo.msg)
 
             }
+        )
 
-            let iscrizioni = document.getElementsByClassName("iscriz");
-            iscrizioni.item(pos).checked = !iscrizioni.item(pos).checked;
 
-        }
-    };
-    xhttp.send(params);
 }
 
-function deleteAccount(){
+function deleteAccount() {
     let responseVal;
     let url = "paginaPrivata";
 
     fetch(url, {
         method: 'post',
         body: {
-            "operazione" : "deleteAccount"
+            "operazione": "deleteAccount"
         },
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'
         }
 
-    }).then((response) => {
-        responseVal = response.json()
+    }).then(resp => resp.json())
+        .then(respInfo => {
+                // riceve risposta
+                alert(respInfo.msg)
 
-    }).catch((error) => {
-        console.log(error)
+            }
+        )
 
-    })
+}
 
+function createElements(divDati) {
+    for (let i = 0; i < 5; i++) {
+        let divRow = document.createElement("div")
+        divRow.className = "row"
+
+        let label = document.createElement("label")
+        //nome label
+        let name = "";
+        switch (i) {
+            case 0:
+                name = "USERNAME"
+                break;
+
+            case 1:
+                name = "NOME"
+                break;
+
+            case 2:
+                name = "COGNOME"
+                break;
+
+            case 3:
+                name = "DATA DI NASCITA"
+                break;
+
+            case 4:
+                name = "NUMERO DI TELEFONO"
+                break;
+
+            default:
+                break;
+        }
+
+        label.innerHTML = name;
+        let val = document.createElement("p")
+        val.className = "info";
+        //Aggiungi il tutto ai div
+        divRow.appendChild(label)
+        divRow.appendChild(val)
+        divDati.appendChild(divRow)
+    }
+}
+
+async function requestData() {
+    //fetch
+    let url = "paginaPrivata";
+    await fetch(url, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        }
+    }).then(resp => resp.json())
+        .then(respInfo => {
+                //riempi l'oggetto cliente
+                cliente.nome = respInfo.nome
+                cliente.cognome = respInfo.cognome
+                cliente.dataDiNascita = respInfo.dataDiNascita
+                cliente.numTel = respInfo.numTel
+                cliente.iscrizWW = respInfo.iscrizWW
+                cliente.iscrizFYB = respInfo.iscrizFYB;
+                cliente.iscrizMC = respInfo.iscrizMC;
+                cliente.username = respInfo.username;
+
+            }
+        )
+
+}
+
+function showInfo() {
+    // query per richiedere i dati
+    //aggiungi i vari label per i dati
+    let divDati = document.getElementById("data");
+    //generi solo se non sono già stati generati
+    if (divDati.childElementCount === 1)
+        createElements(divDati)
+
+    //riempi i campi con le informazioni in cliente
+    let campi = document.getElementsByClassName("info");
+    campi.item(0).innerHTML = cliente.username;
+    campi.item(1).innerHTML = cliente.nome;
+    campi.item(2).innerHTML = cliente.cognome;
+    campi.item(3).innerHTML = cliente.dataDiNascita;
+    campi.item(4).innerHTML = cliente.numTel;
 }

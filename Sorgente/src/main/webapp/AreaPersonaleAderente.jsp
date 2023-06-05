@@ -1,24 +1,27 @@
 <jsp:include page="header.jsp"/>
-<div>
+
+<div id="content" class="column">
     <%
         session = request.getSession();
 
-        if (session.getAttribute("userType")== ("aderente") || session.getAttribute("userType")=="admin") {
+        if (session.getAttribute("typeOfUser") == "aderente") {
 
     %>
-    <a>Dati personali</a>
+    <div id="data">
+        <button onclick="showInfo()" class="button">Dati Personali</button>
+    </div>
+
     <div>
         <h3>Iscriviti/Disiscriviti</h3>
-        <input type="checkbox" value="Water Week">
+        <input type="checkbox" value="waterweek" onclick="subUnsub(this)" class="iscriz">
         <label>Water Week</label>
-        <input type="checkbox" value="Feed Your Brain">
+        <input type="checkbox" value="feedyourbrain" onclick="subUnsub(this)" class="iscriz">
         <label>Feed Your Brain</label>
-        <input type="checkbox" value="Mind Checkup">
+        <input type="checkbox" value="mindcheckup" onclick="subUnsub(this)" class="iscriz">
         <label>Mind Checkup</label>
     </div>
-    <input type="number" value="donazione">
-    <input type="button" value="DONA">
-    <a>Disiscriviti</a>
+    <button onclick="deleteAccount()" class="button">Disiscriviti</button>
+    <button type="button">DONA</button>
     <%
     } else {
 
