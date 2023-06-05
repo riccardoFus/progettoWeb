@@ -44,8 +44,9 @@
         <!-- controlla che tipo di utente è e decide di aggiungere o meno sign in, log out, log in,
         pagina privata nell'header-->
         <%
-            String tipo = (String) request.getAttribute("tipo");
-            if (tipo.equals("standard")) {
+            session = request.getSession(true);
+            String tipo = (String) session.getAttribute("userType");
+            if (tipo==null) {
                 //l'utente non è loggato
         %>
 
@@ -55,17 +56,15 @@
         <%
         } else if (tipo.equals("aderente")) {
         %>
-        <a href="<%=response.encodeURL("AreaPersonaleAd.jsp")%>">Area personale</a>
+        <a href="<%=response.encodeURL("AreaPersonaleAderente.jsp")%>">Area personale</a>
         <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
 
         <%
-        } else {
+        } else{
         %>
-        <a href="<%=response.encodeURL("AreaPersonaleSim.jsp")%>">Area Personale</a>
+        <a href="<%=response.encodeURL("AreaPersonaleAdmin.jsp")%>">Area Personale</a>
         <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
-
         <%}%>
-
 
     </div>
     <div id="phraseHeader"></div>

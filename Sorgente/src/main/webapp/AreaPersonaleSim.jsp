@@ -1,6 +1,12 @@
 <jsp:include page="header.jsp"/>
 <div id="content" class="column">
-    <div>
+<div>
+    <%
+        session = request.getSession();
+
+        if (session.getAttribute("userType")=="simpatizzante" || session.getAttribute("userType")=="admin")  {
+
+    %>
         <h3>Dati personali</h3>
         <label>USERNAME</label>
         <p class="info"></p>
@@ -23,6 +29,12 @@
         <label>Mind Checkup</label>
     </div>
     <a onclick="deleteAccount()" class="button">Disiscriviti</a>
+    <%
+    } else {
+
+    %>
+    <label id="text1">Siamo spiacenti, è necessario essere simpatizzanti per poter accedere a questa pagina</label>
+    <% } %>
 </div>
 
 <script src="./javascript/paginaPrivata.js"></script>

@@ -32,7 +32,7 @@ function checkLogin(form){
 }
 
 function showWarning(msg, id){
-    //imposta il messaggio dello warning emostralo
+    //imposta il messaggio dello warning e mostralo
     let el = document.getElementById(id);
     el.innerText = msg;
     el.style.visibility = "visible";

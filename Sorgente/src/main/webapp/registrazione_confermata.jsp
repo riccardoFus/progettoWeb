@@ -6,5 +6,5 @@
     <h2>Hai completato la registrazione con successo!</h2></p>
 </div>
 
-
+<jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
