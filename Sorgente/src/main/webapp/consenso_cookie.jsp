@@ -6,13 +6,29 @@
 <style>
   #cookieWindow {
     position: fixed;
-    width: 300px;
-    height: 200px;
-    bottom: 0;
-    right: 0;
-    background-color: white;
-    collapse: true;
-    border: black;
+    bottom: 20px;
+    right: 20px;
+    max-width: 345px;
+    max-height: 200px;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 8px;
+    padding: 15px 25px 22px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+  }
+  #cookieWindow header {
+    display: flex;
+    align-items: center;
+  }
+  #cookieWindow p {
+    padding: 0;
+    margin: 0;
+    color: #4070f4;
+    text-decoration: none;
+    text-align: center;
+    width: auto;
+    font-size: 80%;
   }
 </style>
 <script>
@@ -41,9 +57,9 @@
 </script>
 <div id="cookieWindow">
   <header>Cookie policy</header>
-  <p>Il nostro sito utilizza dei Cookie per migliorare l'esperienza di navigazione. Si prega di accettare o declinare la cosa</p>
-  <button onclick="inviaConsenso(true)" value="Accetta">Accetta</button>
-  <button onclick="inviaConsenso(false)" value="Rifiuta">Rifiuta</button>
+  <p>Utilizziamo cookie e altre tecnologie simili per fornire i nostri servizi. Se accetti, utilizzeremo i cookie anche per ottimizzare la tua esperienza online sul nostro sito.</p>
+  <button onclick="inviaConsenso(true)" class="button" value="Accetta">Accetta</button>
+  <button onclick="inviaConsenso(false)" class="button" value="Rifiuta">Rifiuta</button>
 </div>
 <%
   }

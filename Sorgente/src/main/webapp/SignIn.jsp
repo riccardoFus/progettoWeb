@@ -94,4 +94,5 @@
 </div>
 
 <script type="text/javascript" src="./javascript/validationSignIn.js"></script>
+<jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>

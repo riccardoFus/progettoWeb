@@ -56,4 +56,5 @@
 </div>
 
 <script src="javascript/scriptSlider.js"></script>
+<jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
