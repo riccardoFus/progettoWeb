@@ -7,8 +7,8 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 
-@WebFilter(filterName = "filterAuth", urlPatterns = "/*",
-        description = "controlla se l'utente è loggato")
+//@WebFilter(filterName = "filterAuth", urlPatterns = "/*",
+//        description = "controlla se l'utente è loggato")
 public class AuthFilter implements Filter {
     public void init(FilterConfig config) throws ServletException {
     }

@@ -8,39 +8,32 @@ import java.sql.*;
 
 public class DBManager extends HttpServlet {
 
-    protected Connection con;
+    protected Connection con = null;
     protected String URLDB= "jdbc:derby://localhost:1527/Tum4WorldDB";
-    //protected String user = "admin";
-    //protected String psw = "admin";
+    protected String user = "APP";
+    protected String password = "admin";
+
 
     public void init(){
 
         //caricamento del driver jdbc
-        final String DERBY_CLIENT = "org.apache.derby.jdbc.ClientDriver";
         try {
-            Class.forName(DERBY_CLIENT);
+            Class.forName("org.apache.derby.jdbc.ClientDriver");
             System.out.println("\nLoading ha avuto successo\n");
-        } catch (ClassNotFoundException ex) {
+            con = DriverManager.getConnection(URLDB, user, password);
+        } catch (ClassNotFoundException | NullPointerException | SQLException ex) {
             // errore nell caricamento del driver
             System.out.println("\nErrore: caricamento del driver jdbc fallito\n");
             System.out.println("\nDettagli:\n" + ex);
-        }finally{
-            try {
-                con =  DriverManager.getConnection(URLDB);
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
         }
     }
 
     @Override
     public void destroy() {
-        super.destroy();
         try {
             con.close();
-            DriverManager.getConnection("jdbc:derby:;shutdown=true;deregister=false");
         } catch (SQLException e){
-            System.gc();
+            System.out.println(e);
         }
 
     }
@@ -52,7 +45,7 @@ public class DBManager extends HttpServlet {
             // apri/riusa connessione
             Statement stmnt = con.createStatement();
             resultSet = stmnt.executeQuery(query);
-        } catch (SQLException e) {
+        } catch (SQLException | NullPointerException e) {
             throw new RuntimeException(e);
         }
 
@@ -132,6 +125,6 @@ public class DBManager extends HttpServlet {
             throw new RuntimeException(e);
         }
         return "Errore nella ricerca dell'utente";
-     }
+    }
 
 }

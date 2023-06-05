@@ -62,8 +62,6 @@
         <%
         } else{
         %>
-        <a href="<%=response.encodeURL("AreaPersonaleSim.jsp")%>">Area simpatizzante</a>
-        <a href="<%=response.encodeURL("AreaPersonaleAderente.jsp")%>">Area aderente</a>
         <a href="<%=response.encodeURL("AreaPersonaleAdmin.jsp")%>">Area personale admin</a>
         <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
         <%}%>
