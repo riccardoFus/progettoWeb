@@ -31,36 +31,21 @@ let pos = 0
 let noSessionId = window.location.pathname.split(";")[0];
 let path = noSessionId.split("/")[2];
 
-switch (path) {
-    case "Home.jsp":
-        pos = 0
-        break;
+if(path.search("Home") !== -1 || path === ""){
+    pos=0
+}else if(path.search("ChiSiamo") !== -1){
+    pos=1
+}else if(path.search("Contatti") !== -1){
+    pos=3
 
-    case "ChiSiamo.jsp":
-        pos=1
-        break;
-    case "Attivita.jsp":
-        pos=2
-        break;
-    case "Contatti.jsp":
-        pos=3
-        break;
-    case "SignIn.jsp":
-        pos=4
-        break;
-    case "Login.jsp":
-        pos=5
-        break;
-
-    case "":
-        pos = 0
-        break;
-
-    default:
-        // tutte le pagine di attività che perà non hanno il corrispondente sottotag nel menu
-        pos=2;
-        break;
+}else if(path.search("AreaPersonale") !== -1 || path.search("SignIn") !== -1){
+    pos = 4
+}else if(path.search("Login") !== -1){
+    pos=5
+}else{
+    pos=2
 }
+
  // modifica l'header
 let links = (document.getElementById("header")).getElementsByTagName("a")
 links.item(pos).id="selected"

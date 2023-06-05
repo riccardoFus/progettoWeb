@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.ResultSet;
@@ -18,9 +19,17 @@ public class PaginaPrivataServlet extends DBManager{
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        //prendi i parametri dal payload
+        BufferedReader reader = req.getReader();
+        String reqBody;
+        while ((reqBody = reader.readLine()) != null);
+        System.out.println("reqBODY: " + reqBody);
+
         String tipoOp = req.getParameter("operazione");
         HttpSession session = req.getSession(false);
         String username = (String)session.getAttribute("username");
+        System.out.println(tipoOp);
 
         if(tipoOp.equals("subUnsub")){
             String campo = req.getParameter("campo");
@@ -58,8 +67,7 @@ public class PaginaPrivataServlet extends DBManager{
         HttpSession session = req.getSession(false);
         String username = (String)session.getAttribute("username");
         String query = "SELECT nome, cognome, data_di_nascita, telefono, aderente, clienti.username, waterweek, feedyourbrain, mindcheckup"+
-                " FROM clienti JOIN iscrizioni ON clienti.username = iscrizioni.username'"+
-                "WHERE clienti.username='"+ username + "'";
+                " FROM clienti JOIN iscrizioni ON clienti.username = iscrizioni.username WHERE clienti.username='"+ username + "'";
         ResultSet result = getInfoDB(query);
         Clienti cliente = null;
         try{

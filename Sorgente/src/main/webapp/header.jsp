@@ -55,13 +55,13 @@
         <%
         } else if (tipo.equals("aderente")) {
         %>
-        <a href="<%=response.encodeURL("AreaPersonaleAd")%>">Area personale</a>
+        <a href="<%=response.encodeURL("AreaPersonaleAd.jsp")%>">Area personale</a>
         <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
 
         <%
         } else {
         %>
-        <a href="<%=response.encodeURL("AreaPersonaleSim")%>">Area Personale</a>
+        <a href="<%=response.encodeURL("AreaPersonaleSim.jsp")%>">Area Personale</a>
         <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
 
         <%}%>

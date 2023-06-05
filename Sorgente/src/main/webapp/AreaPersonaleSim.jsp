@@ -1,5 +1,5 @@
 <jsp:include page="header.jsp"/>
-<div>
+<div id="content" class="column">
     <div>
         <h3>Dati personali</h3>
         <label>USERNAME</label>
@@ -22,7 +22,7 @@
         <input type="checkbox" value="mindcheckup" onclick="subUnsub(this)" class="iscriz">
         <label>Mind Checkup</label>
     </div>
-    <a onclick="deleteAccount()">Disiscriviti</a>
+    <a onclick="deleteAccount()" class="button">Disiscriviti</a>
 </div>
 
 <script src="./javascript/paginaPrivata.js"></script>
