@@ -50,7 +50,7 @@ public class StatisticsServlet extends DBManager {
         else {
             JsonObject jsonData = new JsonObject();
             JsonArray jsonArray = new JsonArray();
-            ResultSet views = getInfoDB(("SELECT page, SUM(visits) AS visits FROM VISITE GROUP BY page"));
+            ResultSet views = getInfoDB(("SELECT page, visits FROM VISITE"));
 
             try {
                 while (views.next()) {
