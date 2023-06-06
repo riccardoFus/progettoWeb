@@ -9,14 +9,18 @@ import javax.servlet.http.*;
 import javax.servlet.annotation.*;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 @WebServlet(name = "StatisticsServlet", value = "/StatisticsServlet")
 public class StatisticsServlet extends DBManager {
+
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if(request.getParameter("action").equals("reset")){
+        JsonArray array;
+        if (request.getParameter("action").equals("reset")) {
             updateDB("UPDATE VISITE SET visits=0");
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
@@ -24,8 +28,7 @@ public class StatisticsServlet extends DBManager {
             PrintWriter writer = response.getWriter();
             writer.println("Dati azzerati!");
             writer.flush();
-        }
-        else if(request.getParameter("action").equals("totalViews")) {
+        } else if (request.getParameter("action").equals("totalViews")) {
             ResultSet views = getInfoDB("SELECT SUM(visits) FROM VISITE");
             String result;
 
@@ -46,31 +49,54 @@ public class StatisticsServlet extends DBManager {
             PrintWriter writer = response.getWriter();
             writer.println(result);
             writer.flush();
-        }
-        else {
-            JsonObject jsonData = new JsonObject();
-            JsonArray jsonArray = new JsonArray();
-            ResultSet views = getInfoDB(("SELECT page, visits FROM VISITE"));
 
-            try {
-                while (views.next()) {
-                    JsonObject item = new JsonObject();
-                    String pages = views.getString("page");
-                    int visits = views.getInt("visits");
-                    item.addProperty("pages", pages);
-                    item.addProperty("visits", visits);
-                    jsonArray.add(item);
-                }
-                // Aggiungo l'oggetto JSON all'array JSON
-            } catch(SQLException e){
-                throw new RuntimeException();
-            }
-
-            Gson gson = new Gson();
-            String jsonString = gson.toJson(jsonData);
+        } else if (request.getParameter("action").equals("totalSubscriptions")) {
+            array = getJsonUsers("SELECT * FROM UTENTI");
             response.setContentType("application/json");
-            response.getWriter().write(jsonString);
-        }
+            response.setCharacterEncoding("utf-8");
+
+            try (PrintWriter writer = response.getWriter()) {
+                writer.println(array);
+                writer.flush();
+            } catch (IOException ex) {
+                System.err.println("Errore");
+            }
+        } else if (request.getParameter("action").equals("aderenteSubscriptions")) {
+                array = getJsonClienti("SELECT * FROM CLIENTI INNER JOIN UTENTI ON CLIENTI.username=UTENTI.username WHERE ADERENTE=TRUE");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                try (PrintWriter writer = response.getWriter()) {
+                    writer.println(array);
+                    writer.flush();
+                } catch (IOException ex) {
+                    System.err.println("Errore");
+                }
+
+            } else if (request.getParameter("action").equals("simpatizzanteSubscriptions")) {
+                array = getJsonClienti("SELECT * FROM CLIENTI INNER JOIN UTENTI ON CLIENTI.username=UTENTI.username WHERE ADERENTE=FALSE");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                try (PrintWriter writer = response.getWriter()) {
+                    writer.println(array);
+                    writer.flush();
+                } catch (IOException ex) {
+                    System.err.println("Errore");
+                }
+
+            } else {
+                array = getJsonClienti("SELECT page, visits FROM VISITE");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
+
+                try (PrintWriter writer = response.getWriter()) {
+                    writer.println(array);
+                    writer.flush();
+                } catch (IOException ex) {
+                    System.err.println("Errore");
+                }
+            }
     }
 
     @Override

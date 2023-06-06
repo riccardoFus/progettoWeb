@@ -1,20 +1,29 @@
 package it.tum4world;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.client.Client;
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.*;
+import java.util.ArrayList;
 
 public class DBManager extends HttpServlet {
 
     protected Connection con = null;
-    protected String URLDB= "jdbc:derby://localhost:1527/Tum4WorldDB";
+    protected String URLDB = "jdbc:derby://localhost:1527/Tum4WorldDB";
     protected String user = "APP";
     protected String password = "admin";
 
 
-    public void init(){
+    public void init() {
 
         //caricamento del driver jdbc
         try {
@@ -32,13 +41,13 @@ public class DBManager extends HttpServlet {
     public void destroy() {
         try {
             con.close();
-        } catch (SQLException e){
+        } catch (SQLException e) {
             System.out.println(e);
         }
 
     }
 
-    public ResultSet getInfoDB(String query){
+    public ResultSet getInfoDB(String query) {
         ResultSet resultSet;
 
         try {
@@ -52,7 +61,7 @@ public class DBManager extends HttpServlet {
         return resultSet;
     }
 
-    protected boolean updateDB(String update){
+    protected boolean updateDB(String update) {
         try {
             System.out.println(update);
             Statement stmnt = con.createStatement();
@@ -71,7 +80,7 @@ public class DBManager extends HttpServlet {
         StringBuilder hexString = new StringBuilder(2 * hash.length);
         for (int i = 0; i < hash.length; i++) {
             String hex = Integer.toHexString(0xff & hash[i]);
-            if(hex.length() == 1) {
+            if (hex.length() == 1) {
                 hexString.append('0');
             }
             hexString.append(hex);
@@ -79,7 +88,7 @@ public class DBManager extends HttpServlet {
         return hexString.toString();
     }
 
-    public static String createDigest(String psw){
+    public static String createDigest(String psw) {
         MessageDigest digest = null;
         String sha3Hex;
 
@@ -102,29 +111,74 @@ public class DBManager extends HttpServlet {
         return sha3Hex;
     }
 
-    public String getUserType(String username){
+    public String getUserType(String username) {
         String searchAdmin = "SELECT * FROM AMMINISTRATORI WHERE USERNAME='" + username + "'";
         String searchClienti = "SELECT * FROM CLIENTI WHERE USERNAME='" + username + "'";
         ResultSet clienti = getInfoDB(searchClienti);
-        try{
-            if(clienti.next()){
-                boolean isAderente= (boolean) clienti.getObject("ADERENTE");
-                if(isAderente){
+        try {
+            if (clienti.next()) {
+                boolean isAderente = (boolean) clienti.getObject("ADERENTE");
+                if (isAderente) {
                     return "aderente";
-                }
-                else return "simpatizzante";
-            }
-            else {
+                } else return "simpatizzante";
+            } else {
                 ResultSet admin = getInfoDB(searchAdmin);
-                if(admin.next()) {
+                if (admin.next()) {
                     return "admin";
                 }
             }
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             throw new RuntimeException(e);
         }
         return "Errore nella ricerca dell'utente";
     }
+    public JsonArray getJsonUsers(String query) {
+        ArrayList<UsersBean> users = new ArrayList<UsersBean>();
+        ResultSet result = getInfoDB(query);
+        try{
+            while(result.next()){
+                UsersBean user = new UsersBean();
+                user.setUsername(result.getString("username"));
+                user.setEmail(result.getString("email"));
+                user.setPassword(result.getString("password"));
+                users.add(user);
+            }
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+            JsonArray array = new JsonArray();
+            for(UsersBean user : users){
+                Gson gson = new Gson();
+                array.add(gson.toJson(user));
+            }
+            return array;
 
+    }
+    public JsonArray getJsonClienti(String query) {
+        ArrayList<ClientsBean> clients = new ArrayList<ClientsBean>();
+        ResultSet result = getInfoDB(query);
+        try{
+            while(result.next()){
+                ClientsBean client = new ClientsBean();
+                client.setUsername(result.getString("username"));
+                client.setEmail(result.getString("email"));
+                client.setName(result.getString("nome"));
+                client.setSurname(result.getString("cognome"));
+                client.setAderente(result.getBoolean("aderente"));
+                client.setDateOfBirth(result.getDate("data_di_nascita"));
+                client.setPassword(result.getString("password"));
+                client.setTelefono(result.getString("telefono"));
+                clients.add(client);
+            }
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+        JsonArray array = new JsonArray();
+        for(ClientsBean client : clients){
+            Gson gson = new Gson();
+            array.add(gson.toJson(client));
+        }
+        return array;
+
+    }
 }
