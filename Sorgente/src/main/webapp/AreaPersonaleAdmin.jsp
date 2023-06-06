@@ -3,7 +3,7 @@
 <div>
     <%
         session = request.getSession();
-        if (session.getAttribute("userType")=="admin") {
+        if (session.getAttribute("typeOfUser")=="admin") {
 
     %>
     //Obv da aggiungere cose

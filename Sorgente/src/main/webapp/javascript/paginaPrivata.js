@@ -46,9 +46,9 @@ function deleteAccount() {
 
     fetch(url, {
         method: 'post',
-        body: {
+        body: JSON.stringify({
             "operazione": "deleteAccount"
-        },
+        }),
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json'

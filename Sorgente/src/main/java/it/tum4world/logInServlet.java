@@ -52,7 +52,7 @@ public class logInServlet extends DBManager {
             if (user.next()) {
                 String username = user.getObject("username").toString();
                 String userType = getUserType(username);
-                System.out.println(userType);
+                System.out.println("Login in process of username" + username +  " user type: " + userType);
 
                 //ritira la sessione per aggiungere gli attripìbuti typeOfUser e username
                 session.setAttribute("username", username);
@@ -80,15 +80,12 @@ public class logInServlet extends DBManager {
     private String redirectUserType(String userType) {
         switch (userType) {
             case "admin":
-                System.out.println("Hello " + userType);
                 return "AreaPersonaleAdmin.jsp";
 
             case "aderente":
-                System.out.println("Hello " + userType);
                 return "AreaPersonaleAderente.jsp";
 
             case "simpatizzante":
-                System.out.println("Hello " + userType);
                 return "AreaPersonaleSim.jsp";
         }
         return null;

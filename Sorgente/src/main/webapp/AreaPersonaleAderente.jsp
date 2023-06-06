@@ -1,24 +1,31 @@
 <jsp:include page="header.jsp"/>
-
-<div id="content" class="column">
+<div class="flex-container" id="areaP">
     <%
         session = request.getSession();
 
-        if (session.getAttribute("typeOfUser") == "aderente") {
+        if (session.getAttribute("typeOfUser") == "simpatizzante") {
 
     %>
     <div id="data">
         <button onclick="showInfo()" class="button">Dati Personali</button>
     </div>
 
-    <div>
-        <h3>Iscriviti/Disiscriviti</h3>
-        <input type="checkbox" value="waterweek" onclick="subUnsub(this)" class="iscriz">
-        <label>Water Week</label>
-        <input type="checkbox" value="feedyourbrain" onclick="subUnsub(this)" class="iscriz">
-        <label>Feed Your Brain</label>
-        <input type="checkbox" value="mindcheckup" onclick="subUnsub(this)" class="iscriz">
-        <label>Mind Checkup</label>
+    <div class="column">
+        <h3>ISCRIVITI/DISISCRIVITI</h3>
+        <div class="row">
+            <label>Water Week</label>
+            <input type="checkbox" value="waterweek" onclick="subUnsub(this)" class="iscriz">
+        </div>
+
+        <div class="row">
+            <label>Feed Your Brain</label>
+            <input type="checkbox" value="feedyourbrain" onclick="subUnsub(this)" class="iscriz">
+        </div>
+
+        <div class="row">
+            <label>Mind Checkup</label>
+            <input type="checkbox" value="mindcheckup" onclick="subUnsub(this)" class="iscriz">
+        </div>
     </div>
     <button onclick="deleteAccount()" class="button">Disiscriviti</button>
     <button type="button">DONA</button>

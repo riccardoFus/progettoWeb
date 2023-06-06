@@ -19,7 +19,7 @@ public class DBManager extends HttpServlet {
         //caricamento del driver jdbc
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            System.out.println("\nLoading ha avuto successo\n");
+            System.out.println("\nLoading del driver ha avuto successo\n");
             con = DriverManager.getConnection(URLDB, user, password);
         } catch (ClassNotFoundException | NullPointerException | SQLException ex) {
             // errore nell caricamento del driver

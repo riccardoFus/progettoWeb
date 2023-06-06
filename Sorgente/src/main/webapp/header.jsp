@@ -20,7 +20,7 @@
             || pagina.contains("FeedYourBrain") || pagina.contains("MindCheckUp")) {%>
     <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
     <link rel="stylesheet" href="css/attivitaSpec_style.css" type="text/css">
-    <% } else if (pagina.contains("SignIn")
+    <% } else if (pagina.contains("SignIn") || pagina.contains("AreaPersonale")
             || pagina.contains("Contatti") || pagina.contains("Login")) {%>
     <link rel="stylesheet" href="css/formPages_style.css" type="text/css">
     <% } else {%>
@@ -44,8 +44,9 @@
         <!-- controlla che tipo di utente è e decide di aggiungere o meno sign in, log out, log in,
         pagina privata nell'header-->
         <%
-            session = request.getSession(true);
-            String tipo = (String) session.getAttribute("userType");
+            session = request.getSession(false);
+            System.out.println("USERTYPE HEADER:: " + session.getAttribute("typeOfUser"));
+            String tipo = (String) session.getAttribute("typeOfUser");
             if (tipo==null) {
                 //l'utente non è loggato
         %>
@@ -57,6 +58,12 @@
         } else if (tipo.equals("aderente")) {
         %>
         <a href="<%=response.encodeURL("AreaPersonaleAderente.jsp")%>">Area personale</a>
+        <a href="<%=response.encodeURL("Home.jsp")%>" onclick="return logOut()">Logout</a>
+
+        <%
+        } else if (tipo.equals("simpatizzante")) {
+        %>
+        <a href="<%=response.encodeURL("AreaPersonaleSim.jsp")%>">Area personale</a>
         <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
 
         <%

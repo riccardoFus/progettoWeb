@@ -1,13 +1,14 @@
 body {
     font-family: "Roboto Mono";
-    padding: 0;
-    margin:0;
+    margin: 0;
     display: flex;
     flex-direction: column;
     background-color: antiquewhite;
     color: #2c3342;
     font-size: 1.2em;
     font-weight: bold;
+    height: 100vh;
+    padding: 12vw 0 0 0;
 }
 
 .button {
@@ -16,20 +17,21 @@ body {
     font-family: "Major Mono Display";
     cursor: pointer;
     text-align: center;
-    font-weight: bold ;
+    font-weight: bold;
+    font-size: 1em;
     background-color: #2c3342;
     color: floralwhite;
     border: antiquewhite dotted;
-    border-width:  0 1vw;
-    width: 10vw;
-    box-shadow: 0vw 1.3vw 1.4vw -1vw rgba(0,0,0,0.6);
+    border-width: 0 1vw;
+    min-width: 10vw;
+    box-shadow: 0vw 1.3vw 1.4vw -1vw rgba(0, 0, 0, 0.6);
 }
 
-.button:hover{
+.button:hover {
     background-color: mediumpurple;
 }
 
-label{
+label {
     font-family: "Major Mono Display";
     font-size: 1em;
     font-weight: bold;
@@ -46,66 +48,66 @@ label{
     color: #2c3342;
 }
 
-.textbox:focus{
-    outline:none;
+.textbox:focus {
+    outline: none;
     color: floralwhite;
     font-weight: bold;
 }
 
 /* ---------- CSS HEADER ------ */
 
-#header, #header div{
+#header, #header div {
     display: flex;
 }
 
-#header{
-    position: sticky;
+#header {
+    position: fixed;
     z-index: 999;
-    top:0;
+    top: 0;
     flex-flow: column wrap;
     justify-content: center;
     align-items: center;
     background-color: #2c3342;
-    box-shadow: 0vw 0.1vw 1vw rgba(0,0,0,0.6), 0vw 0.8vw mediumpurple, 0vw 0.9vw 1vw rgba(0,0,0,0.6), 0vw 1.5vw lightcoral,
-    0vw 1.6vw 1.6vw rgba(0,0,0,0.6);
+    box-shadow: 0vw 0.1vw 1vw rgba(0, 0, 0, 0.6), 0vw 0.8vw mediumpurple, 0vw 0.9vw 1vw rgba(0, 0, 0, 0.6), 0vw 1.5vw lightcoral,
+    0vw 1.6vw 1.6vw rgba(0, 0, 0, 0.6);
     margin-bottom: 1.7vw;
     color: floralwhite;
 
 }
 
-#nav{
+#nav {
     flex-flow: row wrap;
     justify-content: center;
     align-content: center;
     align-items: center;
     gap: 5vw;
-    height:7vw;
-    width: 100vw;
+    margin: 0;
+    padding: 2vw;
     z-index: 999;
 }
 
-#header h1, a{
+#header h1, a {
     font-family: "Major Mono Display";
 }
 
-#header h1{
+#header h1 {
     font-size: 2.5em;
-    margin:0;
+    margin: 0;
 }
 
-#header a{
+#header a {
     text-decoration: none;
     color: floralwhite;
     font-weight: bold;
     padding-bottom: 0.3vw;
 }
 
-#header #selected{
+#header #selected {
     border-bottom: 0.3em salmon dotted;
     color: salmon;
 }
 
-#phraseHeader{
+#phraseHeader {
     padding: 0.7vw;
     background-color: lightseagreen;
     width: 98.6vw;
@@ -118,19 +120,52 @@ label{
 /*--CSS FOOTER--*/
 
 
-#footer{
+#footer {
+    position: inherit;
+    bottom: 0;
+    /*width: 100%;*/
     color: floralwhite;
     background-color: #2c3342;
     margin-top: 2vw;
     padding: 2vw 0 0 2vw;
-    height: 4vw;
     box-shadow: 0 -0.1vw 0.1vw grey;
 }
 
-#footer p{
+#footer p {
     text-align: left;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
     width: fit-content;
 
+}
+
+/* -- cookie window -- */
+#cookieWindow {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    max-width: 345px;
+    max-height: 200px;
+    width: 100%;
+    height: 100%;
+    background: white;
+    border-radius: 8px;
+    padding: 15px 25px 22px;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+    z-index: 999;
+}
+
+#cookieWindow header {
+    display: flex;
+    align-items: center;
+}
+
+#cookieWindow p {
+    padding: 0;
+    margin: 0;
+    color: #4070f4;
+    text-decoration: none;
+    text-align: center;
+    width: auto;
+    font-size: 80%;
 }

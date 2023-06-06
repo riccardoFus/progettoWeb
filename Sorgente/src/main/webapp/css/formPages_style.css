@@ -25,12 +25,42 @@
     background-color: lightgreen;
 }
 
+#areaP{
+    background-color: mediumpurple;
+    padding-bottom:2vw;
+    color: #2c3342;
+
+}
+
+#data{
+    display:flex;
+    flex-flow: column;
+    border: dotted mediumturquoise;
+    border-width: 0vw 0vw 0vw 1vw;
+    box-shadow: -1.2vw 1.2vw mediumturquoise, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
+    background-color: floralwhite;
+
+}
+
+#data .row{
+    padding: 0 5vw 0 5vw;
+}
+
+#data .button{
+    border-color: floralwhite;
+}
+
+#areaP .column+.button{
+    border-color: mediumpurple;
+}
+
 .row{
     display: flex;
     flex-flow: row wrap-reverse;
     gap: 3vw;
     justify-content: space-between;
     padding: 2vw 0 2vw 0;
+    align-items: center;
 }
 
 .column{
@@ -39,19 +69,26 @@
 
 }
 
-#altroDiv{
-    gap: 2vw;
+#altroDiv, #data{
     padding: 2vw 3vw 2vw 3vw;
     width:50vw;
-    height:25vw;
     margin: 2vw 0 3vw 0;
-    align-items: center;
+    transform: rotate(2.5deg);
+
+}
+#altroDiv{
     background-color: floralwhite;
     border: dotted mediumpurple;
     border-width: 0vw 0vw 0vw 1vw;
     box-shadow: -1.2vw 1.2vw mediumpurple, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
-    transform: rotate(2.5deg);
 
+}
+#areaP .column{
+    color:floralwhite;
+}
+
+#areaP .button:focus{
+    background-color: mediumturquoise;
 }
 
 .warn{
@@ -117,4 +154,9 @@ form+.button{
     outline: none;
     border-color: mediumpurple;
     color: mediumpurple;
+}
+
+input[type="checkbox"]{
+    width: 1.5em;
+    height: 1.5em;
 }

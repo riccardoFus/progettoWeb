@@ -71,20 +71,20 @@ public class PaginaPrivataServlet extends DBManager {
                 query = "DELETE FROM clienti WHERE username='" + username + "'";
 
             boolean esito = updateDB(query);
-            //2.rimozione da utenti
-            query = "DELETE FROM utenti WHERE username='" + username + "'";
-            esito = esito && updateDB(query);
 
-            //3.rimozione iscrizioni
+            //2.rimozione iscrizioni
             query = "DELETE FROM iscrizioni WHERE username='" + username + "'";
             esito = esito && updateDB(query);
 
-            //4.rimozione delle donazioni nel caso l'utente sia aderente
+            //3.rimozione delle donazioni nel caso l'utente sia aderente
             if(typeUser.equals("aderente")){
                 query = "DELETE FROM donazioni WHERE username='" + username + "'";
                 esito = esito && updateDB(query);
             }
 
+            //4.rimozione da utenti
+            query = "DELETE FROM utenti WHERE username='" + username + "'";
+            esito = esito && updateDB(query);
             if(!esito)
                 msg="Errore: qualcosa è andato storto";
             else
