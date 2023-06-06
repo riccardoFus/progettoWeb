@@ -5,8 +5,7 @@ import javax.servlet.annotation.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 
-@WebFilter(filterName = "UpdatePages", urlPatterns = "*.jsp", description = "aggiorna visite di una pagina")
-public class UpdatePages extends DBManager implements Filter {
+public class FilterUpdatePages extends DBManager implements Filter {
     public void init(FilterConfig config) throws ServletException {
         super.init();
     }

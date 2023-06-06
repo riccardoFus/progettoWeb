@@ -6,5 +6,5 @@
     </p>
 </div>
 
-
+<jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
