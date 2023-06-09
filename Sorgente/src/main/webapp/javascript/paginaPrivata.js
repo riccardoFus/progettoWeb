@@ -148,3 +148,29 @@ function showInfo() {
     campi.item(3).innerHTML = cliente.dataDiNascita;
     campi.item(4).innerHTML = cliente.numTel;
 }
+
+async function donate(){
+    //reperisci la somma inserita
+    let somma = document.getElementsByName("donazione")[0].valueAsNumber
+    //fetch
+    let url = "paginaPrivata";
+
+    await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            "operazione": "donate",
+            "somma" : somma
+        })
+    }).then(resp => resp.json())
+        .then(respInfo => {
+                // riceve risposta
+                alert(respInfo.msg)
+
+            }
+        )
+
+}

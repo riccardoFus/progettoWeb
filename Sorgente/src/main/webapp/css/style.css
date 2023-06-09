@@ -7,8 +7,14 @@ body {
     color: #2c3342;
     font-size: 1.2em;
     font-weight: bold;
-    height: 100vh;
+    min-height: 100vh;
     padding: 12vw 0 0 0;
+}
+
+#wrap{
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 5vw;
 }
 
 .button {
@@ -95,14 +101,18 @@ label {
     margin: 0;
 }
 
-#header a {
+a {
     text-decoration: none;
     color: floralwhite;
     font-weight: bold;
     padding-bottom: 0.3vw;
 }
 
-#header #selected {
+a:hover {
+    border-bottom: 0.3em floralwhite dotted;
+}
+
+#selected {
     border-bottom: 0.3em salmon dotted;
     color: salmon;
 }
@@ -119,19 +129,19 @@ label {
 
 /*--CSS FOOTER--*/
 
-
-#footer {
-    position: inherit;
+footer {
+    position: absolute;
     bottom: 0;
-    /*width: 100%;*/
     color: floralwhite;
     background-color: #2c3342;
     margin-top: 2vw;
     padding: 2vw 0 0 2vw;
     box-shadow: 0 -0.1vw 0.1vw grey;
+    width: -moz-available;          /* WebKit-based browsers will ignore this. */
+    width: -webkit-fill-available;  /* Mozilla-based browsers will ignore this. */
 }
 
-#footer p {
+footer p {
     text-align: left;
     margin: 0;
     padding: 0;

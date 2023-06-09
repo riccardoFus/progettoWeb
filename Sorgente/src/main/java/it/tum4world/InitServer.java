@@ -30,7 +30,7 @@ public class InitServer extends DBManager {
         String initFrasi = "CREATE TABLE frasi (id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY (Start with 1, Increment by 1), contenuto VARCHAR(300) NOT NULL)";
         String initDonazioni = "CREATE TABLE donazioni(\n" +
                 "    id INTEGER PRIMARY KEY GENERATED ALWAYS AS IDENTITY(Start with 1, Increment by 1),\n" +
-                "    quota FLOAT NOT NULL,\n" +
+                "    quota INTEGER NOT NULL,\n" +
                 "    data DATE NOT NULL,\n" +
                 "    username VARCHAR(25) NOT NULL,\n" +
                 "    FOREIGN KEY (username) REFERENCES utenti(username)\n" +
@@ -43,21 +43,31 @@ public class InitServer extends DBManager {
                 "    FOREIGN KEY (username) REFERENCES utenti(username)\n" +
                 ")";
         String initVisite = "CREATE TABLE VISITE (page VARCHAR(50) NOT NULL PRIMARY KEY, visits INTEGER NOT NULL)";
+
+        //esito diviso così se un tabella è già presente le altre possono essere create
+        updateDB(initUtenti);
+        updateDB(initAmministratori);
+        updateDB(initClienti);
+        updateDB(initFrasi);
+        updateDB(initDonazioni);
+        updateDB(initIscrizioni);
+        updateDB(initVisite);
+
+        System.out.println("TUTTE LE TABELLE CREATE SE NON GIÀ ESISTENTI\n");
+        String initQuotes = "INSERT INTO frasi (contenuto) VALUES ('La migliore preparazione per domani e'' fare il tuo meglio oggi.')";
+        updateDB(initQuotes);
+        initQuotes = "INSERT INTO frasi (contenuto) VALUES ('Cerco sempre di fare cio'' che non sono capace di fare, per imparare come farlo.')";
+        updateDB(initQuotes);
+        initQuotes = "INSERT INTO frasi (contenuto) VALUES ('Inizia da dove sei. Usa quello che hai. Fai quello che sei capace di fare.')";
+        updateDB(initQuotes);
+        initQuotes = "INSERT INTO frasi (contenuto) VALUES ('Esiste un''isola di opportunita'' in ogni difficoltà.')";
+        updateDB(initQuotes);
+
+        //inserisci admin se non presente
+
         String username = "admin";
         String psw = "07Adm1n!";
         String sha3Hex = createDigest(psw);
-        boolean b = updateDB(initUtenti) && updateDB(initAmministratori) && updateDB(initClienti) && updateDB(initFrasi) && updateDB(initDonazioni) && updateDB(initIscrizioni) && updateDB(initVisite);
-        if(b){
-            System.out.println("no problem");
-            String initQuotes = "INSERT INTO frasi (contenuto) VALUES ('La migliore preparazione per domani e'' fare il tuo meglio oggi.')";
-            updateDB(initQuotes);
-            initQuotes = "INSERT INTO frasi (contenuto) VALUES ('Cerco sempre di fare cio'' che non sono capace di fare, per imparare come farlo.')";
-            updateDB(initQuotes);
-            initQuotes = "INSERT INTO frasi (contenuto) VALUES ('Inizia da dove sei. Usa quello che hai. Fai quello che sei capace di fare.')";
-            updateDB(initQuotes);
-            initQuotes = "INSERT INTO frasi (contenuto) VALUES ('Esiste un''isola di opportunita'' in ogni difficoltà.')";
-            updateDB(initQuotes);
-        }
         String updateUtenti = "INSERT INTO utenti VALUES ('"+ username +"','"+ sha3Hex +"','" + "tum4world@nessunonoluogonoesiste.com" + "')";
         String updateAdmin = "INSERT INTO amministratori VALUES ('" + username+ "')";
         //controllo se l'admin non è già presente nel db
@@ -70,7 +80,6 @@ public class InitServer extends DBManager {
             System.out.println("\nAdmin già presente\n");
         }
         request.getRequestDispatcher("Home.jsp").forward(request, response);
-        return;
     }
 
     @Override

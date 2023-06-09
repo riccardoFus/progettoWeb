@@ -7,7 +7,7 @@
 
     %>
     <div id="data">
-        <button onclick="showInfo()" class="button">Dati Personali</button>
+        <button onclick="showInfo()" class="button">DATI PERSONALI</button>
     </div>
 
     <div class="column">
@@ -27,7 +27,7 @@
             <input type="checkbox" value="mindcheckup" onclick="subUnsub(this)" class="iscriz">
         </div>
     </div>
-    <button onclick="deleteAccount()" class="button">Disiscriviti</button>
+    <button onclick="deleteAccount()" class="button">DISISCRIVITI</button>
     <%
     } else {
 
@@ -35,6 +35,7 @@
     <label id="text1">Siamo spiacenti, è necessario essere simpatizzanti per poter accedere a questa pagina</label>
     <% } %>
 </div>
+<jsp:include page="footer.jsp"/>
+</div>
 
 <script src="./javascript/paginaPrivata.js"></script>
-<jsp:include page="footer.jsp"/>

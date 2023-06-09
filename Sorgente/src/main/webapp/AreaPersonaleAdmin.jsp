@@ -3,7 +3,7 @@
 <div>
     <%
         session = request.getSession();
-        if (session.getAttribute("typeOfUser")=="admin") {
+        if (session.getAttribute("typeOfUser") == "admin") {
 
     %>
     <br>
@@ -14,7 +14,7 @@
     <input type="submit" class="button" value="Iscritti" onclick="showTotalSubscriptions()">
     <input type="submit" class="button" value="Aderenti" onclick="showAderenteSubscriptions()">
     <input type="submit" class="button" value="Simpatizzanti" onclick="showSimpatizzanteSubscriptions()">
-    <table id="showUsers"> </table>
+    <table id="showUsers"></table>
     <br>
     <input type="submit" class="button" value="Statistiche" onclick="showIstogramma()">
     <label id="istogramma"> Qua va l'istogramma</label>
@@ -27,4 +27,5 @@
 
 </div>
 <jsp:include page="footer.jsp"/>
+</div>
 <script src="./javascript/statistics.js"></script>

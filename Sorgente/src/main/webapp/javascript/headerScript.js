@@ -49,3 +49,31 @@ if(path.search("Home") !== -1 || path === ""){
  // modifica l'header
 let links = (document.getElementById("header")).getElementsByTagName("a")
 links.item(pos).id="selected"
+
+
+async function logout(btn){
+    //fetch
+    let url = "paginaPrivata";
+    event.preventDefault()
+
+    await fetch(url, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json"
+        },
+        body: JSON.stringify({
+            "operazione": "logout"
+        })
+    }).then(resp => resp.json())
+        .then(respInfo => {
+                // riceve risposta
+                alert(respInfo.msg)
+                if(respInfo.msg === "Logout completato")
+                    window.location=btn.href
+
+            }
+        )
+
+
+}

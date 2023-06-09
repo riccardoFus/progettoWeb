@@ -23,4 +23,6 @@
 
 </div>
 <jsp:include page="footer.jsp"/>
+</div>
+
 <script src="./javascript/statistics.js"></script>

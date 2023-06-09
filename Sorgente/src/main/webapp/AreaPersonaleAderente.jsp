@@ -3,11 +3,11 @@
     <%
         session = request.getSession();
 
-        if (session.getAttribute("typeOfUser") == "simpatizzante") {
+        if (session.getAttribute("typeOfUser") == "aderente") {
 
     %>
     <div id="data">
-        <button onclick="showInfo()" class="button">Dati Personali</button>
+        <button onclick="showInfo()" class="button">DATI PERSONALI</button>
     </div>
 
     <div class="column">
@@ -26,9 +26,13 @@
             <label>Mind Checkup</label>
             <input type="checkbox" value="mindcheckup" onclick="subUnsub(this)" class="iscriz">
         </div>
+
+        <div class="row">
+            <input type="number" value="0" name="donazione" class="textbox">
+            <button onclick="donate()" class="button">Dona</button>
+        </div>
     </div>
-    <button onclick="deleteAccount()" class="button">Disiscriviti</button>
-    <button type="button">DONA</button>
+    <button onclick="deleteAccount()" class="button">DISISCRIVITI</button>
     <%
     } else {
 
@@ -37,3 +41,5 @@
     <% } %>
 </div>
 <jsp:include page="footer.jsp"/>
+</div>
+<script src="./javascript/paginaPrivata.js"></script>

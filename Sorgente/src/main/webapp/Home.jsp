@@ -3,7 +3,8 @@
     <div class="column" id="home">
         <h2>BENVENUTI</h2>
         <p>
-            Tum4World è un'associazione di volontariato che si dedica a sostenere e migliorare la vita degli anziani,
+            Tum4World è un'associazione di volontariato che si dedica a sostenere e migliorare la vita degli
+            anziani,
             dei
             disabili e degli
             studenti universitari, fornendo supporto e risorse per aiutarli a raggiungere i propri obiettivi e a
@@ -22,3 +23,4 @@
 
 <jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
+</div>

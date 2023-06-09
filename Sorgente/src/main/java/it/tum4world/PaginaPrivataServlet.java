@@ -11,9 +11,9 @@ import javax.servlet.http.HttpSession;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Date;
 
 @WebServlet(name = "paginaPrivata", value = "/paginaPrivata")
 public class PaginaPrivataServlet extends DBManager {
@@ -57,7 +57,7 @@ public class PaginaPrivataServlet extends DBManager {
                     System.out.println("\nDettagli:\n" + ex);
                 }
             }
-        } else {
+        } else if (tipoOp.equals("deleteAccount")){
             //QUERY PER RIMOZIONE
             //1.rimozione da clienti o amministratori
 
@@ -97,6 +97,49 @@ public class PaginaPrivataServlet extends DBManager {
             //N.B: il filter si occuperà di buttare fuori l'utente se la sessione non è attiva
             try (PrintWriter writer = resp.getWriter()) {
                 writer.println("{ \"msg\":\"" + msg + "\"}");
+                writer.flush();
+
+            } catch (IOException ex) {
+                //errore
+                System.out.println("\nErrore: impossibile creare un json di risposta\n");
+                System.out.println("\nDettagli:\n" + ex);
+            }
+
+        }else if (tipoOp.equals("donate")){
+            //QUERY PER DONAZIONE
+            String msg; //contiene il messaggio di risposta
+            //ricava somma da body della richiesta
+            int somma = json.get("somma").getAsInt();
+            //genera l'oggetto data per inserirlo
+            Date oggi = new Date(System.currentTimeMillis());
+            String query = "INSERT INTO donazioni(quota, data, username) VALUES ("+
+                    somma +", '" + oggi + "', '" + username +"')";
+
+            if(!updateDB(query))
+                msg="Errore: qualcosa è andato storto";
+            else
+                msg="Donazione completata";
+
+            //ritorna
+            //N.B: il filter si occuperà di buttare fuori l'utente se la sessione non è attiva
+            try (PrintWriter writer = resp.getWriter()) {
+                writer.println("{ \"msg\":\"" + msg + "\"}");
+                writer.flush();
+
+            } catch (IOException ex) {
+                //errore
+                System.out.println("\nErrore: impossibile creare un json di risposta\n");
+                System.out.println("\nDettagli:\n" + ex);
+            }
+
+        }else{
+            //logout
+            //invalida la sessione
+            session.invalidate();
+            //ritorna
+            //N.B: il filter si occuperà di buttare fuori l'utente se la sessione non è attiva
+            try (PrintWriter writer = resp.getWriter()) {
+                writer.println("{ \"msg\":\"Logout completato\"}");
                 writer.flush();
 
             } catch (IOException ex) {

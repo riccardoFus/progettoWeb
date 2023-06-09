@@ -26,18 +26,26 @@
 }
 
 #areaP{
-    background-color: mediumpurple;
+    background-color: lightgreen;
     padding-bottom:2vw;
     color: #2c3342;
 
 }
 
+#areaP .textbox{
+    background-color: lightgreen;
+}
+
+#areaP .button{
+    border-color: lightgreen;
+}
+
 #data{
     display:flex;
     flex-flow: column;
-    border: dotted mediumturquoise;
+    border: dotted mediumpurple;
     border-width: 0vw 0vw 0vw 1vw;
-    box-shadow: -1.2vw 1.2vw mediumturquoise, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
+    box-shadow: -1.2vw 1.2vw mediumpurple, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
     background-color: floralwhite;
 
 }
@@ -50,8 +58,18 @@
     border-color: floralwhite;
 }
 
-#areaP .column+.button{
-    border-color: mediumpurple;
+#areaP .column{
+    min-width: 30vw;
+}
+
+#areaP .textbox{
+    max-width: 12vw;
+}
+
+#areaP h3{
+    text-align: center;
+    font-family: "Major Mono Display";
+    font-weight: bold;
 }
 
 .row{
@@ -82,13 +100,6 @@
     border-width: 0vw 0vw 0vw 1vw;
     box-shadow: -1.2vw 1.2vw mediumpurple, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
 
-}
-#areaP .column{
-    color:floralwhite;
-}
-
-#areaP .button:focus{
-    background-color: mediumturquoise;
 }
 
 .warn{

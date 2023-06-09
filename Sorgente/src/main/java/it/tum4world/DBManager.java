@@ -2,13 +2,8 @@ package it.tum4world;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.client.Client;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
