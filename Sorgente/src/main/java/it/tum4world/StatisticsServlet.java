@@ -12,6 +12,7 @@ import java.io.PrintWriter;
 import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.time.Year;
 import java.util.ArrayList;
 
 @WebServlet(name = "StatisticsServlet", value = "/StatisticsServlet")
@@ -58,6 +59,7 @@ public class StatisticsServlet extends DBManager {
             try (PrintWriter writer = response.getWriter()) {
                 writer.println(array);
                 writer.flush();
+                System.err.println(array);
             } catch (IOException ex) {
                 System.err.println("Errore");
             }
@@ -85,14 +87,30 @@ public class StatisticsServlet extends DBManager {
                     System.err.println("Errore");
                 }
 
-            } else {
-                array = getJsonClienti("SELECT page, visits FROM VISITE");
+            } else if(request.getParameter("action").equals("plotDonazioni")) {
+            array = getJsonDonazioni("SELECT * from donazioni WHERE year(data) = "+ Year.now().getValue() + "");
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
+
+            try (PrintWriter writer = response.getWriter()) {
+                writer.println(array);
+                writer.flush();
+                System.out.println(array);
+            } catch (IOException ex) {
+                System.err.println("Errore");
+            }
+        }
+
+            else {
+                array = getJsonVisite("SELECT page, visits FROM VISITE");
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
 
                 try (PrintWriter writer = response.getWriter()) {
                     writer.println(array);
                     writer.flush();
+                    System.out.println("Ciao");
+                    System.out.println(array);
                 } catch (IOException ex) {
                     System.err.println("Errore");
                 }
