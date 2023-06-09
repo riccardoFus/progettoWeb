@@ -127,6 +127,7 @@ public class DBManager extends HttpServlet {
         }
         return "Errore nella ricerca dell'utente";
     }
+
     public JsonArray getJsonUsers(String query) {
         ArrayList<UsersBean> users = new ArrayList<UsersBean>();
         ResultSet result = getInfoDB(query);
@@ -141,12 +142,12 @@ public class DBManager extends HttpServlet {
         }catch (SQLException e){
             throw new RuntimeException();
         }
-            JsonArray array = new JsonArray();
-            for(UsersBean user : users){
-                Gson gson = new Gson();
-                array.add(gson.toJson(user));
-            }
-            return array;
+        JsonArray array = new JsonArray();
+        for(UsersBean user : users){
+            Gson gson = new Gson();
+            array.add(gson.toJson(user));
+        }
+        return array;
 
     }
     public JsonArray getJsonClienti(String query) {
