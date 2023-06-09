@@ -176,4 +176,48 @@ public class DBManager extends HttpServlet {
         return array;
 
     }
+
+    public JsonArray getJsonVisite(String query){
+        ArrayList<VisitsBean> visits = new ArrayList<VisitsBean>();
+        ResultSet result = getInfoDB(query);
+        try{
+            while(result.next()){
+                VisitsBean visit = new VisitsBean();
+                visit.setPage(result.getString("page"));
+                visit.setVisits(result.getInt("visits"));
+                visits.add(visit);
+            }
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+        JsonArray array = new JsonArray();
+        for(VisitsBean visit : visits){
+            Gson gson = new Gson();
+            array.add(gson.toJson(visit));
+        }
+        return array;
+    }
+
+
+    public JsonArray getJsonDonazioni(String query){
+        ArrayList<DonationsBean> donations = new ArrayList<DonationsBean>();
+        ResultSet result = getInfoDB(query);
+        try{
+            while(result.next()){
+                DonationsBean donation = new DonationsBean();
+                donation.setUsername(result.getString("username"));
+                donation.setData(result.getString("data"));
+                donation.setQuota(result.getDouble("quota"));
+                donations.add(donation);
+            }
+        }catch (SQLException e){
+            throw new RuntimeException();
+        }
+        JsonArray array = new JsonArray();
+        for(DonationsBean donation : donations){
+            Gson gson = new Gson();
+            array.add(gson.toJson(donation));
+        }
+        return array;
+    }
 }

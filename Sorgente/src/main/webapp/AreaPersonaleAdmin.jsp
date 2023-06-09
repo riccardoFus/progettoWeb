@@ -14,10 +14,10 @@
     <input type="submit" class="button" value="Iscritti" onclick="showTotalSubscriptions()">
     <input type="submit" class="button" value="Aderenti" onclick="showAderenteSubscriptions()">
     <input type="submit" class="button" value="Simpatizzanti" onclick="showSimpatizzanteSubscriptions()">
-    <table id="showUsers"></table>
-    <br>
-    <input type="submit" class="button" value="Statistiche" onclick="showIstogramma()">
-    <label id="istogramma"> Qua va l'istogramma</label>
+    <table id="showUsers"> </table>
+    <input type="submit" class="button" value="Grafico Donazioni" onclick="showIstogrammaDonazioni()">
+    <input type="submit" class="button" value="Grafico Visite" onclick="showIstogrammaVisite()">
+    <div id="divGrafico" style="width:50%; height:400px;"></div>
     <%
     } else {
 
@@ -27,5 +27,6 @@
 
 </div>
 <jsp:include page="footer.jsp"/>
-</div>
+
 <script src="./javascript/statistics.js"></script>
+<script src="./javascript/highcharts.js"></script>
