@@ -1,0 +1,184 @@
+.flex-container {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: center;
+    margin: 4vw 11vw 2vw 11vw;
+    padding: 3vw 6vw 0 6vw;
+    border: dotted antiquewhite;
+    border-width: 1vw 0vw 1vw 0vw;
+    box-shadow: -2vw 0vw 1vw -1vw grey;
+
+}
+
+/* colori delle varie pagine*/
+
+#signin{
+    background-color: mediumturquoise;
+
+}
+
+#login{
+    background-color: lightgreen;
+}
+
+#areaP{
+    background-color: lightgreen;
+    padding-bottom:2vw;
+    color: #2c3342;
+
+}
+
+#areaP .textbox{
+    background-color: lightgreen;
+}
+
+#areaP .button{
+    border-color: lightgreen;
+}
+
+#data, #divContGrafico{
+    display:flex;
+    flex-flow: column;
+    background-color: floralwhite;
+
+}
+
+#data .row, #divContGrafico .row{
+    padding: 0 5vw 0 5vw;
+}
+
+#data .button{
+    border-color: floralwhite;
+}
+
+#areaP .column{
+    min-width: 30vw;
+}
+
+#areaP .textbox{
+    max-width: 12vw;
+}
+
+#areaP h3{
+    text-align: center;
+    font-family: "Major Mono Display";
+    font-weight: bold;
+}
+
+.row{
+    display: flex;
+    flex-flow: row wrap-reverse;
+    gap: 3vw;
+    justify-content: space-between;
+    padding: 2vw 0 2vw 0;
+    align-items: center;
+}
+
+.column{
+    display: flex;
+    flex-flow: column wrap;
+
+}
+
+#altroDiv, #data, #divContGrafico{
+    padding: 2vw 3vw 2vw 3vw;
+    width:50vw;
+    margin: 2vw 0 3vw 0;
+    transform: rotate(2.5deg);
+
+}
+
+
+input.textbox{
+    width: 30vw;
+
+}
+
+#buttons{
+    align-content: center;
+    justify-content: center;
+    margin-bottom: 1vw;
+    margin-top:3vw;
+}
+
+form+.button{
+    margin-bottom:2vw;
+}
+
+
+#signin .textbox{
+    background-color: mediumturquoise;
+
+}
+#signin .button{
+    border-color: mediumturquoise;
+}
+
+#login .textbox{
+    background-color: lightgreen;
+}
+
+#login .button{
+    border-color: lightgreen;
+}
+
+#altro{
+    padding: 2vw;
+    margin-top:1vw;
+    border: dotted #2c3342;
+    width:40vw;
+    border-radius: 1vw;
+    background-color: floralwhite;
+    color: #2c3342;
+    font-size: 1em;
+    text-align: center;
+
+}
+
+
+input[type="checkbox"]{
+    width: 1.5em;
+    height: 1.5em;
+}
+
+/*GRAFICA ADMIN */
+
+table{
+    min-width: 50vw;
+}
+
+td{
+    word-wrap: break-word;
+    max-width: 8vw;
+    padding: 1vw;
+    border: #2c3342 dotted;
+    border-width: 0 0.2em 0.2em 0.2em;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+th{
+    font-family: "Major Mono Display";
+    border: #2c3342 dotted;
+    border-width: 0 0.2em 0.2em 0.2em;
+    padding: 0.5vw;
+}
+
+#divContGrafico{
+    min-height:22vw;
+    align-items: center;
+    background-color: white;
+}
+
+#divGrafico{
+    padding: 2vw;
+    margin-top:1vw;
+    width:40vw;
+    color: #2c3342;
+    min-height:18vw;
+
+}
+
+#areaP .row{
+    align-content: center;
+}

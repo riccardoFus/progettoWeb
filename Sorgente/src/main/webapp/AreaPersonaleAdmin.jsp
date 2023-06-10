@@ -1,23 +1,36 @@
 <jsp:include page="header.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<div>
+<div class="flex-container" id="areaP">
     <%
         session = request.getSession();
-        if (session.getAttribute("userType")=="admin") {
+        if (session.getAttribute("typeOfUser") == "admin") {
 
     %>
-    <br>
-    <input type="submit" class="button" value="Visite" onclick="showTotalViewers()">
-    <input type="submit" class="button" value="Reset" onclick="resetValues()">
-    <label id="text1" style="display:none"> </label>
-    <label id="views"> </label>
-    <input type="submit" class="button" value="Iscritti" onclick="showTotalSubscriptions()">
-    <input type="submit" class="button" value="Aderenti" onclick="showAderenteSubscriptions()">
-    <input type="submit" class="button" value="Simpatizzanti" onclick="showSimpatizzanteSubscriptions()">
-    <table id="showUsers"> </table>
-    <input type="submit" class="button" value="Grafico Donazioni" onclick="showIstogrammaDonazioni()">
-    <input type="submit" class="button" value="Grafico Visite" onclick="showIstogrammaVisite()">
-    <div id="divGrafico" style="width:50%; height:400px;"></div>
+
+    <div class="row">
+        <input type="submit" class="button" value="Visite" onclick="showTotalViewers()">
+        <input type="submit" class="button" value="Reset" onclick="resetValues()">
+    </div>
+
+    <div id="textCont" class="row">
+        <p id="text"> </p>
+        <p id="views"> </p>
+    </div>
+
+    <div class="row">
+        <input type="submit" class="button" value="Iscritti" onclick="showTotalSubscriptions()">
+        <input type="submit" class="button" value="Aderenti" onclick="showAderenteSubscriptions()">
+        <input type="submit" class="button" value="Simpatizzanti" onclick="showSimpatizzanteSubscriptions()">
+    </div>
+        <table id="showUsers"></table>
+
+    <div class="row">
+        <input type="submit" class="button" value="Grafico Donazioni" onclick="showIstogrammaDonazioni()">
+        <input type="submit" class="button" value="Grafico Visite" onclick="showIstogrammaVisite()">
+    </div>
+    <div id="divContGrafico">
+        <div id="divGrafico"></div>
+    </div>
     <%
     } else {
 
@@ -27,5 +40,8 @@
 
 </div>
 <jsp:include page="footer.jsp"/>
+</div>
+
+
 <script src="./javascript/statistics.js"></script>
 <script src="./javascript/highcharts.js"></script>
