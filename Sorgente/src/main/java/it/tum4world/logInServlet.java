@@ -6,6 +6,7 @@ import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.*;
@@ -46,15 +47,13 @@ public class logInServlet extends DBManager {
     @Override
     synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ResultSet user = getLoginValues(req, resp);
-        System.err.println("Ciao sono la post");
-        //Funziona
-        //Ma non capisco come funzioni il collegamento tra questa servlet e la pagina di login
-        //La post viene chiamata solamente quando viene premuto invio, senza toccare il bottone
+        HttpSession session = req.getSession(true);
         try {
             if (user.next()) {
                 String userType = getUserType(user.getObject("username").toString());
                 System.out.println(userType);
-                req.getRequestDispatcher(redirectUserType(userType)).forward(req, resp);
+                session.setAttribute("username", user.getString(1));
+                req.getRequestDispatcher(redirectUserType(userType, session)).forward(req, resp);
             } else {
                 System.err.println("Non funziona");
             }
@@ -72,18 +71,22 @@ public class logInServlet extends DBManager {
         ResultSet user = getInfoDB(checkUtente);
         return user;
     }
-    private String redirectUserType(String userType){
+    private String redirectUserType(String userType, HttpSession session){
+
         switch (userType){
             case "admin":
                 System.out.println("Hello " + userType);
-                return "private_page_admin.jsp";
+                session.setAttribute("userType", "admin");
+                return "AreaPersonaleAdmin.jsp";
 
             case "aderente":
                 System.out.println("Hello " + userType);
-                return "AreaPersonaleAd.jsp";
+                session.setAttribute("userType", "aderente");
+                return "AreaPersonaleAderente.jsp";
 
             case "simpatizzante":
                 System.out.println("Hello " + userType);
+                session.setAttribute("userType", "simpatizzante");
                 return "AreaPersonaleSim.jsp";
         }
         return null;
