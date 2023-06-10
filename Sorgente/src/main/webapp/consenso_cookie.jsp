@@ -8,7 +8,7 @@
 
     let consenso = { consenso: param };
 
-    let URL = window.location.origin + '/' + window.location.pathname.split('/')[1] + '/ConsensoCookie';
+    let URL = "ConsensoCookie";
 
     let xhttp = new XMLHttpRequest();
 
@@ -24,7 +24,7 @@
     xhttp.setRequestHeader("Content-type", "application/json");
     xhttp.send(JSON.stringify(consenso));
 
-    document.getElementById("cookieWindow").hidden = true;
+    document.getElementById("cookieWindow").style.visibility = 'hidden';
   }
 </script>
 <div id="cookieWindow">

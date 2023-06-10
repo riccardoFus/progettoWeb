@@ -52,7 +52,7 @@ public class StatisticsServlet extends DBManager {
             writer.flush();
 
         } else if (request.getParameter("action").equals("totalSubscriptions")) {
-            array = getJsonUsers("SELECT * FROM UTENTI");
+            array = getJsonUsers("SELECT * FROM UTENTI WHERE username != 'admin'");
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
 
