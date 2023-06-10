@@ -37,15 +37,21 @@
 
     <link rel="stylesheet" href="css/standard_style.css" type="text/css">
     <%
-        }else if(tipo.equals("aderente")){
+    } else if (tipo.equals("aderente")) {
     %>
     <link rel="stylesheet" href="css/aderente_style.css" type="text/css">
 
     <%
-        }else if(tipo.equals("simpatizzante")){
+    } else if (tipo.equals("simpatizzante")) {
 
-        }else{
+    %>
+    <link rel="stylesheet" href="css/simp_style.css" type="text/css">
 
+    <%
+    } else {
+    %>
+    <link rel="stylesheet" href="css/admin_style.css" type="text/css">
+    <%
         }
     %>
 
@@ -53,13 +59,13 @@
 
 <body>
 <div id="wrap">
-<header id="header">
+    <header id="header">
         <div id="nav">
             <h1>Tum4World</h1>
-            <a class ="linkHeader" href="<%= response.encodeURL("Home.jsp")%>">Homepage</a>
-            <a class ="linkHeader" href="<%=response.encodeURL("ChiSiamo.jsp")%>">Chi siamo</a>
-            <a class ="linkHeader" href="<%=response.encodeURL("Attivita.jsp")%>">Attività</a>
-            <a class ="linkHeader" href="<%=response.encodeURL("Contatti.jsp")%>">Contatti</a>
+            <a class="linkHeader" href="<%= response.encodeURL("Home.jsp")%>">Homepage</a>
+            <a class="linkHeader" href="<%=response.encodeURL("ChiSiamo.jsp")%>">Chi siamo</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Attivita.jsp")%>">Attività</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Contatti.jsp")%>">Contatti</a>
 
             <!-- controlla che tipo di utente è e decide di aggiungere o meno sign in, log out, log in,
             pagina privata nell'header-->
@@ -68,30 +74,30 @@
                     //l'utente non è loggato
             %>
 
-            <a class ="linkHeader" href="<%=response.encodeURL("SignIn.jsp")%>">Sign-In</a>
-            <a class ="linkHeader" href="<%=response.encodeURL("Login.jsp")%>">Login</a>
+            <a class="linkHeader" href="<%=response.encodeURL("SignIn.jsp")%>">Sign-In</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Login.jsp")%>">Login</a>
 
             <%
             } else if (tipo.equals("aderente")) {
             %>
-            <a class ="linkHeader" href="<%=response.encodeURL("AreaPersonaleAderente.jsp")%>">Area personale</a>
-            <a class ="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
+            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleAderente.jsp")%>">Area personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
 
             <%
             } else if (tipo.equals("simpatizzante")) {
             %>
-            <a class ="linkHeader" href="<%=response.encodeURL("AreaPersonaleSim.jsp")%>">Area personale</a>
-            <a class ="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
+            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleSim.jsp")%>">Area personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
 
             <%
             } else {
             %>
-            <a class ="linkHeader" href="<%=response.encodeURL("AreaPersonaleAdmin.jsp")%>">Area Personale</a>
-            <a class ="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
+            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleAdmin.jsp")%>">Area Personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
             <%}%>
 
         </div>
         <div id="phraseHeader"></div>
-</header>
+    </header>
 
-<script src="./javascript/headerScript.js"></script>
+    <script src="./javascript/headerScript.js"></script>

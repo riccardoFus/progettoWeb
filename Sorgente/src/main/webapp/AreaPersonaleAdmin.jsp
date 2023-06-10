@@ -12,9 +12,9 @@
         <input type="submit" class="button" value="Reset" onclick="resetValues()">
     </div>
 
-    <div class="row">
-        <label id="text"> </label>
-        <label id="views"> </label>
+    <div id="textCont" class="row">
+        <p id="text"> </p>
+        <p id="views"> </p>
     </div>
 
     <div class="row">

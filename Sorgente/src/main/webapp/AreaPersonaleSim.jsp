@@ -27,7 +27,7 @@
             <input type="checkbox" value="mindcheckup" onclick="subUnsub(this)" class="iscriz">
         </div>
     </div>
-    <button onclick="deleteAccount()" class="button">DISISCRIVITI</button>
+    <button onclick="deleteAccount('<%= response.encodeURL("Home.jsp")%>')" class="button">DISISCRIVITI</button>
     <%
     } else {
 

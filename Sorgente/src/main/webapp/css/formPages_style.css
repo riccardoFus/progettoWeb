@@ -11,10 +11,6 @@
 }
 
 /* colori delle varie pagine*/
-#contatti{
-    background-color: lightsalmon;
-
-}
 
 #signin{
     background-color: mediumturquoise;
@@ -43,9 +39,6 @@
 #data, #divContGrafico{
     display:flex;
     flex-flow: column;
-    border: dotted mediumpurple;
-    border-width: 0vw 0vw 0vw 1vw;
-    box-shadow: -1.2vw 1.2vw mediumpurple, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
     background-color: floralwhite;
 
 }
@@ -94,19 +87,7 @@
     transform: rotate(2.5deg);
 
 }
-#altroDiv{
-    background-color: floralwhite;
-    border: dotted mediumpurple;
-    border-width: 0vw 0vw 0vw 1vw;
-    box-shadow: -1.2vw 1.2vw mediumpurple, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
 
-}
-
-.warn{
-    height: 1vw;
-    width: 15vw;
-    color: mediumpurple;
-}
 
 input.textbox{
     width: 30vw;
@@ -124,13 +105,6 @@ form+.button{
     margin-bottom:2vw;
 }
 
-#contatti .textbox{
-    background-color: lightsalmon;
-}
-
-#contatti .button{
-    border-color: lightsalmon;
-}
 
 #signin .textbox{
     background-color: mediumturquoise;
@@ -161,11 +135,6 @@ form+.button{
 
 }
 
-#altro:focus{
-    outline: none;
-    border-color: mediumpurple;
-    color: mediumpurple;
-}
 
 input[type="checkbox"]{
     width: 1.5em;
@@ -208,10 +177,6 @@ th{
     color: #2c3342;
     min-height:18vw;
 
-}
-
-#text{
-    min-height: 3vw;
 }
 
 #areaP .row{

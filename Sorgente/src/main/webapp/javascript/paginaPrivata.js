@@ -40,7 +40,7 @@ async function subUnsub(elem) {
 
 }
 
-function deleteAccount() {
+function deleteAccount(link) {
     let responseVal;
     let url = "paginaPrivata";
 
@@ -58,6 +58,7 @@ function deleteAccount() {
         .then(respInfo => {
                 // riceve risposta
                 alert(respInfo.msg)
+                window.location= link;
 
             }
         )

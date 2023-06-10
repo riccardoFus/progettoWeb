@@ -32,7 +32,7 @@
             <button onclick="donate()" class="button">Dona</button>
         </div>
     </div>
-    <button onclick="deleteAccount()" class="button">DISISCRIVITI</button>
+    <button onclick="deleteAccount(<%= response.encodeURL("Home.jsp")%>)" class="button">DISISCRIVITI</button>
     <%
     } else {
 

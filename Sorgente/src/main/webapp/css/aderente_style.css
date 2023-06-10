@@ -32,5 +32,67 @@ a{
 }
 
 .button:hover {
-    background-color: lightseagreen;
+    background-color: paleturquoise;
+    color: #2c3342;
+}
+
+
+#altro:focus{
+    outline: none;
+    border-color: lightseagreen;
+    color: lightseagreen;
+}
+
+
+.warn{
+    height: 1vw;
+    width: 15vw;
+    color: paleturquoise;
+}
+
+
+#altroDiv{
+    background-color: floralwhite;
+    border: dotted paleturquoise;
+    border-width: 0vw 0vw 0vw 1vw;
+    box-shadow: -1.2vw 1.2vw paleturquoise, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
+
+}
+
+
+#data, #divContGrafico{
+    border: dotted paleturquoise;
+    box-shadow: -1.2vw 1.2vw paleturquoise, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
+
+    border-width: 0vw 0vw 0vw 1vw;
+
+}
+
+#areaP{
+    background-color: turquoise;
+}
+#areaP .textbox{
+    background-color: turquoise;
+}
+
+#data ~ .button{
+    border-color: turquoise;
+}
+
+#areaP .column .button{
+    border-color: turquoise;
+
+}
+
+#contatti{
+    background-color: lightsalmon;
+
+}
+
+#contatti .textbox{
+    background-color: lightsalmon;
+}
+
+#contatti .button{
+    border-color: lightsalmon;
 }
