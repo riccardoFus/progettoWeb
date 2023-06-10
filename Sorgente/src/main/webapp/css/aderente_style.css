@@ -1,0 +1,36 @@
+#header{
+    color: #2c3342;
+    background-color: antiquewhite;
+    box-shadow: 0vw 0.1vw 1vw rgba(0, 0, 0, 0.6), 0vw 0.8vw turquoise, 0vw 0.9vw 1vw rgba(0, 0, 0, 0.6),
+    0vw 1.5vw paleturquoise, 0vw 1.6vw 1.6vw rgba(0, 0, 0, 0.6)
+}
+
+#selected {
+    border-bottom: 0.3em lightseagreen dotted;
+    color: lightseagreen;
+}
+footer{
+    background-color: lightseagreen;
+    color: floralwhite;
+
+}
+a{
+    color: #2c3342;
+}
+
+.linkHeader:hover {
+    border-bottom: 0.3em #2c3342 dotted;
+}
+
+#phraseHeader{
+    background-color: lightseagreen;
+    color:floralwhite;
+}
+
+#header h1{
+    color: lightseagreen;
+}
+
+.button:hover {
+    background-color: lightseagreen;
+}

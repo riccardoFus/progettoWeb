@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class DBManager extends HttpServlet {
 
     protected Connection con = null;
-    protected String URLDB = "jdbc:derby://localhost:1527/Tum4WorldDB";
+    protected String URLDB = "jdbc:derby://localhost:1527/Tum4WorldDB; create=true";
     protected String user = "APP";
     protected String password = "admin";
 

@@ -40,7 +40,7 @@
     border-color: lightgreen;
 }
 
-#data{
+#data, #divContGrafico{
     display:flex;
     flex-flow: column;
     border: dotted mediumpurple;
@@ -50,7 +50,7 @@
 
 }
 
-#data .row{
+#data .row, #divContGrafico .row{
     padding: 0 5vw 0 5vw;
 }
 
@@ -87,7 +87,7 @@
 
 }
 
-#altroDiv, #data{
+#altroDiv, #data, #divContGrafico{
     padding: 2vw 3vw 2vw 3vw;
     width:50vw;
     margin: 2vw 0 3vw 0;
@@ -170,4 +170,50 @@ form+.button{
 input[type="checkbox"]{
     width: 1.5em;
     height: 1.5em;
+}
+
+/*GRAFICA ADMIN */
+
+table{
+    min-width: 50vw;
+}
+
+td{
+    word-wrap: break-word;
+    max-width: 8vw;
+    padding: 1vw;
+    border: #2c3342 dotted;
+    border-width: 0 0.2em 0.2em 0.2em;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+th{
+    font-family: "Major Mono Display";
+    border: #2c3342 dotted;
+    border-width: 0 0.2em 0.2em 0.2em;
+    padding: 0.5vw;
+}
+
+#divContGrafico{
+    min-height:22vw;
+    align-items: center;
+    background-color: white;
+}
+
+#divGrafico{
+    padding: 2vw;
+    margin-top:1vw;
+    width:40vw;
+    color: #2c3342;
+    min-height:18vw;
+
+}
+
+#text{
+    min-height: 3vw;
+}
+
+#areaP .row{
+    align-content: center;
 }

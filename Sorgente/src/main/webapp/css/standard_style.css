@@ -1,0 +1,27 @@
+#header{
+
+    background-color: #2c3342;
+    box-shadow: 0vw 0.1vw 1vw rgba(0, 0, 0, 0.6), 0vw 0.8vw mediumpurple, 0vw 0.9vw 1vw rgba(0, 0, 0, 0.6), 0vw 1.5vw lightcoral,
+    0vw 1.6vw 1.6vw rgba(0, 0, 0, 0.6);
+}
+
+#selected {
+    border-bottom: 0.3em salmon dotted;
+    color: salmon;
+}
+
+footer{
+    background-color: #2c3342;
+}
+
+.linkHeader:hover {
+    border-bottom: 0.3em floralwhite dotted;
+}
+
+#phraseHeader{
+    background-color: lightseagreen;
+}
+
+.button:hover {
+    background-color: mediumpurple;
+}

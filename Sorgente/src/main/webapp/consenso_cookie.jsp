@@ -28,10 +28,12 @@
   }
 </script>
 <div id="cookieWindow">
-  <header>Cookie policy</header>
+  <header>COOKIE POLICY</header>
   <p>Utilizziamo cookie e altre tecnologie simili per fornire i nostri servizi. Se accetti, utilizzeremo i cookie anche per ottimizzare la tua esperienza online sul nostro sito.</p>
-  <button onclick="inviaConsenso(true)" class="button" value="Accetta">Accetta</button>
-  <button onclick="inviaConsenso(false)" class="button" value="Rifiuta">Rifiuta</button>
+  <div class="row">
+    <button onclick="inviaConsenso(true)" class="button" value="Accetta">Accetta</button>
+    <button onclick="inviaConsenso(false)" class="button" value="Rifiuta">Rifiuta</button>
+  </div>
 </div>
 <%
   }
