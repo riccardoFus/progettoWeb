@@ -2,13 +2,8 @@ package it.tum4world;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
 
 import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletResponse;
-import javax.ws.rs.client.Client;
-import java.io.IOException;
-import java.io.PrintWriter;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -18,7 +13,7 @@ import java.util.ArrayList;
 public class DBManager extends HttpServlet {
 
     protected Connection con = null;
-    protected String URLDB = "jdbc:derby://localhost:1527/Tum4WorldDB";
+    protected String URLDB = "jdbc:derby://localhost:1527/Tum4WorldDB; create=true";
     protected String user = "APP";
     protected String password = "admin";
 
@@ -28,7 +23,7 @@ public class DBManager extends HttpServlet {
         //caricamento del driver jdbc
         try {
             Class.forName("org.apache.derby.jdbc.ClientDriver");
-            System.out.println("\nLoading ha avuto successo\n");
+            System.out.println("\nLoading del driver ha avuto successo\n");
             con = DriverManager.getConnection(URLDB, user, password);
         } catch (ClassNotFoundException | NullPointerException | SQLException ex) {
             // errore nell caricamento del driver
@@ -132,6 +127,7 @@ public class DBManager extends HttpServlet {
         }
         return "Errore nella ricerca dell'utente";
     }
+
     public JsonArray getJsonUsers(String query) {
         ArrayList<UsersBean> users = new ArrayList<UsersBean>();
         ResultSet result = getInfoDB(query);
@@ -146,12 +142,12 @@ public class DBManager extends HttpServlet {
         }catch (SQLException e){
             throw new RuntimeException();
         }
-            JsonArray array = new JsonArray();
-            for(UsersBean user : users){
-                Gson gson = new Gson();
-                array.add(gson.toJson(user));
-            }
-            return array;
+        JsonArray array = new JsonArray();
+        for(UsersBean user : users){
+            Gson gson = new Gson();
+            array.add(gson.toJson(user));
+        }
+        return array;
 
     }
     public JsonArray getJsonClienti(String query) {

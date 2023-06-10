@@ -14,60 +14,90 @@
     <%
         String[] URI = (request.getRequestURL().toString()).split("/");
         String pagina = URI[URI.length - 1];
-        if (pagina.contains("ChiSiamo")) {%>
-    <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
-    <link rel="stylesheet" href="css/basicPage_style.css" type="text/css">
-    <% } else if (pagina.contains("Attivita") ) {%>
+
+        if (pagina.contains("Attivita")) {%>
     <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
-    <% } else if ( pagina.contains("WaterWeek")
-            || pagina.contains("FeedYourBrain") || pagina.contains("MindCheckUp") ) {%>
+    <% } else if (pagina.contains("WaterWeek")
+            || pagina.contains("FeedYourBrain") || pagina.contains("MindCheckUp")) {%>
     <link rel="stylesheet" href="css/attivita_style.css" type="text/css">
     <link rel="stylesheet" href="css/attivitaSpec_style.css" type="text/css">
-    <% } else if (pagina.contains("SignIn")
-            || pagina.contains("Contatti") || pagina.contains("Login") ) {%>
-    <link rel="stylesheet" href="css/otherPages_style.css" type="text/css">
+    <% } else if (pagina.contains("SignIn") || pagina.contains("AreaPersonale")
+            || pagina.contains("Contatti") || pagina.contains("Login")) {%>
+    <link rel="stylesheet" href="css/formPages_style.css" type="text/css">
     <% } else {%>
-    <link rel="stylesheet" href="css/home_style.css" type="text/css">
-    <% }%>
+    <link rel="stylesheet" href="css/basicPage_style.css" type="text/css">
+    <% if (pagina.contains("ChiSiamo")) {%>
+    <link rel="stylesheet" href="css/styleSlider.css" type="text/css">
+    <% }
+    }
+        //per la grafica
+        session = request.getSession(false);
+        String tipo = (String) session.getAttribute("typeOfUser");
+        if (tipo == null) {%>
+
+    <link rel="stylesheet" href="css/standard_style.css" type="text/css">
+    <%
+    } else if (tipo.equals("aderente")) {
+    %>
+    <link rel="stylesheet" href="css/aderente_style.css" type="text/css">
+
+    <%
+    } else if (tipo.equals("simpatizzante")) {
+
+    %>
+    <link rel="stylesheet" href="css/simp_style.css" type="text/css">
+
+    <%
+    } else {
+    %>
+    <link rel="stylesheet" href="css/admin_style.css" type="text/css">
+    <%
+        }
+    %>
 
 </head>
 
 <body>
-<header id="header">
-    <div id="nav">
-        <h1>Tum4World</h1>
-        <a href="<%= response.encodeURL("Home.jsp")%>">Homepage</a>
-        <a href="<%=response.encodeURL("ChiSiamo.jsp")%>">Chi siamo</a>
-        <a href="<%=response.encodeURL("Attivita.jsp")%>">Attività</a>
-        <a href="<%=response.encodeURL("Contatti.jsp")%>">Contatti</a>
+<div id="wrap">
+    <header id="header">
+        <div id="nav">
+            <h1>Tum4World</h1>
+            <a class="linkHeader" href="<%= response.encodeURL("Home.jsp")%>">Homepage</a>
+            <a class="linkHeader" href="<%=response.encodeURL("ChiSiamo.jsp")%>">Chi siamo</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Attivita.jsp")%>">Attività</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Contatti.jsp")%>">Contatti</a>
 
-        <!-- controlla che tipo di utente è e decide di aggiungere o meno sign in, log out, log in,
-        pagina privata nell'header-->
-        <%
-            session = request.getSession(true);
-            String tipo = (String) session.getAttribute("userType");
-            if (tipo==null) {
-                //l'utente non è loggato
-        %>
+            <!-- controlla che tipo di utente è e decide di aggiungere o meno sign in, log out, log in,
+            pagina privata nell'header-->
+            <%
+                if (tipo == null) {
+                    //l'utente non è loggato
+            %>
 
-        <a href="<%=response.encodeURL("SignIn.jsp")%>">Sign-In</a>
-        <a href="<%=response.encodeURL("Login.jsp")%>">Login</a>
+            <a class="linkHeader" href="<%=response.encodeURL("SignIn.jsp")%>">Sign-In</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Login.jsp")%>">Login</a>
 
-        <%
-        } else if (tipo.equals("aderente")) {
-        %>
-        <a href="<%=response.encodeURL("AreaPersonaleAderente.jsp")%>">Area personale</a>
-        <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
+            <%
+            } else if (tipo.equals("aderente")) {
+            %>
+            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleAderente.jsp")%>">Area personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
 
-        <%
-        } else{
-        %>
-        <a href="<%=response.encodeURL("AreaPersonaleAdmin.jsp")%>">Area personale admin</a>
-        <a href="<%=response.encodeURL("Home.jsp")%>">Logout</a>
-        <%}%>
+            <%
+            } else if (tipo.equals("simpatizzante")) {
+            %>
+            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleSim.jsp")%>">Area personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
 
-    </div>
-    <div id="phraseHeader"></div>
-</header>
+            <%
+            } else {
+            %>
+            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleAdmin.jsp")%>">Area Personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
+            <%}%>
 
-<script src="./javascript/headerScript.js"></script>
+        </div>
+        <div id="phraseHeader"></div>
+    </header>
+
+    <script src="./javascript/headerScript.js"></script>

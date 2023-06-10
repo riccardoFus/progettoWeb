@@ -60,7 +60,8 @@
     <input type="button" onclick="return reset()" class="button" value="Reset">
 
 </div>
-
-<script src="./javascript/validationContatti.js"></script>
 <jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
+</div>
+
+<script src="./javascript/validationContatti.js"></script>

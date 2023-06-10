@@ -2,6 +2,7 @@ package it.tum4world;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
@@ -34,6 +35,15 @@ public class FilterAuthentication implements Filter {
         } else {
             //utente non è loggato
             servletRequest.setAttribute("tipo", "standard");
+            //se è su una pagina privata redirect a login
+
+            if(((HttpServletRequest) servletRequest).getRequestURI().contains("AreaPersonale")){
+                HttpServletResponse hresp = (HttpServletResponse) servletResponse;
+                String url = hresp.encodeURL("Login.jsp");
+                hresp.sendRedirect(url);
+                return;
+
+            }
 
         }
 

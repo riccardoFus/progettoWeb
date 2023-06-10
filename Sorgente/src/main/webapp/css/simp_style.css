@@ -1,0 +1,90 @@
+#header{
+    color: #2c3342;
+    background-color: antiquewhite;
+    box-shadow: 0vw 0.1vw 1vw rgba(0, 0, 0, 0.6), 0vw 0.8vw #c299ff, 0vw 0.9vw 1vw rgba(0, 0, 0, 0.6),
+    0vw 1.5vw #e0ccff, 0vw 1.6vw 1.6vw rgba(0, 0, 0, 0.6)
+}
+
+#selected {
+    border-bottom: 0.3em mediumpurple dotted;
+    color: mediumpurple;
+}
+footer{
+    background-color: mediumpurple;
+    color: floralwhite;
+
+}
+a{
+    color: #2c3342;
+}
+
+.linkHeader:hover {
+    border-bottom: 0.3em #2c3342 dotted;
+}
+
+#phraseHeader{
+    background-color: mediumpurple;
+    color:floralwhite;
+}
+
+#header h1{
+    color: mediumpurple;
+}
+
+.button:hover {
+    background-color: #e0ccff;
+    color: #2c3342;
+}
+
+
+#altro:focus{
+    outline: none;
+    border-color: #e0ccff;
+    color: #e0ccff;
+}
+
+
+.warn{
+    height: 1vw;
+    width: 15vw;
+    color: mediumpurple;
+}
+
+
+#altroDiv{
+    background-color: floralwhite;
+    border: dotted #e0ccff;
+    border-width: 0vw 0vw 0vw 1vw;
+    box-shadow: -1.2vw 1.2vw #e0ccff, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
+
+}
+
+
+#data, #divContGrafico{
+    border: dotted #e0ccff;
+    box-shadow: -1.2vw 1.2vw #e0ccff, -1.4vw 1.4vw 2vw rgba(0,0,0,0.6);
+
+    border-width: 0vw 0vw 0vw 1vw;
+
+}
+
+#areaP{
+    background-color: #c299ff;
+}
+
+#data ~ .button{
+    border-color: #c299ff;
+}
+
+#contatti{
+    background-color: mediumaquamarine;
+
+}
+
+#contatti .textbox{
+    background-color: mediumaquamarine;
+}
+
+#contatti .button{
+    border-color: mediumaquamarine;
+}
