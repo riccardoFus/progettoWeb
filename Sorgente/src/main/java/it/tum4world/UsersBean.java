@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class UsersBean implements Serializable {
+    // Bean usato per recuperare i dati riguardanti gli utenti
     String username;
     String password;
     String email;

@@ -1,5 +1,6 @@
 <jsp:include page="header.jsp"/>
 
+<!-- Pagina singola di Attività: Feed Your Brain -->
 <div class="column" id="col2">
     <h2>FEED YOUR BRAIN</h2>
     <h3>divertiti in compagnia</h3>

@@ -1,5 +1,6 @@
 <jsp:include page="header.jsp"/>
 
+<!-- Pagina singola di Attività: Water Week -->
 <div class="column" id="col1">
     <h2>WATER WEEK</h2>
     <h3>idroterapia</h3>

@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class ClientsBean implements Serializable {
+    // Bean usato per recupare dati dei clienti
+
     String username;
     String name;
     String surname;

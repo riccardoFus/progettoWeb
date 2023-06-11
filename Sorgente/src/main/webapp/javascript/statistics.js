@@ -1,13 +1,16 @@
 function showTotalViewers() {
+    // funzione per mostrare il numero totale di visite
     let url = "StatisticsServlet?action=totalViews";
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let response = this.response;
+            // rimuovo la richiesta precedentemente fatta
             pulisciMenu();
-            //è presente un \n da eliminare
+            // è presente un \n da eliminare
             response = response.split('\n')[0]
+            // mostro il numero totali di visite
             showWarning(response, "views");
             showWarning("Visite totali del sito:", "text");
             document.getElementById("views").style.color = "salmom";
@@ -18,6 +21,7 @@ function showTotalViewers() {
 }
 
 function showIstogrammaDonazioni() {
+    // funzione per mostrare un grafico delle donazioni (abbiamo usato lo stesso grafico delle visite)
     let url = "StatisticsServlet?action=plotDonazioni";
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
@@ -25,7 +29,10 @@ function showIstogrammaDonazioni() {
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let jsonArray = this.response;
+            // rimuovo la richiesta precedentemente fatta
             pulisciMenu();
+            // creo un array di 12 elementi (un elemento per ogni mese) e in base al mese metto le varie quote ricevute
+            // inizialmente pongo tutti gli elementi a 0 per inserire anche i mesi senza donazioni
             let mesi = [];
             for (let i = 0; i < 12; i++) {
                 mesi[i] = 0;
@@ -37,6 +44,7 @@ function showIstogrammaDonazioni() {
 
             document.getElementById("divGrafico").style.visibility = "visible";
 
+            // creo un hist mantenente corrispondenza mese - quota
             const chart = Highcharts.chart('divGrafico', {
                 chart: {
                     type: 'bar'
@@ -65,7 +73,10 @@ function showIstogrammaVisite() {
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let jsonArray = this.response;
+            // rimuovo la richiesta precedentemente fatta
             pulisciMenu();
+            // creo due array paralleli per le pagine e le rispettive visite
+            // visita[i] rappresenta il numero di visite di pagina[i]
             let pagine = [];
             let visite = [];
             for (let i = 0; i < jsonArray.length; i++) {
@@ -75,6 +86,7 @@ function showIstogrammaVisite() {
             }
 
             document.getElementById("divGrafico").style.visibility = "visible";
+            // creo un hist mantenente corrispondenza pagina - visite
             const chart = Highcharts.chart('divGrafico', {
                 chart: {
                     type: 'bar'
@@ -96,20 +108,23 @@ function showIstogrammaVisite() {
 }
 
 function showWarning(msg, id) {
-    //imposta il messaggio dello warning e mostralo
+    // imposta il messaggio dello warning e mostralo
     let el = document.getElementById(id);
     el.innerText = msg;
     el.style.visibility = "visible";
 }
 
 function resetValues() {
+    // funzione per azzerare visite sito
     let url = "StatisticsServlet?action=reset";
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let response = this.response;
+            // rimuovo la richiesta precedentemente fatta, inoltre se impostato reset cancello anche il grafico
             pulisciMenu("reset");
+            // mostro il warning di reset
             showWarning(response, "views");
             document.getElementById("views").style.color = "salmom";
             document.getElementById("text").innerHTML = "";
@@ -119,6 +134,8 @@ function resetValues() {
 }
 
 function setHeader(table, header) {
+    // funzione per settare gli header della tabella (iscritti, simp, aderente)
+    // riceve l'id della tabella e la lista degli header
     let head = table.createTHead();
     let row = head.insertRow();
     for (let campo of header) {
@@ -130,6 +147,7 @@ function setHeader(table, header) {
 }
 
 function showTotalSubscriptions() {
+    // funzione per restituire la lista degli iscritti al sito
     let url = "StatisticsServlet?action=totalSubscriptions";
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
@@ -139,7 +157,8 @@ function showTotalSubscriptions() {
             let jsonArray = this.response;
             let table = document.getElementById("showUsers");
 
-            pulisciMenu("no");
+            // rimuovo la richiesta precedentemente fatta
+            pulisciMenu();
 
             if (jsonArray === null) {
                 document.getElementById("text").innerHTML = "Errore";
@@ -163,6 +182,7 @@ function showTotalSubscriptions() {
 
 
 function showAderenteSubscriptions() {
+    // funzione per restituire la lista degli aderenti
     let url = "StatisticsServlet?action=aderenteSubscriptions";
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
@@ -171,7 +191,8 @@ function showAderenteSubscriptions() {
         if (xhttp.readyState === 4 && xhttp.status === 200) {
             let jsonArray = this.response;
             let table = document.getElementById("showUsers");
-            pulisciMenu("no");
+            // rimuovo la richiesta precedentemente fatta
+            pulisciMenu();
 
             if (jsonArray === null) {
                 document.getElementById("text").innerHTML = "Errore";
@@ -194,6 +215,7 @@ function showAderenteSubscriptions() {
 }
 
 function showSimpatizzanteSubscriptions() {
+    // funzione per restituire la lista dei simpatizzanti
     let url = "StatisticsServlet?action=simpatizzanteSubscriptions";
     let xhttp = new XMLHttpRequest();
     xhttp.open("GET", url, true);
@@ -203,7 +225,8 @@ function showSimpatizzanteSubscriptions() {
             let jsonArray = this.response;
             let table = document.getElementById("showUsers");
 
-            pulisciMenu("no");
+            // rimuovo la richiesta precedentemente fatta
+            pulisciMenu();
 
             if (jsonArray === null) {
                 document.getElementById("text").innerHTML = "Errore";
@@ -226,6 +249,7 @@ function showSimpatizzanteSubscriptions() {
 }
 
 function pulisciMenu(string) {
+    // funzione per pulire le richieste precedentemente fatte e pulire il menu dell'admin
     let table = document.getElementById("showUsers");
 
     while (table.childNodes.length) {

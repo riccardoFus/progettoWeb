@@ -1,5 +1,6 @@
 <jsp:include page="header.jsp"/>
 
+<!-- Pagina singola di Attività: Mind Checkup -->
 <div class="column" id="col3">
     <h2>MIND CHECKUP</h2>
     <h3>trova l'aiuto di cui hai bisogno</h3>

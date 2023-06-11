@@ -1,5 +1,6 @@
 <jsp:include page="header.jsp"/>
 
+<!-- Pagina Attivita contenente la lista delle tre attività che Tum4World garantisce, inoltre mantiene un link alle pagine singole delle attività -->
 <div class="column" id="col1">
     <h2>WATER WEEK</h2>
     <h3>idroterapia</h3>

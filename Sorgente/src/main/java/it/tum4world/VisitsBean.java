@@ -3,6 +3,7 @@ package it.tum4world;
 import java.io.Serializable;
 
 public class VisitsBean implements Serializable {
+    // Bean usato per recuperare i dati riguardanti le visite sulle pagine
     String page;
     Integer visits;
 

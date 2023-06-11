@@ -11,6 +11,7 @@ import java.sql.*;
 import java.util.ArrayList;
 
 public class DBManager extends HttpServlet {
+    // classe padre che contiene tutti i metodi per comunicare con il DB
 
     protected Connection con = null;
     protected String URLDB = "jdbc:derby://localhost:1527/Tum4WorldDB; create=true";
@@ -35,6 +36,7 @@ public class DBManager extends HttpServlet {
     @Override
     public void destroy() {
         try {
+            // chiusura della connessione
             con.close();
         } catch (SQLException e) {
             System.out.println(e);
@@ -43,6 +45,7 @@ public class DBManager extends HttpServlet {
     }
 
     public ResultSet getInfoDB(String query) {
+        // metodo per implementare query nel quale otteniamo info dal db
         ResultSet resultSet;
 
         try {
@@ -57,8 +60,8 @@ public class DBManager extends HttpServlet {
     }
 
     protected boolean updateDB(String update) {
+        // metodo per implementare query nel quale modifichiamo il db
         try {
-            System.out.println(update);
             Statement stmnt = con.createStatement();
             stmnt.executeUpdate(update);
             System.out.println("\nQuery SQL ha avuto successo\n");
@@ -69,6 +72,7 @@ public class DBManager extends HttpServlet {
         }
     }
 
+    // bytesToHex e createDigest sono usate per implementare l'hashing della password
     public static String bytesToHex(byte[] hash) {
         /* conversione bytes in caratteri*/
 
@@ -107,6 +111,7 @@ public class DBManager extends HttpServlet {
     }
 
     public String getUserType(String username) {
+        // con questa query ricerchiamo che tipo di utente ha effettuale l'accesso, utile per implementare header dinamico
         String searchAdmin = "SELECT * FROM AMMINISTRATORI WHERE USERNAME='" + username + "'";
         String searchClienti = "SELECT * FROM CLIENTI WHERE USERNAME='" + username + "'";
         ResultSet clienti = getInfoDB(searchClienti);
@@ -129,6 +134,7 @@ public class DBManager extends HttpServlet {
     }
 
     public JsonArray getJsonUsers(String query) {
+        // metodo per ottenere la lista in json degli utenti per la tabella degli utenti nella pagina privata dell'admin
         ArrayList<UsersBean> users = new ArrayList<UsersBean>();
         ResultSet result = getInfoDB(query);
         try{
@@ -151,6 +157,7 @@ public class DBManager extends HttpServlet {
 
     }
     public JsonArray getJsonClienti(String query) {
+        // metodo per ottenere la lista in json dei clienti per la tabella dei clienti nella pagina privata dell'admin
         ArrayList<ClientsBean> clients = new ArrayList<ClientsBean>();
         ResultSet result = getInfoDB(query);
         try{
@@ -179,6 +186,7 @@ public class DBManager extends HttpServlet {
     }
 
     public JsonArray getJsonVisite(String query){
+        // metodo per ottenere la lista in json delle visite per l'istogramma delle visite nella pagina privata dell'admin
         ArrayList<VisitsBean> visits = new ArrayList<VisitsBean>();
         ResultSet result = getInfoDB(query);
         try{
@@ -201,6 +209,7 @@ public class DBManager extends HttpServlet {
 
 
     public JsonArray getJsonDonazioni(String query){
+        // metodo per ottenere la lista in json delle donazioni utile per l'istogramma delle donazioni nella pagina privata dell'admin
         ArrayList<DonationsBean> donations = new ArrayList<DonationsBean>();
         ResultSet result = getInfoDB(query);
         try{

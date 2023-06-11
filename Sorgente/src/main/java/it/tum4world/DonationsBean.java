@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 public class DonationsBean implements Serializable {
+    // Bean usato per recuperare i dati riguardanti le donazioni
     String username;
     String data;
     double quota;
