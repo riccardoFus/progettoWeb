@@ -179,3 +179,36 @@ footer p {
     border-color: white;
 
 }
+
+
+#logo{
+    border:none;
+    box-shadow: none;
+    width:20vw;
+    height:auto;
+    margin:0;
+    padding:0;
+}
+
+#home h2{
+    margin-bottom: 1vw;
+}
+
+#home .row{
+    display: flex;
+    flex-flow: row wrap;
+    padding: 1vw 6vw 2vw 6vw;
+    align-items: center;
+}
+
+#home{
+    min-width: 55vw;
+}
+#home p{
+    text-align: right;
+    width: 30vw;
+    border: dotted #2c3342;
+    border-width: 0.3em 0.3em 0.3em 0;
+    border-radius: 0.6em;
+    padding: 2em 4em 2em 0;
+}

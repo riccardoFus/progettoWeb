@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="css/style.css" type="text/css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Major+Mono+Display">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto+Mono">
+    <link rel="icon" href="images/favicon.png">
 
     <!-- gestione dei diversi file css da includere-->
     <%
