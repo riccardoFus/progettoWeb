@@ -1,4 +1,5 @@
 function isEmpty(x){
+    // check stringa vuota
     if(x==="")
         return true;
     else
@@ -6,6 +7,7 @@ function isEmpty(x){
 }
 
 function checkLogin(form){
+    // check dei vari campi inseriti
     let esito = true
     let msg = "Campo obbligatorio"
 
@@ -39,29 +41,28 @@ function showWarning(msg, id){
 }
 
 function checkLoginValid(form){
-    //Riceve l'errore
-        let esito = true;
-        let response = "";
-        let url = "logIn?username="+form.elements.namedItem("username").value+"&password="+form.elements.namedItem("password").value;
-        let xhttp = new XMLHttpRequest();
-        xhttp.open("GET", url, false);
-        xhttp.onreadystatechange = function(){
-            if(this.readyState===4 && this.status===200){
-                response = this.response;
-                if(response.split("\"")[1] === ""){
-                }else{
-                    showWarning(response.split("\"")[1], "warnNome");
-                    document.getElementById("username").style.color="salmom";
-                    document.getElementById("warnNome").style.color="salmon";
-                }
+    // funzione per controllare in maniera responsive se il login è corretto o meno
+    let esito = true;
+    let response = "";
+    let url = "logIn?username="+form.elements.namedItem("username").value+"&password="+form.elements.namedItem("password").value;
+    let xhttp = new XMLHttpRequest();
+    xhttp.open("GET", url, false);
+    xhttp.onreadystatechange = function(){
+        if(this.readyState===4 && this.status===200){
+            response = this.response;
+            if(response.split("\"")[1] === ""){
+            }else{
+                showWarning(response.split("\"")[1], "warnNome");
+                document.getElementById("username").style.color="salmom";
+                document.getElementById("warnNome").style.color="salmon";
             }
-        };
-        xhttp.send();
-        if(response.split("\"")[1] === ""){
-            esito = true;
-        }else{
-            esito = false;
         }
-        return esito;
-
+    };
+    xhttp.send();
+    if(response.split("\"")[1] === ""){
+        esito = true;
+    }else{
+        esito = false;
+    }
+    return esito;
 }

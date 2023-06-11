@@ -35,13 +35,16 @@ public class ConsensoCookie extends HttpServlet {
         }
         String requestBody = sb.toString();
 
+        // riceve consenso ricevuto dalla finestra del cookie
         JsonObject json = new Gson().fromJson(requestBody, JsonObject.class);
         Boolean consent = json.get("consenso").getAsBoolean();
 
+        // se cookie accettati, semplicemente aggiungo un attributo alla sessione acceptCookies = true
         if (consent == true) {
             session.setAttribute("acceptCookies", true);
         }
         else {
+            // se cookie NON accettati, semplicemente aggiungo un attributo alla sessione acceptCookies = false e blocco tutti i cookie
             session.setAttribute("acceptCookies", false);
 
             for (Cookie c : req.getCookies()) {
@@ -54,7 +57,8 @@ public class ConsensoCookie extends HttpServlet {
         resp.setCharacterEncoding("utf-8");
 
         try (PrintWriter writer = resp.getWriter()) {
-            writer.write("Consent: " + consent.toString());
+            writer.println("{ \"consent\":\"" + consent + "\"}");
+            writer.flush();
         }
     }
 }

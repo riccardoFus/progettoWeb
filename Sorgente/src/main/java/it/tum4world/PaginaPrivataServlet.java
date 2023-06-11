@@ -175,7 +175,7 @@ public class PaginaPrivataServlet extends DBManager {
             }
 
         } catch (SQLException e) {
-            System.out.println("Errore: risultato inaspettato durante il ritiro dei dati utente dal db\n");
+            System.out.println("\nErrore: risultato inaspettato durante il ritiro dei dati utente dal db\n");
         }
 
         try (PrintWriter writer = resp.getWriter()) {
@@ -193,6 +193,7 @@ public class PaginaPrivataServlet extends DBManager {
 }
 
 class Clienti {
+    // Classe usata per inviare info al cliente di js
     String nome;
     String cognome;
     Date dataDiNascita;

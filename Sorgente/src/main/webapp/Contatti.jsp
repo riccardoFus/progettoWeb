@@ -1,4 +1,5 @@
 <jsp:include page="header.jsp"/>
+<!-- Pagina Contatti contenente informazioni riguardante i contatti dell'azienda in più contiene il form per inviare (fake) email di informazioni -->
 <div class="flex-container" id="contatti">
     <p>
         Indirizzo email della nostra associazione: <a href="mailto:tum4world@nessunonoluogonoesiste.com"
@@ -13,6 +14,7 @@
             <span id="warnNome" class="warn"></span>
             <div class="row">
                 <label for="name">Nome</label>
+                <!-- onkeydown inserito per evitare che il form venga "submittato" quando si preme 'Enter' con la tastiera -->
                 <input onkeydown="return event.key != 'Enter';" type="text" name="name" id="name" class="textbox">
             </div>
 
@@ -22,6 +24,7 @@
             <span id="warnCognome" class="warn"></span>
             <div class="row">
                 <label for="surname">Cognome</label>
+                <!-- onkeydown inserito per evitare che il form venga "submittato" quando si preme 'Enter' con la tastiera -->
                 <input onkeydown="return event.key != 'Enter';" type="text" name="surname" id="surname" class="textbox">
             </div>
 
@@ -31,6 +34,7 @@
             <span id="warnEmail" class="warn"></span>
             <div class="row">
                 <label for="email">Email</label>
+                <!-- onkeydown inserito per evitare che il form venga "submittato" quando si preme 'Enter' con la tastiera -->
                 <input onkeydown="return event.key != 'Enter';" type="text" name="email" id="email" class="textbox">
             </div>
 
@@ -39,6 +43,7 @@
 
         <div class="row">
             <label for="reasons">Motivazione</label>
+            <!-- onkeydown inserito per evitare che il form venga "submittato" quando si preme 'Enter' con la tastiera -->
             <select onkeydown="return event.key != 'Enter';" name="reasons" id="reasons" class="textbox">
                 <option value="info">informazioni aggiuntive sui nostri servizi</option>
                 <option value="richiesta">richiesta di uno specifico servizio</option>

@@ -1,7 +1,9 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <jsp:include page="header.jsp"/>
 
+<!-- Pagina di Sign In -->
 <div class="flex-container" id="signin">
+    <!-- onkeydown inserito per evitare che il form venga "submittato" quando si preme 'Enter' con la tastiera -->
     <form method="post" action="<%= response.encodeURL("./signIn")%>" onsubmit="return validate()"
           onkeydown="return event.key != 'Enter';" id="form">
         <div class="column">
@@ -68,6 +70,10 @@
         </div>
 
         <div class="column">
+            <label class="label">la password deve essere lunga 8 caratteri, deve contenere d-D, r-R, s-S, c-C, almeno un carattere numerico, un carattere maiuscolo e un carattere tra $, ! e ?</label>
+        </div>
+
+        <div class="column">
             <span id="warnPsw" class="warn"></span>
             <div class="row">
                 <label class="label">Password</label>
@@ -81,7 +87,6 @@
                 <label class="label">Conferma password</label>
                 <input type="password" name="psw confermata" class="textbox">
             </div>
-
         </div>
 
         <div id="buttons" class="column">

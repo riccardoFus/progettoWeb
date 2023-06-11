@@ -7,30 +7,32 @@ function updatePhrase() {
     xhttp.open("GET", URL, true);
     xhttp.responseType = "json";
 
+    // richiamo la servlet PhraseFetcher e ricevo una frase casualmente
     xhttp.onreadystatechange = function () {
         let done = 4, ok = 200;
         if (this.readyState === done && this.status === ok) {
             jsonObject = this.response;
 
-            document.getElementById("phraseHeader").innerText =
-                jsonObject.frase;
+            document.getElementById("phraseHeader").innerText = jsonObject.frase;
         }
     };
 
     xhttp.send();
 }
 
+// aggiorno la frase ogni 20 secondi, al primo accesso lo faccio istantaneamente
 updatePhrase();
 window.setInterval(updatePhrase, 20000);
 
 
-/* Script ser tenere slezionata la parte di pagina dove ti trovi nell'header*/
+/* Script per tenere slezionata la parte di pagina dove ti trovi nell'header (grafica)*/
 
 let pos = 0
-//togli session id se presente
+// togli session id se presente per evitare di leggere anche quello
 let noSessionId = window.location.pathname.split(";")[0];
 let path = noSessionId.split("/")[2];
 
+// in base alla pagina in cui mi trovo, cambio il selected dell'item nell'header
 if(path.search("Home") !== -1 || path === ""){
     pos=0
 }else if(path.search("ChiSiamo") !== -1){
@@ -46,14 +48,15 @@ if(path.search("Home") !== -1 || path === ""){
     pos=2
 }
 
- // modifica l'header
+// modifica l'header
 let links = (document.getElementById("header")).getElementsByTagName("a")
 links.item(pos).id="selected"
 
-
+// funzione richiamata nel caso di logout (caso con cookie)
 async function logout(btn){
     //fetch
     let url = "paginaPrivata";
+    // evito il redirect alla home page direttamente ma attendo la risposta della servlet
     event.preventDefault()
 
     await fetch(url, {
@@ -67,11 +70,9 @@ async function logout(btn){
         })
     }).then(resp => resp.json())
         .then(respInfo => {
-                // riceve risposta
-                alert(respInfo.msg)
                 if(respInfo.msg === "Logout completato")
+                    // sposto l'utente alla home page
                     window.location=btn.href
-
             }
         )
 

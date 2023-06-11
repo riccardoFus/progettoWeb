@@ -1,6 +1,8 @@
 <jsp:include page="header.jsp"/>
 
+<!-- Pagina di login alla parte privata -->
 <div class="flex-container" id="login">
+    <!-- onkeydown inserito per evitare che il form venga "submittato" quando si preme 'Enter' con la tastiera -->
     <form method="post" action="<%= response.encodeURL("./logIn")%>" onsubmit="return checkLogin(this)"
           onkeydown="return event.key != 'Enter';">
         <div class="column">

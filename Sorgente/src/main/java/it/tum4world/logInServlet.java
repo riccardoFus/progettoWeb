@@ -52,9 +52,9 @@ public class logInServlet extends DBManager {
             if (user.next()) {
                 String username = user.getObject("username").toString();
                 String userType = getUserType(username);
-                System.out.println("Login in process of username" + username +  " user type: " + userType);
+                System.out.println("\nLogin in process of username" + username +  " user type: " + userType + "\n");
 
-                //ritira la sessione per aggiungere gli attripìbuti typeOfUser e username
+                //ritira la sessione per aggiungere gli attributi typeOfUser e username
                 session.setAttribute("username", username);
                 session.setAttribute("typeOfUser", userType);
                 String url = resp.encodeURL(redirectUserType(userType));
@@ -69,6 +69,7 @@ public class logInServlet extends DBManager {
     }
 
     private ResultSet getLoginValues(HttpServletRequest req, HttpServletResponse resp) {
+        // query al db per ottenere l'eventuale utente legato alle credenziali inserite
         String username = req.getParameter("username");
         String psw = req.getParameter("password");
         String password = createDigest(psw);
@@ -78,6 +79,7 @@ public class logInServlet extends DBManager {
     }
 
     private String redirectUserType(String userType) {
+        // in base al tipo di utente indirizzo alla sua pagina privata
         switch (userType) {
             case "admin":
                 return "AreaPersonaleAdmin.jsp";

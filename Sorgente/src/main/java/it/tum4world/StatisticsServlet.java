@@ -20,8 +20,10 @@ public class StatisticsServlet extends DBManager {
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // array che mi mantiene le varie risposte del DB
         JsonArray array;
         if (request.getParameter("action").equals("reset")) {
+            // pongo tutte le visite a 0 delle pagine
             updateDB("UPDATE VISITE SET visits=0");
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
@@ -30,6 +32,7 @@ public class StatisticsServlet extends DBManager {
             writer.println("Dati azzerati!");
             writer.flush();
         } else if (request.getParameter("action").equals("totalViews")) {
+            // ottengo la somma di tutte le visite delle pagine del sito e le mostro all'utente
             ResultSet views = getInfoDB("SELECT SUM(visits) FROM VISITE");
             String result;
 
@@ -52,6 +55,7 @@ public class StatisticsServlet extends DBManager {
             writer.flush();
 
         } else if (request.getParameter("action").equals("totalSubscriptions")) {
+            // ottengo dal db tutti gli utenti escluso l'admin e li mostro all'admin stesso
             array = getJsonUsers("SELECT * FROM UTENTI WHERE username != 'admin'");
             response.setContentType("application/json");
             response.setCharacterEncoding("utf-8");
@@ -64,18 +68,20 @@ public class StatisticsServlet extends DBManager {
                 System.err.println("Errore");
             }
         } else if (request.getParameter("action").equals("aderenteSubscriptions")) {
-                array = getJsonClienti("SELECT * FROM CLIENTI INNER JOIN UTENTI ON CLIENTI.username=UTENTI.username WHERE ADERENTE=TRUE");
-                response.setContentType("application/json");
-                response.setCharacterEncoding("utf-8");
+            // ottengo dal db tutti gli aderenti
+            array = getJsonClienti("SELECT * FROM CLIENTI INNER JOIN UTENTI ON CLIENTI.username=UTENTI.username WHERE ADERENTE=TRUE");
+            response.setContentType("application/json");
+            response.setCharacterEncoding("utf-8");
 
-                try (PrintWriter writer = response.getWriter()) {
-                    writer.println(array);
-                    writer.flush();
-                } catch (IOException ex) {
-                    System.err.println("Errore");
-                }
+            try (PrintWriter writer = response.getWriter()) {
+                writer.println(array);
+                writer.flush();
+            } catch (IOException ex) {
+                System.err.println("Errore");
+            }
 
             } else if (request.getParameter("action").equals("simpatizzanteSubscriptions")) {
+                // ottengo dal db tutti i simpatizzanti
                 array = getJsonClienti("SELECT * FROM CLIENTI INNER JOIN UTENTI ON CLIENTI.username=UTENTI.username WHERE ADERENTE=FALSE");
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
@@ -88,20 +94,20 @@ public class StatisticsServlet extends DBManager {
                 }
 
             } else if(request.getParameter("action").equals("plotDonazioni")) {
-            array = getJsonDonazioni("SELECT * from donazioni WHERE year(data) = "+ Year.now().getValue() + "");
-            response.setContentType("application/json");
-            response.setCharacterEncoding("utf-8");
+                // ottengo dal db tutte le donazioni dell'anno attuale
+                array = getJsonDonazioni("SELECT * from donazioni WHERE year(data) = "+ Year.now().getValue() + "");
+                response.setContentType("application/json");
+                response.setCharacterEncoding("utf-8");
 
-            try (PrintWriter writer = response.getWriter()) {
-                writer.println(array);
-                writer.flush();
-                System.out.println(array);
-            } catch (IOException ex) {
-                System.err.println("Errore");
+                try (PrintWriter writer = response.getWriter()) {
+                    writer.println(array);
+                    writer.flush();
+                } catch (IOException ex) {
+                    System.err.println("Errore");
+                }
             }
-        }
-
             else {
+                // ottengo dal db tutte le visite individuali delle pagine
                 array = getJsonVisite("SELECT page, visits FROM VISITE");
                 response.setContentType("application/json");
                 response.setCharacterEncoding("utf-8");
@@ -109,16 +115,14 @@ public class StatisticsServlet extends DBManager {
                 try (PrintWriter writer = response.getWriter()) {
                     writer.println(array);
                     writer.flush();
-                    System.out.println("Ciao");
-                    System.out.println(array);
                 } catch (IOException ex) {
-                    System.err.println("Errore");
+                    System.err.println("\nErrore : "+ex+"\n");
                 }
             }
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+        doGet(request, response);
     }
 }

@@ -45,7 +45,7 @@ public class SendEmail extends HttpServlet {
             msg.setText("Motivazione richiesta : " + request.getParameter("reasons") + "\nAltre informazioni : " + request.getParameter("altro"));
             // Invio la mail effettiva
             Transport.send(msg);
-            // Torno alla pagina di invio confermato
+            // Torno alla pagina di invio confermato (anche in caso di errori, cosi evito di bloccare l'utente perché fake sending)
             response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
         } catch (AddressException e) {
             response.sendRedirect(response.encodeURL("invio_confermato.jsp"));

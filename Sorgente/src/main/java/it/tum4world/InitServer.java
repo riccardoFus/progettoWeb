@@ -9,6 +9,8 @@ import java.io.IOException;
 public class InitServer extends DBManager {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // servlet eseguita all'inizio del server
+        // genera tutte le tabelle nel DB e popola la tabella inserendo l'admin e le frasi
         String initUtenti = "CREATE TABLE utenti(\n" +
                 "    username VARCHAR(25) PRIMARY KEY,\n" +
                 "    password CHAR(64) NOT NULL,\n" +
@@ -53,7 +55,6 @@ public class InitServer extends DBManager {
         updateDB(initIscrizioni);
         updateDB(initVisite);
 
-        System.out.println("TUTTE LE TABELLE CREATE SE NON GIÀ ESISTENTI\n");
         String initQuotes = "INSERT INTO frasi (contenuto) VALUES ('La migliore preparazione per domani e'' fare il tuo meglio oggi.')";
         updateDB(initQuotes);
         initQuotes = "INSERT INTO frasi (contenuto) VALUES ('Cerco sempre di fare cio'' che non sono capace di fare, per imparare come farlo.')";
@@ -72,7 +73,7 @@ public class InitServer extends DBManager {
         String updateAdmin = "INSERT INTO amministratori VALUES ('" + username+ "')";
         //controllo se l'admin non è già presente nel db
         if(updateDB(updateUtenti)){
-            System.out.println("Admin inserito");
+            System.out.println("\nAdmin inserito\n");
 
             //carica nella tabella amministratori l'utente, fatto qui perché se lo metto nell'if, ogni volta mi aggiunge un istanza di admin nella tabella amministratori
             updateDB(updateAdmin);

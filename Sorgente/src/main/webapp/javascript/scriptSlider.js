@@ -1,20 +1,20 @@
 var currentIndex = 1;
 
-//Show current image
+// Show current image
 showSlides(currentIndex);
 
-//Function to move Next
+// Function to move Next
 function plusSlides(n) {
     showSlides(currentIndex += n);
 }
 
-//Function to move back
+// Function to move back
 function currentSlide(n) {
     showSlides(currentIndex = n);
 }
 
 
-//Initiate moving of slides
+// Initiate moving of slides
 function showSlides(n) {
     var i;
     var slides = document.getElementsByClassName("images");

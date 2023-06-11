@@ -98,7 +98,7 @@ function validateNSU(form){
                 responseU = this.response;
                 let purifyResp =responseU.split("\"");
                 if( purifyResp[1] === "true"){
-                    //user con lo stesso esername trovato
+                    //user con lo stesso username trovato
                     esito = false;
                     showWarning("07 : Username già utilizzato", "warnUser");
                     document.getElementById("username").style.color="salmom";
@@ -127,6 +127,7 @@ function validatePsw(form){
     let elemPC = form.elements.namedItem("psw confermata");
 
     //controlla che sia stata inserita
+    // regexp per controllare che siano rispettate tutte le regole
     if(/^(?=.*[Cc])(?=.*[sS])(?=.*[dD])(?=.*[rR])(?=.*[A-Z])(?=.*\d)(?=.*[$!?])[\w\W]{8}$/.test(elemP.value)){
         document.getElementById("warnPsw").style.visibility = "hidden";
         if (elemP.value === elemPC.value) {

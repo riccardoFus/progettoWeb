@@ -1,5 +1,6 @@
 <jsp:include page="header.jsp"/>
 
+<!-- Pagina Chi Siamo contenente delle informazioni (inventate) dell'associazione -->
 <div id="content">
 
     <div id="left1" class = column>
@@ -38,6 +39,7 @@
             all'aiuto dei suoi volontari.
         </p>
 
+        <!-- Slide di immagini  -->
         <div class="carousel-container">
             <div class="images fade">
                 <img src="images/aquagym.jpg" class="imageStandard">
