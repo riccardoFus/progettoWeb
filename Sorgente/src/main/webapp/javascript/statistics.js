@@ -261,6 +261,8 @@ function pulisciMenu(string) {
         cont.style.visibility = "collapse";
         document.getElementById("text").style.visibility = "hidden"
         document.getElementById("views").style.visibility = "hidden"
+    }else{
+        cont.style.visibility="visible"
     }
     if (string === "reset")
         document.getElementById("divGrafico").style.visibility = "hidden";
