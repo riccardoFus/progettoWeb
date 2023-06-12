@@ -30,7 +30,7 @@ public class PaginaPrivataServlet extends DBManager {
         }
 
         //response contiene ora un oggetto JSON in stringa
-        //convertiamolo in oggeto json
+        //convertiamolo in oggetto json
         JsonObject json = new Gson().fromJson(response.toString(), JsonObject.class);
 
         String tipoOp = json.get("operazione").getAsString();
