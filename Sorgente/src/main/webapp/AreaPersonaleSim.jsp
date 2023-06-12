@@ -1,16 +1,20 @@
 <jsp:include page="header.jsp"/>
 <div class="flex-container" id="areaP">
     <%
-        // ottengo la sessione attuale dell'utente
-        session = request.getSession();
-
         // se la sessione dell'utente ha come attributo typeOfUser == simpatizzante allora significa che posso mostrarli la pagina privata
         // altrimenti può essere che si sia fatto accesso diretto mettendo l'url con <path>/AreaPersonaleSim senza fare l'accesso,
         // in quel caso mostriamo all'utente un alert
-        if (session.getAttribute("typeOfUser") == "simpatizzante") {
+
+        String[] URI = (request.getRequestURL().toString()).split("/");
+        String pagina = URI[URI.length - 1];
+        if (pagina.contains("jsessionid")) {%>
+    <label id="text1">Siamo spiacenti, è necessario accettare i cookie per poter accedere a questa pagina</label>
+    <%
+
+    } else if (session.getAttribute("typeOfUser") == "simpatizzante") {
 
     %>
-    <div id="data" <% if((Boolean)session.getAttribute("acceptCookies") == false)%> disabled>
+    <div id="data" <% if ((Boolean) session.getAttribute("acceptCookies") == false)%> disabled>
         <!-- Bottone per mostrare i dati personali dell'aderente -->
         <button onclick="showInfo()" class="button">DATI PERSONALI</button>
     </div>
