@@ -146,7 +146,7 @@ function showInfo() {
     campi.item(4).innerHTML = cliente.numTel;
 }
 
-async function donate(){
+async function donate() {
     // prende da input il valore inserito
     let somma = document.getElementsByName("donazione")[0].valueAsNumber
     // fetch che inserisce nel DB la nuova donazione
@@ -160,7 +160,7 @@ async function donate(){
         },
         body: JSON.stringify({
             "operazione": "donate",
-            "somma" : somma
+            "somma": somma
         })
     }).then(resp => resp.json())
         .then(respInfo => {
