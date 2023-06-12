@@ -1,10 +1,10 @@
-// al caricamento della pagina vengono cercate tutte le info (comprese le iscrizioni) e riempe l'oggetto client
+//al caricamento della pagina vengono cercate tutte le info (comprese le iscrizioni) e riempe l'oggetto client
 let cliente = {}
 let iscrizioni
-// richiesta fetch che ritorna tutti i valori
+//richiesta fetch che ritorna tutti i valori
 requestData().then(
     () => {
-        // check/uncheck a seconda delle iscrizioni
+        //check/uncheck a seconda delle iscrizioni
         iscrizioni = document.getElementsByClassName("iscriz");
         iscrizioni.item(0).checked = cliente.iscrizWW
         iscrizioni.item(1).checked = cliente.iscrizFYB
@@ -18,7 +18,6 @@ async function subUnsub(elem) {
     //fetch
     let url = "paginaPrivata";
 
-    // nel caso di click in una checkbox iscrivo l'utente all'attività cliccata
     await fetch(url, {
         method: "POST",
         headers: {
@@ -32,6 +31,9 @@ async function subUnsub(elem) {
         })
     }).then(resp => resp.json())
         .then(respInfo => {
+                // riceve risposta
+                alert(respInfo.msg)
+
             }
         )
 
@@ -42,7 +44,6 @@ function deleteAccount(link) {
     let responseVal;
     let url = "paginaPrivata";
 
-    // cancello l'utente e la sua iscrizione al sito
     fetch(url, {
         method: 'post',
         body: JSON.stringify({
@@ -55,19 +56,21 @@ function deleteAccount(link) {
 
     }).then(resp => resp.json())
         .then(respInfo => {
+                // riceve risposta
+                window.location= link;
+
             }
         )
 
 }
 
 function createElements(divDati) {
-    // creo il div che conterrà le info sull'utente
     for (let i = 0; i < 5; i++) {
         let divRow = document.createElement("div")
         divRow.className = "row"
 
         let label = document.createElement("label")
-        // nome label
+        //nome label
         let name = "";
         switch (i) {
             case 0:
@@ -105,16 +108,19 @@ function createElements(divDati) {
 }
 
 async function requestData() {
-    // fetch per ottenere le info sull'utente
+    //fetch
     let url = "paginaPrivata";
     await fetch(url, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         }
-    }).then(resp => resp.json())
+    }).then( resp => {
+        resp.json()
+
+    })
         .then(respInfo => {
-                // riempi l'oggetto cliente
+                //riempi l'oggetto cliente
                 cliente.nome = respInfo.nome
                 cliente.cognome = respInfo.cognome
                 cliente.dataDiNascita = respInfo.dataDiNascita
@@ -131,13 +137,13 @@ async function requestData() {
 
 function showInfo() {
     // query per richiedere i dati
-    // aggiungi i vari label per i dati
+    //aggiungi i vari label per i dati
     let divDati = document.getElementById("data");
-    // generi solo se non sono già stati generati
+    //generi solo se non sono già stati generati
     if (divDati.childElementCount === 1)
         createElements(divDati)
 
-    // riempi i campi con le informazioni in cliente
+    //riempi i campi con le informazioni in cliente
     let campi = document.getElementsByClassName("info");
     campi.item(0).innerHTML = cliente.username;
     campi.item(1).innerHTML = cliente.nome;
@@ -147,9 +153,9 @@ function showInfo() {
 }
 
 async function donate(){
-    // prende da input il valore inserito
+    //reperisci la somma inserita
     let somma = document.getElementsByName("donazione")[0].valueAsNumber
-    // fetch che inserisce nel DB la nuova donazione
+    //fetch
     let url = "paginaPrivata";
 
     await fetch(url, {
@@ -164,6 +170,9 @@ async function donate(){
         })
     }).then(resp => resp.json())
         .then(respInfo => {
+                // riceve risposta
+                alert(respInfo.msg)
+
             }
         )
 
