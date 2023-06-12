@@ -152,8 +152,8 @@ function showInfo() {
     campi.item(4).innerHTML = cliente.numTel;
 }
 
-async function donate(){
-    //reperisci la somma inserita
+async function donate() {
+    // prende da input il valore inserito
     let somma = document.getElementsByName("donazione")[0].valueAsNumber
     //fetch
     let url = "paginaPrivata";
@@ -166,7 +166,7 @@ async function donate(){
         },
         body: JSON.stringify({
             "operazione": "donate",
-            "somma" : somma
+            "somma": somma
         })
     }).then(resp => resp.json())
         .then(respInfo => {
