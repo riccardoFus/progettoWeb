@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonArray;
 
 import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -17,6 +18,8 @@ public class DBManager extends HttpServlet {
     protected String URLDB = "jdbc:derby://localhost:1527/Tum4WorldDB; create=true";
     protected String user = "APP";
     protected String password = "admin";
+    protected String username;
+    protected String userType;
 
 
     public void init() {
@@ -230,4 +233,6 @@ public class DBManager extends HttpServlet {
         }
         return array;
     }
+
+
 }

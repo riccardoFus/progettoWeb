@@ -31,7 +31,7 @@ public class SendEmail extends HttpServlet {
 
         // Ottengo oggetto Sessione javax.mail
         Session session = Session.getDefaultInstance(props);
-
+        String url = response.encodeURL("invio_confermato.jsp");
         try{
             // Creo un oggetto di default MimeMessage
             MimeMessage msg = new MimeMessage(session);
@@ -46,13 +46,13 @@ public class SendEmail extends HttpServlet {
             // Invio la mail effettiva
             Transport.send(msg);
             // Torno alla pagina di invio confermato (anche in caso di errori, cosi evito di bloccare l'utente perché fake sending)
-            response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
+            response.sendRedirect(url);
         } catch (AddressException e) {
-            response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
+            response.sendRedirect(url);
         } catch (MessagingException e) {
-            response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
+            response.sendRedirect(url);
         } catch (IOException e) {
-            response.sendRedirect(response.encodeURL("invio_confermato.jsp"));
+            response.sendRedirect(url);
         }
     }
 

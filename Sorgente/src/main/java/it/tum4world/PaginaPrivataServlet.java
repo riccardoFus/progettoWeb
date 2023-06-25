@@ -36,6 +36,7 @@ public class PaginaPrivataServlet extends DBManager {
         String tipoOp = json.get("operazione").getAsString();
         HttpSession session = req.getSession(false);
         String username = (String) session.getAttribute("username");
+        String typeUser= (String) session.getAttribute("typeOfUser");
 
         if (tipoOp.equals("subUnsub")) {
             String campo = json.get("campo").getAsString();
@@ -62,7 +63,6 @@ public class PaginaPrivataServlet extends DBManager {
             //1.rimozione da clienti o amministratori
 
             String msg; //contiene il messaggio di risposta
-            String typeUser = (String) session.getAttribute("typeOfUser");
             String query;
             if(typeUser.equals("admin")){
                 //user è amministratore
@@ -157,6 +157,7 @@ public class PaginaPrivataServlet extends DBManager {
 
         HttpSession session = req.getSession(false);
         String username = (String) session.getAttribute("username");
+
         String query = "SELECT nome, cognome, data_di_nascita, telefono, aderente, clienti.username, waterweek, feedyourbrain, mindcheckup" +
                 " FROM clienti JOIN iscrizioni ON clienti.username = iscrizioni.username WHERE clienti.username='" + username + "'";
         ResultSet result = getInfoDB(query);
@@ -181,6 +182,7 @@ public class PaginaPrivataServlet extends DBManager {
         try (PrintWriter writer = resp.getWriter()) {
             Gson gson = new Gson();
             writer.println(gson.toJson(cliente));
+            System.out.println(gson.toJson(cliente));
             writer.flush();
 
         } catch (IOException ex) {

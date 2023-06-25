@@ -47,18 +47,18 @@ public class logInServlet extends DBManager {
     @Override
     synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ResultSet user = getLoginValues(req, resp);
-        HttpSession session = req.getSession(true);
+        HttpSession session = req.getSession(false);
+
         try {
             if (user.next()) {
                 String username = user.getObject("username").toString();
                 String userType = getUserType(username);
-                System.out.println("\nLogin in process of username" + username +  " user type: " + userType + "\n");
+                System.out.println("\nLogin in process of username" + username + " user type: " + userType + "\n");
 
-                //ritira la sessione per aggiungere gli attributi typeOfUser e username
+                // aggiunge gli attributi typeOfUser e username
                 session.setAttribute("username", username);
                 session.setAttribute("typeOfUser", userType);
-                String url = resp.encodeURL(redirectUserType(userType));
-                resp.sendRedirect(url);
+                resp.sendRedirect(resp.encodeURL(redirectUserType(userType)));
             } else {
                 System.err.println("Non funziona");
             }

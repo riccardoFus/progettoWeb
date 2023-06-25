@@ -25,8 +25,7 @@ public class ConsensoCookie extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        HttpSession session = req.getSession();
-
+        HttpSession session = req.getSession(true);
         StringBuilder sb = new StringBuilder();
         BufferedReader reader = req.getReader();
         String line;
@@ -37,28 +36,30 @@ public class ConsensoCookie extends HttpServlet {
 
         // riceve consenso ricevuto dalla finestra del cookie
         JsonObject json = new Gson().fromJson(requestBody, JsonObject.class);
-        Boolean consent = json.get("consenso").getAsBoolean();
-
-        // se cookie accettati, semplicemente aggiungo un attributo alla sessione acceptCookies = true
-        if (consent == true) {
-            session.setAttribute("acceptCookies", true);
-        }
-        else {
-            // se cookie NON accettati, semplicemente aggiungo un attributo alla sessione acceptCookies = false e blocco tutti i cookie
-            session.setAttribute("acceptCookies", false);
-
-            for (Cookie c : req.getCookies()) {
-                c.setMaxAge(0);
-                resp.addCookie(c);
-            }
-        }
+        boolean consent = json.get("consenso").getAsBoolean();
 
         resp.setContentType("text/html");
         resp.setCharacterEncoding("utf-8");
 
+        // se cookie accettati, semplicemente aggiungo un attributo alla sessione acceptCookies = true
+        if (consent) {
+            session.setAttribute("acceptCookies", true);
+        }else{
+            //elimina cookie jsession
+            Cookie[] cookies = req.getCookies();
+            for(Cookie c: cookies){
+                if(c.getName().equals("JSESSIONID")){
+                    c.setMaxAge(0);
+                    resp.addCookie(c);
+                }
+            }
+        }
+
         try (PrintWriter writer = resp.getWriter()) {
-            writer.println("{ \"consent\":\"" + consent + "\"}");
+            String objToWrite =  "{ \"consent\":\"" + consent + "\"}";
+            writer.println(objToWrite);
             writer.flush();
         }
+
     }
 }

@@ -8,7 +8,7 @@
 
     <p>Numero di telefono della nostra associazione: +39 326 151242 1512154 1154</p>
 
-    <form action="<%= response.encodeURL("./SendEmail")%>" method="post" onsubmit="return validatePageContatti(this)">
+    <form action="<%=response.encodeURL("./SendEmail")%>" method="post" onsubmit="return validatePageContatti(this)">
 
         <div class="column">
             <span id="warnNome" class="warn"></span>
@@ -60,13 +60,10 @@
         <div id="buttons" class="column">
             <input type="submit" value="Submit" class="button">
         </div>
-
     </form>
     <input type="button" onclick="return reset()" class="button" value="Reset">
 
 </div>
-<jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
-</div>
 
 <script src="./javascript/validationContatti.js"></script>

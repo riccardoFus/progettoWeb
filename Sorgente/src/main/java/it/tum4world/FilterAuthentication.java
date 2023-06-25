@@ -16,37 +16,42 @@ public class FilterAuthentication implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest hreq = (HttpServletRequest) servletRequest;
+        HttpServletResponse hresp = (HttpServletResponse) servletResponse;
+        boolean redirectUnauth = false;
+
         HttpSession session = hreq.getSession(false);
+        String typeOfUser = null;
+        String URI = hreq.getRequestURL().toString();
+        String redirectUrl = "AccessoNonAutorizzato.jsp";
 
-        /* Prende la sessione e analizza i parametri: l'utente è loggato?*/
-
-        if (session != null && session.getAttribute("username") != null) {
-            //utente è loggato
-            String typeOfUser = (String) session.getAttribute("typeOfUser");
-            if (typeOfUser == null) {
-                //pagina di errore
-                servletRequest.setAttribute("tipo", "standard");
-
-            } else {
-                /* passa il parametro alle pagine per indicare il tipo di utente*/
-                servletRequest.setAttribute("tipo", typeOfUser);
-            }
+        if (session != null && session.getAttribute("typeOfUser") != null) {
+            //prendi type of user dalla sessione
+            typeOfUser = (String) session.getAttribute("typeOfUser");
+        }
+        if (typeOfUser == null) {
+            //se utente non è loggato
+            servletRequest.setAttribute("tipo", "standard");
+            //se sta accedendo ad una pagina privata fai redirect
+            redirectUnauth = URI.contains("AreaPersonale");
 
         } else {
-            //utente non è loggato
-            servletRequest.setAttribute("tipo", "standard");
-            //se è su una pagina privata redirect a login
-
-            if(((HttpServletRequest) servletRequest).getRequestURI().contains("AreaPersonale")){
-                HttpServletResponse hresp = (HttpServletResponse) servletResponse;
-                String url = hresp.encodeURL("Login.jsp");
-                hresp.sendRedirect(url);
-                return;
-
+            //è loggato
+            servletRequest.setAttribute("tipo", typeOfUser);
+            //può accedere alla pagina solo se è la SUA area privata, altrimenti redirect alla pagina di errore
+            if (URI.contains("AreaPersonale")) {
+                if (!URI.toLowerCase().contains(typeOfUser) || (typeOfUser.equals("simpatizzante") && !URI.contains("Sim")))
+                    redirectUnauth = true;
             }
 
         }
 
+        if (redirectUnauth) {
+            hresp.sendRedirect(hresp.encodeURL(redirectUrl));
+            return;
+        }
+
+
         filterChain.doFilter(servletRequest, servletResponse);
     }
+
 }

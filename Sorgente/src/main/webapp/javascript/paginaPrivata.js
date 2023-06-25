@@ -2,21 +2,25 @@
 let cliente = {}
 let iscrizioni
 //richiesta fetch che ritorna tutti i valori
-requestData().then(
-    () => {
-        //check/uncheck a seconda delle iscrizioni
-        iscrizioni = document.getElementsByClassName("iscriz");
-        iscrizioni.item(0).checked = cliente.iscrizWW
-        iscrizioni.item(1).checked = cliente.iscrizFYB
-        iscrizioni.item(2).checked = cliente.iscrizMC
 
-    }
-)
+function setup(url){
+    requestData(url).then(
+        () => {
+            //check/uncheck a seconda delle iscrizioni
+            iscrizioni = document.getElementsByClassName("iscriz");
+            iscrizioni.item(0).checked = cliente.iscrizWW
+            iscrizioni.item(1).checked = cliente.iscrizFYB
+            iscrizioni.item(2).checked = cliente.iscrizMC
+            console.log("done")
+
+        }
+    )
+
+}
 
 //fetch funzione per unsub/SUB
-async function subUnsub(elem) {
+async function subUnsub(elem, url) {
     //fetch
-    let url = "paginaPrivata";
 
     await fetch(url, {
         method: "POST",
@@ -32,7 +36,6 @@ async function subUnsub(elem) {
     }).then(resp => resp.json())
         .then(respInfo => {
                 // riceve risposta
-                alert(respInfo.msg)
 
             }
         )
@@ -40,10 +43,7 @@ async function subUnsub(elem) {
 
 }
 
-function deleteAccount(link) {
-    let responseVal;
-    let url = "paginaPrivata";
-
+function deleteAccount(link, url) {
     fetch(url, {
         method: 'post',
         body: JSON.stringify({
@@ -107,20 +107,17 @@ function createElements(divDati) {
     }
 }
 
-async function requestData() {
+async function requestData(url) {
     //fetch
-    let url = "paginaPrivata";
     await fetch(url, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
         }
-    }).then( resp => {
-        resp.json()
-
-    })
+    }).then( resp => resp.json())
         .then(respInfo => {
                 //riempi l'oggetto cliente
+            console.log(respInfo)
                 cliente.nome = respInfo.nome
                 cliente.cognome = respInfo.cognome
                 cliente.dataDiNascita = respInfo.dataDiNascita
@@ -152,11 +149,10 @@ function showInfo() {
     campi.item(4).innerHTML = cliente.numTel;
 }
 
-async function donate() {
+async function donate(url) {
     // prende da input il valore inserito
     let somma = document.getElementsByName("donazione")[0].valueAsNumber
     //fetch
-    let url = "paginaPrivata";
 
     await fetch(url, {
         method: "POST",

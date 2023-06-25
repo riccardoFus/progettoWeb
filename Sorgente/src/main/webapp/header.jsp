@@ -35,10 +35,12 @@
     }
         //per la grafica
         // cambio di css in base al tipo di user
-        session = request.getSession(false);
-        String tipo = (String) session.getAttribute("typeOfUser");
-        Boolean cookie = (Boolean) session.getAttribute("acceptCookies");
-        if (tipo == null) {%>
+        //array url per il menu
+        String[] urls = {"Home.jsp", "ChiSiamo.jsp", "Attivita.jsp", "Contatti.jsp", "SignIn.jsp", "Login.jsp", "AreaPersonaleAderente.jsp",
+                "AreaPersonaleSim.jsp", "AreaPersonaleAdmin.jsp"};
+
+        String tipo = request.getAttribute("tipo").toString();
+        if (tipo.equals("standard")) {%>
 
     <link rel="stylesheet" href="css/standard_style.css" type="text/css">
     <%
@@ -67,47 +69,43 @@
     <header id="header">
         <div id="nav">
             <h1>Tum4World</h1>
-            <a class="linkHeader" href="<%= response.encodeURL("Home.jsp")%>">Homepage</a>
-            <a class="linkHeader" href="<%=response.encodeURL("ChiSiamo.jsp")%>">Chi siamo</a>
-            <a class="linkHeader" href="<%=response.encodeURL("Attivita.jsp")%>">Attività</a>
-            <a class="linkHeader" href="<%=response.encodeURL("Contatti.jsp")%>">Contatti</a>
+            <a class="linkHeader" href="<%= response.encodeURL(urls[0])%>">Homepage</a>
+            <a class="linkHeader" href="<%= response.encodeURL(urls[1])%>">Chi siamo</a>
+            <a class="linkHeader" href="<%=response.encodeURL(urls[2])%>">Attività</a>
+            <a class="linkHeader" href="<%=response.encodeURL(urls[3])%>">Contatti</a>
 
             <!-- in base al tipo di utente inserisce l'header privato (con area personale e logout) oppure l'header pubblico (con signin e login) -->
             <%
-                if (tipo == null) {
+                if (tipo.equals("standard")) {
                     //l'utente non è loggato, quindi mostro l'header con sign in e login
             %>
 
-            <a class="linkHeader" href="<%=response.encodeURL("SignIn.jsp")%>">Sign-In</a>
-            <a class="linkHeader" href="<%=response.encodeURL("Login.jsp")%>">Login</a>
+            <a class="linkHeader" href="<%=response.encodeURL(urls[4])%>">Sign-In</a>
+            <a class="linkHeader" href="<%=response.encodeURL(urls[5])%>">Login</a>
 
             <%
                 // in base al tipo di utente, mostriamo la rispettiva pagina personale
             } else if (tipo.equals("aderente")) {
             %>
-            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleAderente.jsp")%>">Area personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL(urls[6])%>">Area personale</a>
 
             <%
             } else if (tipo.equals("simpatizzante")) {
             %>
-            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleSim.jsp")%>">Area personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL(urls[7])%>">Area personale</a>
 
             <%
             } else {
             %>
-            <a class="linkHeader" href="<%=response.encodeURL("AreaPersonaleAdmin.jsp")%>">Area Personale</a>
+            <a class="linkHeader" href="<%=response.encodeURL(urls[8])%>">Area Personale</a>
 
             <%}%>
             <%
-                // nel caso di accesso con cookie accettati facciamo il logout cancellando la sessione
-                if(cookie != null && cookie == true && tipo != null){
+                if (!tipo.equals("standard")) {
             %>
-            <a class="linkHeader" href="<%=response.encodeURL("Home.jsp")%>" onclick="logout(this)">Logout</a>
-            <%}
-                // nel caso di accesso con cookie rifiutati facciamo solo il redirect alla homepage senza url rewriting, in questo modo cancelliamo tutte le info sulla sessione
-                else if(cookie != null && cookie == false && tipo != null){
-            %>
-            <a class="linkHeader" href="Home.jsp" >Logout</a><%}%>
+            <a class="linkHeader" href="<%=urls[0]%>">Logout</a>
+            <%
+            }%>
 
         </div>
         <!-- Div contenente le frasi generate casualmente -->

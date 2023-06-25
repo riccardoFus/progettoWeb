@@ -1,11 +1,16 @@
 <jsp:include page="header.jsp"/>
 
 <!-- Pagina Attivita contenente la lista delle tre attività che Tum4World garantisce, inoltre mantiene un link alle pagine singole delle attività -->
+<%
+    String[] urls = {"WaterWeek.jsp", "FeedYourBrain.jsp", "MindCheckUp.jsp"};
+
+
+%>
 <div class="column" id="col1">
     <h2>WATER WEEK</h2>
     <h3>idroterapia</h3>
     <div class="row">
-        <a href="<%= response.encodeURL("./WaterWeek.jsp")%>"><img src="images/aquagym.jpg" alt="aquagym"></a>
+        <a href="<%= response.encodeURL(urls[0])%>"><img src="images/aquagym.jpg" alt="aquagym"></a>
         <p>
             Noi di Tum4World, offriamo la possibilità ad anziani e disabili di beneficiare di corsi terapeutici nelle
             piscine che li aiuteranno a mantenere la loro mobilità e a rilassarsi in compagnia
@@ -29,8 +34,8 @@
             </p>
 
         </div>
-        <a href="<%= response.encodeURL("./FeedYourBrain.jsp")%>"><img src="images/giochi_da_tavolo.jpg"
-                                                                alt="giochi da tavolo"></a>
+        <a href="<%= response.encodeURL(urls[1])%>"><img src="images/giochi_da_tavolo.jpg"
+                                                                       alt="giochi da tavolo"></a>
     </div>
 </div>
 
@@ -39,8 +44,8 @@
     <h3>trova l'aiuto di cui hai bisogno</h3>
 
     <div class="row">
-        <a href="<%= response.encodeURL("./MindCheckUp.jsp")%>"><img src="images/psicologia.jpg"
-                                                                           alt="supporto psicologico"></a>
+        <a href="<%= response.encodeURL(urls[2])%>"><img src="images/psicologia.jpg"
+                                                                     alt="supporto psicologico"></a>
         <p>
             È importante prendersi cura della propria salute mentale, ma spesso i programmi di supporto non sono
             disponibili a tutti e per questo offriamo un servizio che rende più facile consultare psicologi, ottenere i
@@ -49,8 +54,4 @@
 
     </div>
 </div>
-
-<jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
-
-</div>

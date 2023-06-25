@@ -1,17 +1,6 @@
 <jsp:include page="header.jsp"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <div class="flex-container" id="areaP">
-    <%
-        // ottengo la sessione attuale dell'utente
-        session = request.getSession();
-
-        // se la sessione dell'utente ha come attributo typeOfUser == admin allora significa che posso mostrarli la pagina privata
-        // altrimenti può essere che si sia fatto accesso diretto mettendo l'url con <path>/AreaPersonaleAdmin senza fare l'accesso,
-        // in quel caso mostriamo all'utente un alert
-        if (session.getAttribute("typeOfUser") == "admin") {
-
-    %>
-
     <div class="row">
         <!-- Bottone per mostrare il numero totale di visite al sito -->
         <input type="submit" class="button" value="Visite" onclick="showTotalViewers()">
@@ -21,8 +10,8 @@
 
     <div id="textCont" class="row">
         <!-- Paragrafi di appoggio richiamati dalle funzioni js per mostrare dei messaggi di testo -->
-        <p id="text"> </p>
-        <p id="views"> </p>
+        <p id="text"></p>
+        <p id="views"></p>
     </div>
 
     <div class="row">
@@ -47,18 +36,10 @@
         <!-- Div di appoggio usato per mostrare i vari grafici -->
         <div id="divGrafico"></div>
     </div>
-    <%
-    } else {
-
-    %>
-    <!-- Messaggio di errore nel caso di accesso anomalo -->
-    <label id="text1">Siamo spiacenti, è necessario essere amministratori per poter accedere a questa pagina</label>
-    <% }%>
 
     <script src="./javascript/statistics.js"></script>
     <script src="./javascript/highcharts.js"></script>
 </div>
 <jsp:include page="footer.jsp"/>
-</div>
 
 

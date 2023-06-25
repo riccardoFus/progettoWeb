@@ -60,8 +60,6 @@
         </div>
     </div>
 </div>
-<jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
-</div>
 
 <script src="javascript/scriptSlider.js"></script>

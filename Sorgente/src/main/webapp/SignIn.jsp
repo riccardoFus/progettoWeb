@@ -4,7 +4,7 @@
 <!-- Pagina di Sign In -->
 <div class="flex-container" id="signin">
     <!-- onkeydown inserito per evitare che il form venga "submittato" quando si preme 'Enter' con la tastiera -->
-    <form method="post" action="<%= response.encodeURL("./signIn")%>" onsubmit="return validate()"
+    <form method="post" action="<%=response.encodeURL("./signIn")%>" onsubmit="return validate()"
           onkeydown="return event.key != 'Enter';" id="form">
         <div class="column">
             <span id="warnNome" class="warn"></span>
@@ -98,8 +98,6 @@
     <input type="button" onclick="return reset()" class="button" value="Reset">
 </div>
 
-<jsp:include page="consenso_cookie.jsp"/>
 <jsp:include page="footer.jsp"/>
-</div>
 
 <script type="text/javascript" src="./javascript/validationSignIn.js"></script>

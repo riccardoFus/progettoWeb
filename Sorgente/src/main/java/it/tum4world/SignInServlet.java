@@ -21,6 +21,7 @@ public class SignInServlet extends DBManager {
     synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // riceve i dati del form di sign in
         String username = req.getParameter("username");
+        String url = resp.encodeURL("registrazione_confermata.jsp");
 
         /* non memorizziamo la psw in chiaro, ma applichiamo l'algoritmo SHA-256 e memorizziamo il digest * */
         String psw = req.getParameter("psw");
@@ -41,7 +42,7 @@ public class SignInServlet extends DBManager {
         String updateIscriz = "INSERT INTO iscrizioni VALUES ('" + username +"',false, false, false)";
         if(updateDB(updateUtenti) && updateDB(updateClienti) && updateDB(updateIscriz)){
             //iscrizione andata a buon fine, redirect corretto
-            req.getRequestDispatcher("./registrazione_confermata.jsp").forward(req,resp);
+            resp.sendRedirect(url);
 
         }else{
             System.out.println("\nErrore: inserimento utente fallito\n");
