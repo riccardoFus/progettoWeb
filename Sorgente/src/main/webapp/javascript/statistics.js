@@ -197,7 +197,7 @@ function showAderenteSubscriptions() {
             if (jsonArray === null) {
                 document.getElementById("text").innerHTML = "Errore";
             } else {
-                setHeader(table, ["Username", "Nome", "Cognome", "Email", "Password", "Data Di Nascita", "Telefono", "Aderente"]);
+                setHeader(table, ["Username", "Nome", "Cognome",  "Password", "Email", "Data Di Nascita", "Telefono", "Aderente"]);
                 for (let i = 0; i < jsonArray.length; i++) {
                     row = table.insertRow();
                     let current_JSON_object = JSON.parse(jsonArray[i]);
@@ -231,7 +231,7 @@ function showSimpatizzanteSubscriptions() {
             if (jsonArray === null) {
                 document.getElementById("text").innerHTML = "Errore";
             } else {
-                setHeader(table, ["Username", "Nome", "Cognome", "Email", "Password", "Data Di Nascita", "Telefono", "Aderente"]);
+                setHeader(table, ["Username", "Nome", "Cognome", "Password","Email",  "Data Di Nascita", "Telefono", "Aderente"]);
                 for (let i = 0; i < jsonArray.length; i++) {
                     row = table.insertRow();
                     let current_JSON_object = JSON.parse(jsonArray[i]);
