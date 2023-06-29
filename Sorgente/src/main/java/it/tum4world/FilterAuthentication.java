@@ -39,7 +39,7 @@ public class FilterAuthentication implements Filter {
             servletRequest.setAttribute("tipo", typeOfUser);
             //può accedere alla pagina solo se è la SUA area privata, altrimenti redirect alla pagina di errore
             if (URI.contains("AreaPersonale")) {
-                if (!URI.toLowerCase().contains(typeOfUser) || (typeOfUser.equals("simpatizzante") && !URI.contains("Sim")))
+                if ((!URI.toLowerCase().contains(typeOfUser) && !typeOfUser.equals("simpatizzante")) || (typeOfUser.equals("simpatizzante") && !URI.contains("Sim")))
                     redirectUnauth = true;
             }
 

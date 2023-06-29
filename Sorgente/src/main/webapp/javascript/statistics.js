@@ -29,8 +29,6 @@ function showIstogrammaDonazioni() {
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let jsonArray = this.response;
-            // rimuovo la richiesta precedentemente fatta
-            pulisciMenu();
             // creo un array di 12 elementi (un elemento per ogni mese) e in base al mese metto le varie quote ricevute
             // inizialmente pongo tutti gli elementi a 0 per inserire anche i mesi senza donazioni
             let mesi = [];
@@ -41,8 +39,6 @@ function showIstogrammaDonazioni() {
                 let current_JSON_object = JSON.parse(jsonArray[i]);
                 mesi[new Date(current_JSON_object["data"]).getMonth()] += current_JSON_object["quota"];
             }
-
-            document.getElementById("divGrafico").style.visibility = "visible";
 
             // creo un hist mantenente corrispondenza mese - quota
             const chart = Highcharts.chart('divGrafico', {
@@ -73,8 +69,6 @@ function showIstogrammaVisite() {
     xhttp.onreadystatechange = function () {
         if (this.readyState === 4 && this.status === 200) {
             let jsonArray = this.response;
-            // rimuovo la richiesta precedentemente fatta
-            pulisciMenu();
             // creo due array paralleli per le pagine e le rispettive visite
             // visita[i] rappresenta il numero di visite di pagina[i]
             let pagine = [];
@@ -84,8 +78,6 @@ function showIstogrammaVisite() {
                 pagine[i] = current_JSON_object["page"];
                 visite[i] = current_JSON_object["visits"];
             }
-
-            document.getElementById("divGrafico").style.visibility = "visible";
             // creo un hist mantenente corrispondenza pagina - visite
             const chart = Highcharts.chart('divGrafico', {
                 chart: {

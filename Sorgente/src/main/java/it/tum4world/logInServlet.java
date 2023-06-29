@@ -47,7 +47,7 @@ public class logInServlet extends DBManager {
     @Override
     synchronized protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         ResultSet user = getLoginValues(req, resp);
-        HttpSession session = req.getSession(false);
+        HttpSession session = req.getSession(true);
 
         try {
             if (user.next()) {

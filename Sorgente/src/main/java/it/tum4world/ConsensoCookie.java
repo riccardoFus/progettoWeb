@@ -45,14 +45,11 @@ public class ConsensoCookie extends HttpServlet {
         if (consent) {
             session.setAttribute("acceptCookies", true);
         }else{
+            session.setAttribute("acceptCookies", false);
             //elimina cookie jsession
-            Cookie[] cookies = req.getCookies();
-            for(Cookie c: cookies){
-                if(c.getName().equals("JSESSIONID")){
-                    c.setMaxAge(0);
-                    resp.addCookie(c);
-                }
-            }
+            Cookie cookie = new Cookie("JSESSIONID", "");
+            cookie.setMaxAge(0);
+            resp.addCookie(cookie);
         }
 
         try (PrintWriter writer = resp.getWriter()) {

@@ -7,19 +7,41 @@ img{
 
 #col2 img{
     transform: rotate(5deg);
-    box-shadow: -0.2vw 0.2vw 1vw rgba(0,0,0,0.6), -1.5vw 1.5vw mediumturquoise, -2.2vw 2.2vw 2.2vw rgba(0,0,0,0.7);
+    box-shadow: -0.2vw 0.2vw 1vw rgba(0,0,0,0.6), -1.5vw 1.5vw mediumturquoise, -1.5vw 1.5vw 1.5vw rgba(0,0,0,0.7);
+    transition: box-shadow 1s, transform 1s;
+
+}
+
+#col2 img:hover{
+    box-shadow: -0.7vw 0.7vw 1vw rgba(0,0,0,0.6), -1.5vw 1.5vw mediumturquoise, -2.2vw 2.2vw 2.2vw rgba(0,0,0,0.7);
+    transform: rotate(0deg);
 
 }
 
 #col1 img{
     transform: rotate(-5deg);
-    box-shadow: -0.2vw 0.2vw 1vw rgba(0,0,0,0.6), 1.5vw 1.5vw lightsalmon, 2.2vw 2.2vw 2.2vw rgba(0,0,0,0.7);
+    box-shadow: 0.2vw 0.2vw 1vw rgba(0,0,0,0.6), 1.5vw 1.5vw lightsalmon, 1.5vw 1.5vw 1.5vw rgba(0,0,0,0.7);
+    transition: box-shadow 1s, transform 1s;
 
 }
 
 #col3 img{
     transform: rotate(-5deg);
-    box-shadow: -0.2vw 0.2vw 1vw rgba(0,0,0,0.6), 1.5vw 1.5vw lightgreen, 2.2vw 2.2vw 2.2vw rgba(0,0,0,0.7);
+    box-shadow: 0.2vw 0.2vw 1vw rgba(0,0,0,0.6), 1.5vw 1.5vw lightgreen, 1.5vw 1.5vw 1.5vw rgba(0,0,0,0.7);
+    transition: box-shadow 1s, transform 1s;
+
+}
+
+
+#col3 img:hover{
+    box-shadow: 0.7vw 0.7vw 1vw rgba(0,0,0,0.6), 1.5vw 1.5vw lightgreen, 2.2vw 2.2vw 2.2vw rgba(0,0,0,0.7);
+    transform: rotate(0deg);
+
+}
+
+#col1 img:hover{
+    box-shadow: 0.7vw 0.7vw 1vw rgba(0,0,0,0.6), 1.5vw 1.5vw lightsalmon, 2.2vw 2.2vw 2.2vw rgba(0,0,0,0.7);
+    transform: rotate(0deg);
 
 }
 

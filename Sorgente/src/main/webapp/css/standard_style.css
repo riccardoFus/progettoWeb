@@ -24,6 +24,7 @@ footer{
 
 .button:hover {
     background-color: mediumpurple;
+    box-shadow: 0vw 1.3vw 1.4vw -1vw rgba(0, 0, 0, 0.6);
 }
 
 

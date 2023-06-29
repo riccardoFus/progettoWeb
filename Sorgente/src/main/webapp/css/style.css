@@ -30,7 +30,8 @@ body {
     border: floralwhite dotted;
     border-width: 0 1vw;
     min-width: 10vw;
-    box-shadow: 0vw 1.3vw 1.4vw -1vw rgba(0, 0, 0, 0.6);
+    transition: background-color 0.2s;
+    transition: box-shadow 0.2s;
 }
 
 
@@ -100,6 +101,7 @@ a {
     color: floralwhite;
     font-weight: bold;
     padding-bottom: 0.3vw;
+    transition: border 0.1s;
 }
 
 #phraseHeader {

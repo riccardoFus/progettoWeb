@@ -41,13 +41,13 @@
 
         <!-- Slide di immagini  -->
         <div class="carousel-container">
-            <div class="images fade">
+            <div class="imagesFade">
                 <img src="images/aquagym.jpg" class="imageStandard">
             </div>
-            <div class="images fade">
+            <div class="imagesFade">
                 <img src="images/giochi_da_tavolo.jpg" class="imageStandard">
             </div>
-            <div class="images fade">
+            <div class="imagesFade">
                 <img src="images/psicologia.jpg" class="imageStandard">
             </div>
         </div>

@@ -80,7 +80,7 @@ public class InitServer extends DBManager {
         }else{
             System.out.println("\nAdmin già presente\n");
         }
-        request.getRequestDispatcher("Home.jsp").forward(request, response);
+        response.sendRedirect("Home.jsp");
     }
 
     @Override

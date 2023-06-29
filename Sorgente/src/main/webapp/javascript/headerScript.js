@@ -53,9 +53,8 @@ let links = (document.getElementById("header")).getElementsByTagName("a")
 links.item(pos).id="selected"
 
 // funzione richiamata nel caso di logout (caso con cookie)
-async function logout(btn){
+async function logout(btn, url){
     //fetch
-    let url = "paginaPrivata";
     // evito il redirect alla home page direttamente ma attendo la risposta della servlet
     event.preventDefault()
 
@@ -71,8 +70,14 @@ async function logout(btn){
     }).then(resp => resp.json())
         .then(respInfo => {
                 if(respInfo.msg === "Logout completato") {
-                    // sposto l'utente alla home page
-                    window.location.replace(btn.href)
+                    // sposto l'utente alla home page, attenzione all'url rewriting
+                    if(respInfo.consenso === "false"){
+                        let link = window.location.href
+                        if(!link.includes("jsessionid"))
+                            document.location.replace(btn.href+ ";jsessionid="+respInfo.id)
+
+                    }else
+                        document.location.replace(btn.href)
                 }
             }
         )

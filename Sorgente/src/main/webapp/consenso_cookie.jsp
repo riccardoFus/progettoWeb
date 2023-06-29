@@ -1,8 +1,8 @@
 <%
-    // Se in questa sessione non ho ricevuto il consenso per
+    // Se in questa sessione non ho mai mostrato l'informaztiva per
     //  l'utilizzo dei cookies, mostro la finestra all'utente
     String URI = request.getRequestURI();
-    if (session.getAttribute("acceptCookies") == null && !URI.contains("jsessionid")) {
+    if (session.getAttribute("acceptCookies") == null) {
 %>
 <script>
     let bodyEl = document.getElementsByTagName("body")[0];
@@ -24,17 +24,17 @@
             body: JSON.stringify(consensoJson)
         }).then(resp => resp.json())
             .then(consent => {
-                if (consent.consent === "false") {
-                    //no cookies: applica encoding
-                    let encode = "<%=response.encodeURL(URI)%>";
-                    window.location.replace(encode)
-                } else {
-                    //rendi il resto interactable
-                    bodyEl.removeChild(lockContent)
-                    bodyEl.removeChild(document.getElementById("cookieWindow"))
-                }
+                //rendi il resto interactable
+                bodyEl.removeChild(lockContent)
+                bodyEl.removeChild(document.getElementById("cookieWindow"))
+                //se si rifiutano i cookie e jsessionid non è già presente nell'indirizzo (particolari casi di sessione scaduta e history dei link)
+                let link = window.location.href
+                if(consent === "false" && !link.includes("jsessionid"))
+                    document.location.replace(link+";jsessionid=<%=session.getId()%>")
+
 
             })
+
 
     }
 </script>

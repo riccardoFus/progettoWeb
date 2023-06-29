@@ -1,15 +1,19 @@
-.images {display: none}
-
 img {
     vertical-align: middle;
-    width:100%;
 }
+.imagesFade{
+    transition: opacity 0.5s;
+    position:absolute;
+    top:0;
 
+}
 /* Slideshow container */
 .carousel-container {
-    max-width: 1000px;
+    min-width: 30vw;
+    min-height: 20vw;
     position: relative;
     margin: auto;
+
 }
 
 /* Next & previous buttons */

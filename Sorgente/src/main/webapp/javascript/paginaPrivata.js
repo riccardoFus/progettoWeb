@@ -11,7 +11,6 @@ function setup(url){
             iscrizioni.item(0).checked = cliente.iscrizWW
             iscrizioni.item(1).checked = cliente.iscrizFYB
             iscrizioni.item(2).checked = cliente.iscrizMC
-            console.log("done")
 
         }
     )
@@ -137,16 +136,26 @@ function showInfo() {
     //aggiungi i vari label per i dati
     let divDati = document.getElementById("data");
     //generi solo se non sono già stati generati
-    if (divDati.childElementCount === 1)
+    if (divDati.childElementCount === 1){
         createElements(divDati)
-
-    //riempi i campi con le informazioni in cliente
-    let campi = document.getElementsByClassName("info");
-    campi.item(0).innerHTML = cliente.username;
-    campi.item(1).innerHTML = cliente.nome;
-    campi.item(2).innerHTML = cliente.cognome;
-    campi.item(3).innerHTML = cliente.dataDiNascita;
-    campi.item(4).innerHTML = cliente.numTel;
+        //riempi i campi con le informazioni in cliente
+        let campi = document.getElementsByClassName("info");
+        campi.item(0).innerHTML = cliente.username;
+        campi.item(1).innerHTML = cliente.nome;
+        campi.item(2).innerHTML = cliente.cognome;
+        campi.item(3).innerHTML = cliente.dataDiNascita;
+        campi.item(4).innerHTML = cliente.numTel;
+    }else{
+        //le info sono già presenti, controlla se il contenitore dei dati è visibile
+        let infoCont =data.getElementsByClassName("row");
+        for( let c of infoCont) {
+            if (c.style.visibility === "collapse") {
+                //nascondi
+                c.style.visibility = "visible"
+            } else
+                c.style.visibility = "collapse"
+        }
+    }
 }
 
 async function donate(url) {

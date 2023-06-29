@@ -35,10 +35,10 @@ public class PaginaPrivataServlet extends DBManager {
         JsonObject json = new Gson().fromJson(response.toString(), JsonObject.class);
 
         String tipoOp = json.get("operazione").getAsString();
+        System.out.println(tipoOp);
         HttpSession session = req.getSession(false);
         String username = (String) session.getAttribute("username");
         String typeUser= (String) session.getAttribute("typeOfUser");
-        System.out.println(tipoOp);
 
         if (tipoOp.equals("subUnsub")) {
             String campo = json.get("campo").getAsString();
@@ -92,9 +92,6 @@ public class PaginaPrivataServlet extends DBManager {
             else
                 msg="Iscrizione rimossa con successo";
 
-            //invalida sessione attiva
-            session.invalidate();
-
             //ritorna
             //N.B: il filter si occuperà di buttare fuori l'utente se la sessione non è attiva
             try (PrintWriter writer = resp.getWriter()) {
@@ -136,24 +133,28 @@ public class PaginaPrivataServlet extends DBManager {
 
         }else{
             //logout
-            //invalida la sessione
-            resp.setContentType("text/html");
-            resp.setCharacterEncoding("utf-8");
-            //elimina jsession cookie se esiste
+
+            //PER EVITARE CHE SUBITO DOPO IL LOGOUT VENGA RICHIESTO IL CONSENSO DEL COOKIE
+            //ricreiamo subito un'altra sessione dopo aver invalidato la precedente in cui memoriziamo l'attributo acceptCookies della precedente
+            boolean acceptedCookies = session.getAttribute("acceptCookies").toString().equals("true");
+            //invalida sessione attiva
+            session.invalidate();
+            //creaiamo un'altra sessione
+            session = req.getSession(true);
+            session.setAttribute("acceptCookies", acceptedCookies);
+            //elimina jsession cookie se esiste e acceptedCookies = false
             Cookie[] cookies = req.getCookies();
-            System.out.println("COOKIES: "+ cookies);
-            for(Cookie c: cookies){
-                if(c.getName().equals("JSESSIONID")){
-                    c.setMaxAge(0);
-                    resp.addCookie(c);
-                }
+            if(!acceptedCookies) {
+                Cookie cookie = new Cookie("JSESSIONID", null);
+                cookie.setMaxAge(0);
+                resp.addCookie(cookie);
             }
 
-            session.invalidate();
             //ritorna
             //N.B: il filter si occuperà di buttare fuori l'utente se la sessione non è attiva
+            //aggiungiamo l'id della sessione nel caso si debba fare url rewriting
             try (PrintWriter writer = resp.getWriter()) {
-                writer.println("{ \"msg\":\"Logout completato\"}");
+                writer.println("{ \"msg\":\"Logout completato\", \"consenso\":\"" + acceptedCookies+ "\", \"id\":\""+session.getId() +"\"}");
                 writer.flush();
 
             } catch (IOException ex) {

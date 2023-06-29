@@ -33,6 +33,7 @@ p {
     margin-top: 3vw;
     margin-bottom: 3vw;
     background-color: floralwhite;
+    min-width: 75vw;
 }
 
 #home {
