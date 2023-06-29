@@ -103,7 +103,7 @@
             <%
                 if (!tipo.equals("standard")) {
             %>
-            <a class="linkHeader" href="<%=urls[0]%>">Logout</a>
+            <a class="linkHeader" href="<%=urls[0]%>" onclick="logout(this)">Logout</a>
             <%
             }%>
 

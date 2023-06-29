@@ -5,6 +5,7 @@ import com.google.gson.JsonObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -37,6 +38,7 @@ public class PaginaPrivataServlet extends DBManager {
         HttpSession session = req.getSession(false);
         String username = (String) session.getAttribute("username");
         String typeUser= (String) session.getAttribute("typeOfUser");
+        System.out.println(tipoOp);
 
         if (tipoOp.equals("subUnsub")) {
             String campo = json.get("campo").getAsString();
@@ -135,6 +137,18 @@ public class PaginaPrivataServlet extends DBManager {
         }else{
             //logout
             //invalida la sessione
+            resp.setContentType("text/html");
+            resp.setCharacterEncoding("utf-8");
+            //elimina jsession cookie se esiste
+            Cookie[] cookies = req.getCookies();
+            System.out.println("COOKIES: "+ cookies);
+            for(Cookie c: cookies){
+                if(c.getName().equals("JSESSIONID")){
+                    c.setMaxAge(0);
+                    resp.addCookie(c);
+                }
+            }
+
             session.invalidate();
             //ritorna
             //N.B: il filter si occuperà di buttare fuori l'utente se la sessione non è attiva

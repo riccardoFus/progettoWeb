@@ -70,9 +70,10 @@ async function logout(btn){
         })
     }).then(resp => resp.json())
         .then(respInfo => {
-                if(respInfo.msg === "Logout completato")
+                if(respInfo.msg === "Logout completato") {
                     // sposto l'utente alla home page
-                    window.location=btn.href
+                    window.location.replace(btn.href)
+                }
             }
         )
 
