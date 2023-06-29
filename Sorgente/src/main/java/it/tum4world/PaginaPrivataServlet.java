@@ -143,7 +143,6 @@ public class PaginaPrivataServlet extends DBManager {
             session = req.getSession(true);
             session.setAttribute("acceptCookies", acceptedCookies);
             //elimina jsession cookie se esiste e acceptedCookies = false
-            Cookie[] cookies = req.getCookies();
             if(!acceptedCookies) {
                 Cookie cookie = new Cookie("JSESSIONID", null);
                 cookie.setMaxAge(0);
@@ -155,6 +154,7 @@ public class PaginaPrivataServlet extends DBManager {
             //aggiungiamo l'id della sessione nel caso si debba fare url rewriting
             try (PrintWriter writer = resp.getWriter()) {
                 writer.println("{ \"msg\":\"Logout completato\", \"consenso\":\"" + acceptedCookies+ "\", \"id\":\""+session.getId() +"\"}");
+                System.out.println("{ \"msg\":\"Logout completato\", \"consenso\":\"" + acceptedCookies+ "\", \"id\":\""+session.getId() +"\"}");
                 writer.flush();
 
             } catch (IOException ex) {

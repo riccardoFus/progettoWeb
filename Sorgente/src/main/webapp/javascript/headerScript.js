@@ -71,10 +71,9 @@ async function logout(btn, url){
         .then(respInfo => {
                 if(respInfo.msg === "Logout completato") {
                     // sposto l'utente alla home page, attenzione all'url rewriting
+                    console.log(respInfo)
                     if(respInfo.consenso === "false"){
-                        let link = window.location.href
-                        if(!link.includes("jsessionid"))
-                            document.location.replace(btn.href+ ";jsessionid="+respInfo.id)
+                        document.location.replace(btn.href+ ";jsessionid="+respInfo.id)
 
                     }else
                         document.location.replace(btn.href)

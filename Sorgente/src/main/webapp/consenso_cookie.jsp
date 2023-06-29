@@ -29,7 +29,7 @@
                 bodyEl.removeChild(document.getElementById("cookieWindow"))
                 //se si rifiutano i cookie e jsessionid non è già presente nell'indirizzo (particolari casi di sessione scaduta e history dei link)
                 let link = window.location.href
-                if(consent === "false" && !link.includes("jsessionid"))
+                if(consent.consent === "false" && !link.includes("jsessionid"))
                     document.location.replace(link+";jsessionid=<%=session.getId()%>")
 
 
