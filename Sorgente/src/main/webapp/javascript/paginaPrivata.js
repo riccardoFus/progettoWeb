@@ -165,22 +165,36 @@ async function donate(url) {
     let somma = document.getElementsByName("donazione")[0].valueAsNumber
     //fetch
 
-    await fetch(url, {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/json",
-            "Accept": "application/json"
-        },
-        body: JSON.stringify({
-            "operazione": "donate",
-            "somma": somma
-        })
-    }).then(resp => resp.json())
-        .then(respInfo => {
-                // riceve risposta
-                alert(respInfo.msg)
+    if(validateDon(somma)) {
+        await fetch(url, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({
+                "operazione": "donate",
+                "somma": somma
+            })
+        }).then(resp => resp.json())
+            .then(respInfo => {
+                    // riceve risposta
+                    alert(respInfo.msg)
 
-            }
-        )
+                }
+            )
+    }
 
+}
+
+function validateDon(somma){
+    let warn = document.getElementById("warnDon");
+    warn.innerHTML = "";
+    let esito = true
+    if(somma <= 0){
+        warn.innerHTML = "Inserire una somma >= 0";
+        esito=false
+    }
+
+    return esito
 }

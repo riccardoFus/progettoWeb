@@ -30,10 +30,13 @@
             <input type="checkbox" value="mindcheckup" onclick="subUnsub(this, '<%=response.encodeURL("paginaPrivata")%>')" class="iscriz">
         </div>
 
-        <div class="row">
-            <input type="number" value="0" name="donazione" class="textbox">
-            <!-- Spazio riservato alle donazioni (SOLO PER ADERENTE) -->
-            <button onclick="donate('<%=response.encodeURL("paginaPrivata")%>')" class="button">Dona</button>
+        <div class="column">
+            <span id="warnDon" class="warn"></span>
+            <div class="row">
+                <input type="number" value="0" name="donazione" class="textbox">
+                <!-- Spazio riservato alle donazioni (SOLO PER ADERENTE) -->
+                <button onclick="donate('<%=response.encodeURL("paginaPrivata")%>')" class="button">Dona</button>
+            </div>
         </div>
     </div>
     <!-- Bottone per permettere all'utente di disiscriversi dal sito, dopo aver eseguito la funzione js, viene reindirizzato all'homepage l'utente stesso-->
