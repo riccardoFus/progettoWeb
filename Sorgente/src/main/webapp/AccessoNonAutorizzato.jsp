@@ -2,7 +2,7 @@
 <!-- Pagina mostrata all'utente quando completa la compilazione nella pagina SignIn -->
 <jsp:include page="header.jsp"/>
 <div id="content">
-    <div id="left1" class="column">
+    <div id="left1" >
         <h2>ERRORE</h2>
         <p>Non sei autorizzato ad entrare in questa area</p>
     </div>

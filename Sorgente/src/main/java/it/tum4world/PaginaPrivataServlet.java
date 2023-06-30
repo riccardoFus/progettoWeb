@@ -93,9 +93,25 @@ public class PaginaPrivataServlet extends DBManager {
                 msg="Iscrizione rimossa con successo";
 
             //ritorna
+            //PER EVITARE CHE SUBITO DOPO IL LOGOUT VENGA RICHIESTO IL CONSENSO DEL COOKIE
+            //ricreiamo subito un'altra sessione dopo aver invalidato la precedente in cui memoriziamo l'attributo acceptCookies della precedente
+            boolean acceptedCookies = session.getAttribute("acceptCookies").toString().equals("true");
+            //invalida sessione attiva
+            session.invalidate();
+            //creaiamo un'altra sessione
+            session = req.getSession(true);
+            session.setAttribute("acceptCookies", acceptedCookies);
+
+            //elimina jsession cookie se esiste e acceptedCookies = false
+            if(!acceptedCookies) {
+                Cookie cookie = new Cookie("JSESSIONID", null);
+                cookie.setMaxAge(0);
+                resp.addCookie(cookie);
+            }
+
             //N.B: il filter si occuperà di buttare fuori l'utente se la sessione non è attiva
             try (PrintWriter writer = resp.getWriter()) {
-                writer.println("{ \"msg\":\"" + msg + "\"}");
+                writer.println("{ \"msg\":\"" + msg + "\", \"consenso\":\"" + acceptedCookies+ "\", \"id\":\""+session.getId() +"\"}");
                 writer.flush();
 
             } catch (IOException ex) {
@@ -154,7 +170,6 @@ public class PaginaPrivataServlet extends DBManager {
             //aggiungiamo l'id della sessione nel caso si debba fare url rewriting
             try (PrintWriter writer = resp.getWriter()) {
                 writer.println("{ \"msg\":\"Logout completato\", \"consenso\":\"" + acceptedCookies+ "\", \"id\":\""+session.getId() +"\"}");
-                System.out.println("{ \"msg\":\"Logout completato\", \"consenso\":\"" + acceptedCookies+ "\", \"id\":\""+session.getId() +"\"}");
                 writer.flush();
 
             } catch (IOException ex) {

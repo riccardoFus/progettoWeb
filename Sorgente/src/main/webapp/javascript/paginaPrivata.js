@@ -55,9 +55,11 @@ function deleteAccount(link, url) {
 
     }).then(resp => resp.json())
         .then(respInfo => {
-                // riceve risposta
-                window.location= link;
-
+            // sposto l'utente alla home page, attenzione all'url rewriting
+            if(respInfo.consenso === "false"){
+                document.location.replace(link+ ";jsessionid="+respInfo.id)
+            }else
+                document.location.replace(link)
             }
         )
 
